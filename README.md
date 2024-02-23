@@ -68,6 +68,7 @@ To run this project locally, follow these steps:
 - Express.js 🚂
 - React ⚛️
 - Node.js 🖥️
+- NextJs :📁
 - JSON Web Tokens (JWT) for authentication 🔑
 - Passport.js for session management 🛂
 - Recoil for state management 🔧
