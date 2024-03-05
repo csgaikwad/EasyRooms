@@ -5,12 +5,27 @@
 html {
   scroll-behavior: smooth;
 }
-
+.basicLogo{
+  @apply text-red-500
+}
+.basicLogo:hover{
+  @apply text-red-700
+}
+.basicColor{
+  @apply bg-red-500
+}
+.basicColor:hover{
+  @apply bg-red-700
+}
 .hoverable-item:hover {
   transition: transform 300ms ease-in-out;
   transform: scale(1.1);
   background-color: aliceblue;
   border-radius: 1rem;
+  -webkit-transition: transform 300ms ease-in-out;
+  -moz-transition: transform 300ms ease-in-out;
+  -ms-transition: transform 300ms ease-in-out;
+  -o-transition: transform 300ms ease-in-out;
 }
 
 .rotate-360:hover {
@@ -21,6 +36,20 @@ html {
 
 .searching {
   transition-property: all;
-  transition-duration: 1s;
+  transition-duration: 0.8s;
   transition-timing-function: ease;
 }
+
+label{
+  @apply text-xl text-gray-500 font-serif ml-4
+}
+
+input:not([type="checkbox"]) {
+ @apply bg-gray-50 border-2 rounded-full shadow-sm outline-none p-2 px-4 m-2 min-w-96
+
+}
+
+.formButton{
+  @apply border-2 rounded-full basicColor py-3 text-white text-xl min-w-96 mt-2
+}
+

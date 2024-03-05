@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
+  const navigate=useNavigate();
   return (
     <div className="flex items-center w-auto h-10 border-2 rounded-full py-6 px-2 gap-1">
       <div className="transition duration-300 ease-in-out transform hover:scale-125">
@@ -20,8 +22,10 @@ export default function UserProfile() {
           />
         </svg>
       </div>
-      <div className="transition duration-300 ease-in-out transform hover:scale-125">
-        {" "}
+      <div
+        onClick={()=> navigate("/profile")}
+        className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-125"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

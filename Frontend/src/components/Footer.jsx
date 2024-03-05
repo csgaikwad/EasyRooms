@@ -53,7 +53,7 @@ export default function Footer() {
         <h1>&copy; {currentYear} Airbnd, Inc.</h1>
         <h1 className="text-gray-500 text-sm pt-3">
           {" "}
-          *This is a project for studing MERN Stack
+          *This is a project for studying MERN Stack
         </h1>
       </div>
     </div>
