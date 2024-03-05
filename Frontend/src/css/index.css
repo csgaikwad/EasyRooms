@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+.hoverable-item:hover {
+  transition: transform 300ms ease-in-out;
+  transform: scale(1.1);
+  background-color: aliceblue;
+  border-radius: 1rem;
+}
+
+.rotate-360:hover {
+  transform: rotate(360deg);
+  transition-duration: 1s;
+  transition-timing-function: ease;
+}
+
+.searching {
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+}
