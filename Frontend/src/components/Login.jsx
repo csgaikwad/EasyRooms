@@ -9,9 +9,9 @@ export default function Login() {
 
   return (
     <div className="h-screen p-4">
-      <div className=" min-w-96 flex items-center justify-center mt-16">
+      <div className=" mt-16 flex min-w-96 items-center justify-center">
         <form
-          className="flex flex-col items-center justify-center border-2 rounded-3xl p-6 py-12 shadow-md gap-5 "
+          className="flex flex-col items-center justify-center gap-5 rounded-3xl border-2 p-6 py-12 shadow-md "
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col items-start">

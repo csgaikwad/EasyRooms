@@ -27,7 +27,7 @@ export default function Register() {
           <div className="flex h-4 w-full items-center justify-start gap-2">
             <label>Owner Login: </label>
             <input
-              className="appearance-none mt-1 align-text-bottom h-5 w-5 border-2 rounded-full focus:border-blue-500 checked:bg-blue-500 checked:border-none"
+              className="appearance-none mt-1 align-text-bottom size-5 border-2 rounded-full focus:border-blue-500 checked:bg-blue-500 checked:border-none"
               type="checkbox"
               name="isOwner"
               value=""

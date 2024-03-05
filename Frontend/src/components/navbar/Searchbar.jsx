@@ -20,10 +20,10 @@ export default function Searchbar() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center gap-4 w-[70%] md:w-125 ">
+    <div className="md:w-125 flex w-[70%] items-center justify-center gap-4 ">
       {showFirstBar ? (
-        <div className=" searching hidden md:flex w-full border rounded-full flex justify-around p-2 gap-2 items-center shadow-md">
-          <div className=" font-serif searching w-[25%] pl-2 p-1 text-md hoverable-item text-center">
+        <div className="  searching hidden w-full items-center justify-around gap-2 rounded-full border p-2 shadow-md md:flex">
+          <div className=" searching text-md hoverable-item w-[25%] p-1 pl-2 text-center font-serif">
             Where
           </div>
           <div
@@ -33,7 +33,7 @@ export default function Searchbar() {
             onMouseLeave={() => {
               sethideBar(false);
             }}
-            className={`searching font-serif w-[25%] border-l-2 p-1 text-md hoverable-item text-center ${
+            className={`searching text-md hoverable-item w-[25%] border-l-2 p-1 text-center font-serif ${
               hideBar ? "border-r-0" : "border-r-2"
             }`}
           >
@@ -46,20 +46,20 @@ export default function Searchbar() {
             onMouseLeave={() => {
               sethideBar(false);
             }}
-            className="searching w-[25%] border-r-2 p-1 text-nowrap pr-4 text-md hoverable-item text-center font-serif"
+            className="searching text-md hoverable-item w-[25%] text-nowrap border-r-2 p-1 pr-4 text-center font-serif"
           >
             Check-Out
           </div>
-          <div className="flex justify-between w-[25%] items-center ">
-            <h1 className="searching p-1 text-md hoverable-item grow text-center w-14 font-serif">
+          <div className="flex w-[25%] items-center justify-between ">
+            <h1 className="searching text-md hoverable-item w-14 grow p-1 text-center font-serif">
               Who
             </h1>
-            <div className="transition duration-300 ease-in-out transform hover:scale-110 border rounded-full p-2 basicColor text-white ">
+            <div className="basicColor rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="w-6 h-6"
+                className="size-6"
               >
                 <path
                   fillRule="evenodd"
@@ -71,23 +71,23 @@ export default function Searchbar() {
           </div>
         </div>
       ) : (
-        <div className=" searching min-w-80 w-[50%] border rounded-full flex justify-around md:p-2 gap-2 items-center shadow-md ">
-          <div className="searching w-[33%] pl-2 p-1 text-md hoverable-item text-center font-serif">
+        <div className=" searching flex w-[50%] min-w-80 items-center justify-around gap-2 rounded-full border shadow-md md:p-2 ">
+          <div className="searching text-md hoverable-item w-[33%] p-1 pl-2 text-center font-serif">
             Anywhere
           </div>
-          <div className="searching w-[33%] border-x-2 p-1 text-md hoverable-item text-center font-serif">
+          <div className="searching text-md hoverable-item w-[33%] border-x-2 p-1 text-center font-serif">
             Anyweek
           </div>
-          <div className="searching flex justify-between w-[33%] items-center ">
-            <h1 className="p-1 text-md hoverable-item text-center md:w-24 md:text-nowrap font-serif">
+          <div className="searching flex w-[33%] items-center justify-between ">
+            <h1 className="text-md hoverable-item p-1 text-center font-serif md:w-24 md:text-nowrap">
               Add Guest
             </h1>
-            <div className=" transition duration-300 ease-in-out transform hover:scale-110 border rounded-full p-2 basicColor text-white ">
+            <div className=" basicColor rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="w-6 h-6"
+                className="size-6"
               >
                 <path
                   fillRule="evenodd"
