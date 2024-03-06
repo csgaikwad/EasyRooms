@@ -2,9 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import compression from "compression";
 import bcrypt, { hashSync } from "bcrypt";
-import helmet from "helmet";
 import jwt from "jsonwebtoken";
 import passport from "passport";
 import multer from "multer";
@@ -17,10 +15,11 @@ const app = express();
 const port = 8000;
 
 app.use(express.json());
-app.use(cors());
-app.use(compression());
-app.use(helmet());
 app.use(cookieParser());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -34,14 +33,28 @@ mongoose
 const saltRounds = parseInt(process.env.SALTING_ROUNDS);
 const secretKey = process.env.SECRET_KEY;
 
+
+
+
+
+
 async function hashPassword(password) {
   try {
+    if (!password) {
+      throw new Error("Password is empty or undefined");
+    }
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     return hashedPassword;
   } catch (error) {
+    // console.error('Error hashing password:', error);
     throw new Error("Error hashing password");
   }
 }
+
+
+
+
+
 
 async function verifyPassword(password, hashedPassword) {
   try {
@@ -55,6 +68,18 @@ async function verifyPassword(password, hashedPassword) {
 app.get("/", (req, res) => {
   res.send("Hello");
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.post("/register", async (req, res) => {
   const { username, userEmail, password, isOwner } = req.body;
@@ -79,8 +104,8 @@ app.post("/register", async (req, res) => {
     );
     console.log(token)
     res.cookie("jwt", token, {
-      secure:true,
-      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000
     }).status(201).json({ ResUserDoc, message: "User registered successfully" });
 
 
@@ -90,6 +115,18 @@ app.post("/register", async (req, res) => {
     res.status(500).json({ error: "An internal server error occurred" });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.post("/login", async (req, res) => {
   try {
