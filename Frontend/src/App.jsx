@@ -7,7 +7,10 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import axios from "axios";
 
+axios.defaults.baseURL="http://localhost:8000"
+axios.defaults.withCredentials=true;
 export default function App() {
   return (
     <div className="">
