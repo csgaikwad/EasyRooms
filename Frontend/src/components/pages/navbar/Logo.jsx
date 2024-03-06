@@ -15,7 +15,7 @@ export default function Logo() {
         className="size-full transition-transform duration-500 ease-in-out rotate-360"
       />
     </div>
-      <h1 className="text-2xl font-bold basicLogo font-serif transition-all duration-300 mt-1 underline">Airbnd</h1>
+      <h1 className="text-2xl font-bold basicLogo font-serif  underline transition duration-300 ease-in-out transform hover:scale-90 cursor-pointer">Airbnd</h1>
     </div>
   );
 }

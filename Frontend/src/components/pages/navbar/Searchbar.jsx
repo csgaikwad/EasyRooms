@@ -23,7 +23,7 @@ export default function Searchbar() {
     <div className="md:w-125 flex w-[70%] items-center justify-center gap-4 ">
       {showFirstBar ? (
         <div className="  searching hidden w-full items-center justify-around gap-2 rounded-full border p-2 shadow-md md:flex">
-          <div className=" searching text-md hoverable-item w-[25%] p-1 pl-2 text-center font-serif">
+          <div className=" searching text-md hoverable-item w-[25%] p-1 pl-2 text-center font-serif cursor-pointer">
             Where
           </div>
           <div
@@ -33,7 +33,7 @@ export default function Searchbar() {
             onMouseLeave={() => {
               sethideBar(false);
             }}
-            className={`searching text-md hoverable-item w-[25%] border-l-2 p-1 text-center font-serif ${
+            className={` cursor-pointer searching text-md hoverable-item w-[25%] border-l-2 p-1 text-center font-serif ${
               hideBar ? "border-r-0" : "border-r-2"
             }`}
           >
@@ -46,15 +46,15 @@ export default function Searchbar() {
             onMouseLeave={() => {
               sethideBar(false);
             }}
-            className="searching text-md hoverable-item w-[25%] text-nowrap border-r-2 p-1 pr-4 text-center font-serif"
+            className=" cursor-pointer searching text-md hoverable-item w-[25%] text-nowrap border-r-2 p-1 pr-4 text-center font-serif"
           >
             Check-Out
           </div>
           <div className="flex w-[25%] items-center justify-between ">
-            <h1 className="searching text-md hoverable-item w-14 grow p-1 text-center font-serif">
+            <h1 className="cursor-pointer searching text-md hoverable-item w-14 grow p-1 text-center font-serif">
               Who
             </h1>
-            <div className="basicColor rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110">
+            <div className="basicColor rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -72,13 +72,13 @@ export default function Searchbar() {
         </div>
       ) : (
         <div className=" searching flex w-[50%] min-w-80 items-center justify-around gap-2 rounded-full border shadow-md md:p-2 ">
-          <div className="searching text-md hoverable-item w-[33%] p-1 pl-2 text-center font-serif">
+          <div className="cursor-pointer searching text-md hoverable-item w-[33%] p-1 pl-2 text-center font-serif">
             Anywhere
           </div>
-          <div className="searching text-md hoverable-item w-[33%] border-x-2 p-1 text-center font-serif">
+          <div className="cursor-pointer searching text-md hoverable-item w-[33%] border-x-2 p-1 text-center font-serif">
             Anyweek
           </div>
-          <div className="searching flex w-[33%] items-center justify-between ">
+          <div className="cursor-pointer searching flex w-[33%] items-center justify-between ">
             <h1 className="text-md hoverable-item p-1 text-center font-serif md:w-24 md:text-nowrap">
               Add Guest
             </h1>

@@ -8,9 +8,7 @@ html {
 .basicLogo{
   @apply text-red-500
 }
-.basicLogo:hover{
-  @apply text-red-700
-}
+
 .basicColor{
   @apply bg-red-500
 }

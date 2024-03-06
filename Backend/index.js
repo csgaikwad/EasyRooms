@@ -2,9 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import bcrypt, { hashSync } from "bcrypt";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import passport from "passport";
+import compression from "compression";
 import multer from "multer";
 import cookieParser from "cookie-parser";
 import User from "./models/User.js";
@@ -14,12 +15,16 @@ dotenv.config();
 const app = express();
 const port = 8000;
 
+app.use(compression());
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
-}));
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -32,7 +37,6 @@ mongoose
 
 const saltRounds = parseInt(process.env.SALTING_ROUNDS);
 const secretKey = process.env.SECRET_KEY;
-
 
 
 
@@ -51,11 +55,6 @@ async function hashPassword(password) {
   }
 }
 
-
-
-
-
-
 async function verifyPassword(password, hashedPassword) {
   try {
     const result = await bcrypt.compare(password, hashedPassword);
@@ -65,13 +64,39 @@ async function verifyPassword(password, hashedPassword) {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get("/", (req, res) => {
   res.send("Hello");
 });
 
 
 
-
+app.get("/me", async (req, res) => {
+  const token = req.cookies.jwt;
+  const mail = jwt.verify(token, secretKey);
+  const foundUser = await User.findOne({ userEmail: mail.userEmail });
+  const ResUserDoc = {
+    userEmail: foundUser.userEmail,
+    username: foundUser.username,
+    isOwner: foundUser.isOwner,
+  };
+  res.json(ResUserDoc);
+});
 
 
 
@@ -93,6 +118,7 @@ app.post("/register", async (req, res) => {
       isOwner,
     });
     const ResUserDoc = {
+      userEmail: userDoc.userEmail,
       username: userDoc.username,
       isOwner: userDoc.isOwner,
     };
@@ -102,14 +128,14 @@ app.post("/register", async (req, res) => {
       },
       secretKey
     );
-    console.log(token)
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000
-    }).status(201).json({ ResUserDoc, message: "User registered successfully" });
-
-
-
+    console.log(token);
+    res
+      .cookie("jwt", token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      })
+      .status(201)
+      .json({ ResUserDoc, message: "User registered successfully" });
   } catch (error) {
     console.error("Error registering user:", error.message);
     res.status(500).json({ error: "An internal server error occurred" });
@@ -126,19 +152,39 @@ app.post("/register", async (req, res) => {
 
 
 
-
-
 app.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { userEmail, password } = req.body;
     if (!password) {
       return res.status(400).json({ error: "Password is required" });
     }
-    const hashedPassword =
-      "$2b$11$Z6PDnL8OVhyMRX/r.ixicunhcUDTP0csBez2SzCyEB9Ba1cbbgON2";
-    const passwordVerified = await verifyPassword(password, hashedPassword);
+
+    const user = await User.findOne({ userEmail });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const passwordVerified = await verifyPassword(password, user.password);
+    if (!passwordVerified) {
+      return res.status(401).json({ error: "Incorrect password" });
+    }
+
+    const userDoc = {
+      userEmail: user.userEmail,
+      username: user.username,
+      isOwner: user.isOwner,
+    };
+
+    const token = jwt.sign({ userEmail }, secretKey);
+    res
+      .cookie("jwt", token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      })
+      .status(200)
+      .json({ userDoc, message: "User logged in successfully" });
   } catch (error) {
-    console.error("Error registering user:", error.message);
+    // console.error("Error logging in user:", error.message);
     res.status(500).json({ error: "An internal server error occurred" });
   }
 });

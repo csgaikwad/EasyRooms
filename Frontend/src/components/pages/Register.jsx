@@ -1,37 +1,51 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { UserAtom } from "../atoms/UserAtom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("ab");
   const [userEmail, setUserEmail] = useState("test@gm.com");
   const [password, setPassword] = useState("123");
   const [isOwner, setisOwner] = useState(false);
+  const setUserAtom = useSetRecoilState(UserAtom);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const userDetails = {
+        username,
+        userEmail,
+        password,
+        isOwner,
+      };
+      const response = await axios.post("/register", userDetails);
+      alert(response.data.message);
+      if (response) {
+        const UserAtomDetails = {
+          isAuthenticated: true,
+          userEmail: response.data.userEmail,
+          username: response.data.username,
+          isOwner: response.data.isOwner,
+        };
+        setUserAtom(UserAtomDetails);
+      }
+      navigate("/");
+    } catch (e) {
+      alert("Registeration failed.Please try again! ");
+    }
+  }
 
   return (
     <div className="h-screen p-4">
       <div className=" min-w-96 flex items-center justify-center mt-6">
         <form
           className="flex flex-col items-center justify-center border-2 rounded-3xl p-6 py-12 pb-2 shadow-md gap-5 "
-          onSubmit={async(e) => {
-            e.preventDefault();
-
-
-           try{
-             const userDetails={
-              username,
-              userEmail,
-              password,
-              isOwner
-            }
-            const response = await axios.post("/register",userDetails)
-            alert(response.data.message)
-          }catch(e){
-            alert("Registeration failed.Please try again! later")
-          }
-
-          }}
+          onSubmit={handleSubmit}
         >
           <div className="flex flex-col items-start">
             <label>Name</label>
@@ -40,7 +54,9 @@ export default function Register() {
               name="username"
               placeholder="First Last"
               value={username}
-              onChange={(e) => { setUsername(e.target.value)}}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
               required
             />
           </div>
@@ -51,7 +67,9 @@ export default function Register() {
               name="email"
               placeholder="abc@gmail.com"
               value={userEmail}
-              onChange={(e) => { setUserEmail(e.target.value)}}
+              onChange={(e) => {
+                setUserEmail(e.target.value);
+              }}
               required
             />
           </div>
@@ -62,7 +80,9 @@ export default function Register() {
               name="password"
               placeholder="4321"
               value={password}
-              onChange={(e) => { setPassword(e.target.value)}}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               required
             />
           </div>
@@ -74,7 +94,9 @@ export default function Register() {
               name="isOwner"
               value={isOwner}
               checked={isOwner}
-              onChange={(e) => { setisOwner(e.target.checked)}}
+              onChange={(e) => {
+                setisOwner(e.target.checked);
+              }}
             />
           </div>
           <button className="formButton ">Register</button>
