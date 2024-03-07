@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import { UserAtom } from "../atoms/UserAtom";
 
 export default function Login() {
-  const [userEmail, setEmail] = useState("test@gm.com");
+  const [userEmail, setEmail] = useState("owner@gm.com");
   const [password, setPassword] = useState("123");
   const navigate = useNavigate();
   const [user,setUser] = useRecoilState(UserAtom);

@@ -42,6 +42,11 @@ const secretKey = process.env.SECRET_KEY;
 
 
 
+
+
+
+
+
 async function hashPassword(password) {
   try {
     if (!password) {
@@ -73,44 +78,39 @@ async function verifyPassword(password, hashedPassword) {
 
 
 
-
-
-
-
-
-
-
 app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-
-
 app.get("/me", async (req, res) => {
- try {
-   const token = req.cookies.jwt;
-   const mail = jwt.verify(token, secretKey);
-   const foundUser = await User.findOne({ userEmail: mail.userEmail });
-   const ResUserDoc = {
-     userEmail: foundUser.userEmail,
-     username: foundUser.username,
-     isOwner: foundUser.isOwner,
-   };
-   res.json(ResUserDoc);
- } catch (error) {
-  res.json({message:"Cookie Not found"});
-}
+  try {
+    const token = req.cookies.jwt;
+    const mail = jwt.verify(token, secretKey);
+    const foundUser = await User.findOne({ userEmail: mail.userEmail });
+    const ResUserDoc = {
+      userEmail: foundUser.userEmail,
+      username: foundUser.username,
+      isOwner: foundUser.isOwner,
+    };
+    res.json(ResUserDoc);
+  } catch (error) {
+    res.json({ message: "Cookie Not found" });
+  }
 });
+
+
 
 
 
 
 app.get("/logout", async (req, res) => {
   try {
-    res.cookie("jwt", "", {
-      httpOnly: true,
-      expires: new Date(0),
-    }).json({ message: "Logout successful" });
+    res
+      .cookie("jwt", "", {
+        httpOnly: true,
+        expires: new Date(0),
+      })
+      .json({ message: "Logout successful" });
   } catch (error) {
     console.error("Error logging out:", error.message);
     res.status(500).json({ error: "An internal server error occurred" });
@@ -121,10 +121,26 @@ app.get("/logout", async (req, res) => {
 
 
 
+
+
+
+
+
+
+
 app.post("/register", async (req, res) => {
   const { username, userEmail, password, isOwner } = req.body;
   console.log(req.body);
   try {
+    // const duplicateUser = await UserModel.findOne({
+    //   userEmail: req.body.userEmail,
+    // });
+    // if (duplicateUser) {
+    //   return res
+    //     .status(400)
+    //     .json({ error: "User with this email already exists" });
+    // }
+
     const hashedPassword = await hashPassword(password);
     const userDoc = await User.create({
       userEmail,
@@ -167,6 +183,10 @@ app.post("/register", async (req, res) => {
 
 
 
+
+
+
+
 app.post("/login", async (req, res) => {
   try {
     const { userEmail, password } = req.body;
@@ -191,10 +211,12 @@ app.post("/login", async (req, res) => {
     };
 
     const token = jwt.sign({ userEmail }, secretKey);
-    res.cookie("jwt", token, {
+    res
+      .cookie("jwt", token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
-      }).json({ userDoc, message: "User logged in successfully" });
+      })
+      .json({ userDoc, message: "User logged in successfully" });
   } catch (error) {
     console.error("Error logging in user:", error.message);
     res.status(500).json({ error: "An internal server error occurred" });

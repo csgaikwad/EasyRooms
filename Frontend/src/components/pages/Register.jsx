@@ -8,7 +8,7 @@ import { UserAtom } from "../atoms/UserAtom";
 export default function Register() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("ab");
-  const [userEmail, setUserEmail] = useState("test@gm.com");
+  const [userEmail, setUserEmail] = useState("owner@gm.com");
   const [password, setPassword] = useState("123");
   const [isOwner, setisOwner] = useState(false);
   const [user,setUser] = useRecoilState(UserAtom);
@@ -29,9 +29,9 @@ export default function Register() {
       if (response.data) {
         const UserAtomDetails = {
           isAuthenticated: true,
-          userEmail: response.data.userDoc.userEmail,
-          username: response.data.userDoc.username,
-          isOwner: response.data.userDoc.isOwner,
+          userEmail: response.data.ResUserDoc.userEmail,
+          username: response.data.ResUserDoc.username,
+          isOwner: response.data.ResUserDoc.isOwner,
         };
         setUser(UserAtomDetails);
         navigate("/");
