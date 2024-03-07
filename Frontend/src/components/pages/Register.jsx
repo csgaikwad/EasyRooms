@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { UserAtom } from "../atoms/UserAtom";
 
 export default function Register() {
@@ -11,10 +11,11 @@ export default function Register() {
   const [userEmail, setUserEmail] = useState("test@gm.com");
   const [password, setPassword] = useState("123");
   const [isOwner, setisOwner] = useState(false);
-  const setUserAtom = useSetRecoilState(UserAtom);
+  const [user,setUser] = useRecoilState(UserAtom);
 
   async function handleSubmit(e) {
     e.preventDefault();
+
 
     try {
       const userDetails = {
@@ -25,16 +26,16 @@ export default function Register() {
       };
       const response = await axios.post("/register", userDetails);
       alert(response.data.message);
-      if (response) {
+      if (response.data) {
         const UserAtomDetails = {
           isAuthenticated: true,
-          userEmail: response.data.ResUserDoc.userEmail,
-          username: response.data.ResUserDoc.username,
-          isOwner: response.data.ResUserDoc.isOwner,
+          userEmail: response.data.userDoc.userEmail,
+          username: response.data.userDoc.username,
+          isOwner: response.data.userDoc.isOwner,
         };
-        setUserAtom(UserAtomDetails);
+        setUser(UserAtomDetails);
+        navigate("/");
       }
-      navigate("/");
     } catch (e) {
       alert("Registeration failed.Please try again! ");
     }
@@ -99,7 +100,7 @@ export default function Register() {
               }}
             />
           </div>
-          <button className="formButton ">Register</button>
+          <button className={`basicButton ${user.isOwner ? 'bg-purple-500' : 'bg-red-500'}`}>Register</button>
           <Link to="/login">
             <label className=" text-blue-400 cursor-pointer">
               Already Registered...

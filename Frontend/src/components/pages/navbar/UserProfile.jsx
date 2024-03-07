@@ -59,7 +59,7 @@ export default function UserProfile() {
               name={user.username}
               size="40"
               round={true}
-              color="#007bff"
+              color={`${!user.isOwner ? "#8B5CF6" :"#EF4444"  }`}
               fgColor="#fff"
               className="avatar-class "
             />

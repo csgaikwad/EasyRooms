@@ -5,32 +5,21 @@
 html {
   scroll-behavior: smooth;
 }
-.basicLogo{
-  @apply text-red-500
+.basicText {
+  @apply text-red-500;
 }
 
-.basicColor{
-  @apply bg-red-500
+.basicColor {
+  @apply bg-red-500;
 }
-.basicColor:hover{
-  @apply bg-red-700
-}
-.formButton{
-  @apply border-2 rounded-full basicColor py-3 text-white text-xl min-w-96 mt-2
-}
-.formButton{
-  @apply border-2 rounded-full basicColor py-3 text-white text-xl min-w-96 mt-2
-}
-.isOwner{
-  @apply text-purple-500
+.basicColor:hover {
+  @apply bg-red-700;
 }
 
-.basicColor{
-  @apply bg-purple-500
+.basicButton {
+  @apply border-2 rounded-full  py-3 text-white text-xl min-w-96 mt-2;
 }
-.basicColor:hover{
-  @apply bg-purple-700
-}
+
 .hoverable-item:hover {
   transition: transform 300ms ease-in-out;
   transform: scale(1.1);
@@ -54,14 +43,10 @@ html {
   transition-timing-function: ease;
 }
 
-label{
-  @apply text-xl text-gray-500 font-serif ml-4
+label {
+  @apply text-xl text-gray-500 font-serif ml-4;
 }
 
 input:not([type="checkbox"]) {
- @apply bg-gray-50 border-2 rounded-full shadow-sm outline-none p-2 px-4 m-2 min-w-96
-
+  @apply bg-gray-50 border-2 rounded-full shadow-sm outline-none p-2 px-4 m-2 min-w-96;
 }
-
-
-

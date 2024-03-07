@@ -26,9 +26,12 @@ export default function Logo() {
           />
         )}
       </div>
-      <h1 className="text-2xl font-bold basicLogo font-serif  underline transition duration-300 ease-in-out transform hover:scale-90 cursor-pointer">
+      <div className={`${user.isOwner? "text-purple-800" : "text-red-500"}`}>
+
+      <h1 className=" text-2xl font-bold font-serif  underline transition duration-300 ease-in-out transform hover:scale-90 cursor-pointer">
         Airbnd
       </h1>
+      </div>
     </div>
   );
 }

@@ -31,7 +31,6 @@ export default function Login() {
           username: response.data.userDoc.username,
           isOwner: response.data.userDoc.isOwner,
         };
-        document.documentElement.style.setProperty('siteColor','purple');
         setUser(UserAtomDetails);
         navigate("/");
       }
@@ -60,7 +59,7 @@ export default function Login() {
               required
             />
           </div>
-          <div className="flex flex-col items-start">
+          <div className=" flex flex-col items-start">
             <label>Password : </label>
             <input
               type="password"
@@ -73,7 +72,7 @@ export default function Login() {
               required
             />
           </div>
-          <button className="formButton">Login</button>
+          <button className={`basicButton ${user.isOwner ? 'bg-purple-500' : 'bg-red-500'}`}>Login</button>
           <Link to="/register">
             <label className=" cursor-pointer text-blue-400">
               Not Registered yet...?

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { UserAtom } from "../../atoms/UserAtom";
 
 export default function Searchbar() {
   const [showFirstBar, setShowFirstBar] = useState(true);
   const [hideBar, sethideBar] = useState(false);
+  const user=useRecoilValue(UserAtom);
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -54,7 +57,7 @@ export default function Searchbar() {
             <h1 className="cursor-pointer searching text-md hoverable-item w-14 grow p-1 text-center font-serif">
               Who
             </h1>
-            <div className="basicColor rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer">
+            <div className={`${user.isOwner ? "bg-purple-500" : "bg-red-500"} rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer ` } >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -82,7 +85,7 @@ export default function Searchbar() {
             <h1 className="text-md hoverable-item p-1 text-center font-serif md:w-24 md:text-nowrap">
               Add Guest
             </h1>
-            <div className=" basicColor rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 ">
+            <div className={`${user.isOwner ? "bg-purple-500" : "bg-red-500"} rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer` } >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
