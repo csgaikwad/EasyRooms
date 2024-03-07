@@ -2,14 +2,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { UserAtom } from "../atoms/UserAtom";
 
 export default function Login() {
   const [userEmail, setEmail] = useState("test@gm.com");
   const [password, setPassword] = useState("123");
   const navigate = useNavigate();
-  const setUserAtom = useSetRecoilState(UserAtom);
+  const [user,setUser] = useRecoilState(UserAtom);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -21,15 +21,18 @@ export default function Login() {
       };
       const response = await axios.post("/login", userDetails);
       alert(response.data.message);
-      if (response) {
+
+
+
+      if (response.data) {
         const UserAtomDetails = {
           isAuthenticated: true,
-          userEmail: response.data.userEmail,
-          username: response.data.username,
-          isOwner: response.data.isOwner,
+          userEmail: response.data.userDoc.userEmail,
+          username: response.data.userDoc.username,
+          isOwner: response.data.userDoc.isOwner,
         };
-        setUserAtom(UserAtomDetails);
-
+        document.documentElement.style.setProperty('siteColor','purple');
+        setUser(UserAtomDetails);
         navigate("/");
       }
     } catch (e) {
@@ -45,6 +48,7 @@ export default function Login() {
         >
           <div className="flex flex-col items-start">
             <label>Email</label>
+
             <input
               type="email"
               name="email"

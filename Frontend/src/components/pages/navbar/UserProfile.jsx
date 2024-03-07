@@ -1,24 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
 import Avatar from "react-avatar";
+import { fetchData } from "../../functions/fetchData";
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const user = useRecoilValue(UserAtom);
+  const [user, setUser] = useRecoilState(UserAtom);
   const [showDiv, setShowDiv] = useState(false);
 
   function showDivOnMouseEnter() {
-    setShowDiv((prev) => {
-      return !prev;
-    });
+    setShowDiv((prev) => !prev);
   }
 
+  useEffect(() => {
+    async function fetchDataOnLogin() {
+      try {
+        await fetchData(setUser);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchDataOnLogin();
+  }, [setUser]);
   return (
     <div className="flex items-center w-auto h-10 border-2 rounded-full py-6 px-2 pl-2 gap-1 shadow-md">
       <div
-        className=" transition duration-300 ease-in-out transform hover:scale-125 cursor-pointer"
+        className="transition duration-300 ease-in-out transform hover:scale-125 cursor-pointer"
         onClick={showDivOnMouseEnter}
       >
         <svg
@@ -43,7 +53,7 @@ export default function UserProfile() {
         </div>
       </div>
       <div onClick={() => navigate("/profile")}>
-        {user ? (
+        {user.username ? (
           <div className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
             <Avatar
               name={user.username}

@@ -28,9 +28,9 @@ export default function Register() {
       if (response) {
         const UserAtomDetails = {
           isAuthenticated: true,
-          userEmail: response.data.userEmail,
-          username: response.data.username,
-          isOwner: response.data.isOwner,
+          userEmail: response.data.ResUserDoc.userEmail,
+          username: response.data.ResUserDoc.username,
+          isOwner: response.data.ResUserDoc.isOwner,
         };
         setUserAtom(UserAtomDetails);
       }

@@ -6,47 +6,40 @@ import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Profile from "./components/pages/Profile";
-import { RecoilRoot, useSetRecoilState } from "recoil";
-import axios from "axios";
+import { fetchData } from "./components/functions/fetchData";
+import { useRecoilState } from "recoil";
 import { UserAtom } from "./components/atoms/UserAtom";
+import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 export default function App() {
-  const setUserAtom = useSetRecoilState(UserAtom);
+  const [user, setUser] = useRecoilState(UserAtom);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchDataOnLoad() {
       try {
-        const response = await axios.get("/me");
-        const UserAtomDetails = {
-          isAuthenticated: true,
-          userEmail: response.data.userEmail,
-          username: response.data.username,
-          isOwner: response.data.isOwner,
-        };
-        setUserAtom(UserAtomDetails);
+        await fetchData(setUser);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching data:", error);
       }
-    };
-
-    fetchData();
-  }, [setUserAtom]);
+    }
+    fetchDataOnLoad();
+  }, []);
 
   return (
-      <div>
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </BrowserRouter>
-        <Footer />
-      </div>
+    <div>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
+    </div>
   );
 }

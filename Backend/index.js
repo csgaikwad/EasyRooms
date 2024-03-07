@@ -87,20 +87,35 @@ app.get("/", (req, res) => {
 
 
 app.get("/me", async (req, res) => {
-  const token = req.cookies.jwt;
-  const mail = jwt.verify(token, secretKey);
-  const foundUser = await User.findOne({ userEmail: mail.userEmail });
-  const ResUserDoc = {
-    userEmail: foundUser.userEmail,
-    username: foundUser.username,
-    isOwner: foundUser.isOwner,
-  };
-  res.json(ResUserDoc);
+ try {
+   const token = req.cookies.jwt;
+   const mail = jwt.verify(token, secretKey);
+   const foundUser = await User.findOne({ userEmail: mail.userEmail });
+   const ResUserDoc = {
+     userEmail: foundUser.userEmail,
+     username: foundUser.username,
+     isOwner: foundUser.isOwner,
+   };
+   res.json(ResUserDoc);
+ } catch (error) {
+  res.json({message:"Cookie Not found"});
+}
 });
 
 
 
 
+app.get("/logout", async (req, res) => {
+  try {
+    res.cookie("jwt", "", {
+      httpOnly: true,
+      expires: new Date(0),
+    }).json({ message: "Logout successful" });
+  } catch (error) {
+    console.error("Error logging out:", error.message);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
 
 
 
@@ -176,15 +191,12 @@ app.post("/login", async (req, res) => {
     };
 
     const token = jwt.sign({ userEmail }, secretKey);
-    res
-      .cookie("jwt", token, {
+    res.cookie("jwt", token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
-      })
-      .status(200)
-      .json({ userDoc, message: "User logged in successfully" });
+      }).json({ userDoc, message: "User logged in successfully" });
   } catch (error) {
-    // console.error("Error logging in user:", error.message);
+    console.error("Error logging in user:", error.message);
     res.status(500).json({ error: "An internal server error occurred" });
   }
 });

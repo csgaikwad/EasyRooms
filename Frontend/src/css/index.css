@@ -15,6 +15,22 @@ html {
 .basicColor:hover{
   @apply bg-red-700
 }
+.formButton{
+  @apply border-2 rounded-full basicColor py-3 text-white text-xl min-w-96 mt-2
+}
+.formButton{
+  @apply border-2 rounded-full basicColor py-3 text-white text-xl min-w-96 mt-2
+}
+.isOwner{
+  @apply text-purple-500
+}
+
+.basicColor{
+  @apply bg-purple-500
+}
+.basicColor:hover{
+  @apply bg-purple-700
+}
 .hoverable-item:hover {
   transition: transform 300ms ease-in-out;
   transform: scale(1.1);
@@ -47,7 +63,5 @@ input:not([type="checkbox"]) {
 
 }
 
-.formButton{
-  @apply border-2 rounded-full basicColor py-3 text-white text-xl min-w-96 mt-2
-}
+
 
