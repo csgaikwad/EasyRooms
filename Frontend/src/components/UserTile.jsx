@@ -20,7 +20,7 @@ export default function UserTile() {
       <div className=" shadow-2xl h-[30rem] w-96 bg-gray-500 rounded-xl flex flex-col items-center justify-between pt-4  ">
         <div className="size-40 bg-pink-400 rounded-full "></div>
         <div
-          className=" bg-white py-2 px-4 rounded-xl  text-2xl underline text-blue-400 font-serif tracking-tighter cursor-pointer"
+          className=" bg-white py-2 my-2 shadow-lg px-4 rounded-xl  text-2xl underline text-blue-400 font-serif tracking-tighter cursor-pointer"
           onClick={logout}
         >
           Logout

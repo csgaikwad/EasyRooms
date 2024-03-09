@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
 import Avatar from "react-avatar";
@@ -53,7 +53,7 @@ export default function UserProfile() {
           <h1>Hi There</h1>
         </div>
       </div>
-      <div onClick={() => navigate("/profile")}>
+      <div onClick={() => user.isAuthenticated ?navigate("/profile") : navigate("/login")}>
         {user.username ? (
           <div className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
             <Avatar

@@ -17,7 +17,7 @@ export default function Navbar() {
         <Logo />
         <Searchbar />
         {!user.isAuthenticated && (
-          <div className="text-2xl underline text-blue-400 font-serif tracking-tighter cursor-pointer">
+          <div className="text-2xl underline text-blue-400 font-serif tracking-tighter w-auto cursor-pointer">
             <Link to={"/login"}>Login</Link>
           </div>
         )}
