@@ -10,7 +10,7 @@ export default function UserProfile() {
   const [user, setUser] = useRecoilState(UserAtom);
   const [showDiv, setShowDiv] = useState(false);
 
-  function showDivOnMouseEnter() {
+  function showDivOnEvent() {
     setShowDiv((prev) => !prev);
   }
 
@@ -29,7 +29,7 @@ export default function UserProfile() {
     <div className="flex items-center w-auto h-10 border-2 rounded-full py-6 px-2 pl-2 gap-1 shadow-md">
       <div
         className="transition duration-300 ease-in-out transform hover:scale-125 cursor-pointer"
-        onClick={showDivOnMouseEnter}
+        onClick={showDivOnEvent}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -46,10 +46,11 @@ export default function UserProfile() {
           />
         </svg>
         <div
-          onMouseLeave={showDivOnMouseEnter}
-          className={`border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-18px] ${showDiv ? "" : "hidden"}`}
+          onMouseLeave={showDivOnEvent}
+          onClick={() => {navigate("/login");}}
+          className={`block border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-18px] ${showDiv ? "" : "hidden"}`}
         >
-          <Link to="/login"> Hi There</Link>
+          <h1>Hi There</h1>
         </div>
       </div>
       <div onClick={() => navigate("/profile")}>
@@ -59,7 +60,7 @@ export default function UserProfile() {
               name={user.username}
               size="40"
               round={true}
-              color={`${!user.isOwner ? "#8B5CF6" :"#EF4444"  }`}
+              color={`${!user.isOwner ? "#8B5CF6" : "#EF4444"}`}
               fgColor="#fff"
               className="avatar-class "
             />

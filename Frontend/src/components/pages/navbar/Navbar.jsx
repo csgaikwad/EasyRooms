@@ -11,34 +11,12 @@ import axios from "axios";
 export default function Navbar() {
   const [user, setUser] = useRecoilState(UserAtom);
 
-  async function logout() {
-    try {
-      const res = await axios.get("/logout");
-
-      setUser({
-        isAuthenticated: false,
-        userEmail: "",
-        username: "",
-        isOwner: false,
-      });
-    } catch (err) {
-      throw Error(err);
-    }
-  }
-
   return (
     <div className="sticky top-0 px-8 bg-white stroke-lime-50 rounded-md shadow-sm border-b-2 border-gray-300">
       <div className="flex flex-col  sm:flex-row items-center gap-3 justify-center md:justify-between py-5 md:p-5 px-8">
         <Logo />
         <Searchbar />
-        {user.isAuthenticated ? (
-          <div
-            className="text-2xl underline text-blue-400 font-serif tracking-tighter cursor-pointer"
-            onClick={logout}
-          >
-            Logout
-          </div>
-        ) : (
+        {!user.isAuthenticated && (
           <div className="text-2xl underline text-blue-400 font-serif tracking-tighter cursor-pointer">
             <Link to={"/login"}>Login</Link>
           </div>

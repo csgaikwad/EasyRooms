@@ -82,6 +82,10 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
+
+
+
+
 app.get("/me", async (req, res) => {
   try {
     const token = req.cookies.jwt;
