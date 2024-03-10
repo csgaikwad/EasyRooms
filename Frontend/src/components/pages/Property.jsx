@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { UserAtom } from "../atoms/UserAtom";
 import { useNavigate } from "react-router-dom";
-import UserProperties from "../UserProperties";
+import UserProperties from "../CreateProperty";
 
 export function Property() {
   const user = useRecoilValue(UserAtom);
@@ -12,7 +12,7 @@ export function Property() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 100);
+    }, 1000);
     if (!loading && !user.isAuthenticated) {
       setTimeout(() => {
         navigate("/login");

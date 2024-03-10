@@ -37,7 +37,7 @@ export default function Profile() {
           HI
           <div className="bg-orange-400 h-[30rem] w-80 rounded-xl "></div>
         </div>
-        hideScrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-300
+        {/* hideScrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-300 */}
       </div>
     </div>
   );
