@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { UserAtom } from "../atoms/UserAtom";
 import { useNavigate } from "react-router-dom";
-import UserProperties from "../CreateProperty";
+import CreateProperties from "../CreateProperty";
 
 export function Property() {
   const user = useRecoilValue(UserAtom);
@@ -40,13 +40,13 @@ export function Property() {
           <div className="w-full flex flex-col justify-center items-center">
             <div className="py-4">
               <h1 className="text-lg font-medium">
-                Welcome to your properties{" "}
+                Add new properties here{" "}
                 <span className=" cursor-default font-bold text-xl text-purple-500 underline capitalize">
                   {user.username}!
                 </span>
               </h1>
             </div>
-            <UserProperties />
+            <CreateProperties />
           </div>
         ) : loading ? (
           <div className="h-screen flex items-center text-2xl text-pink-500">

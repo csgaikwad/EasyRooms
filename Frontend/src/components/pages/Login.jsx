@@ -9,7 +9,7 @@ export default function Login() {
   const [userEmail, setEmail] = useState("owner@gm.com");
   const [password, setPassword] = useState("123");
   const navigate = useNavigate();
-  const [user,setUser] = useRecoilState(UserAtom);
+  const [user, setUser] = useRecoilState(UserAtom);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -21,8 +21,6 @@ export default function Login() {
       };
       const response = await axios.post("/login", userDetails);
       alert(response.data.message);
-
-
 
       if (response.data) {
         const UserAtomDetails = {
@@ -66,13 +64,18 @@ export default function Login() {
               name="password"
               placeholder="4321"
               value={password}
+              min={6}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
               required
             />
           </div>
-          <button className={`basicButton ${user.isOwner ? 'bg-purple-500' : 'bg-red-500'}`}>Login</button>
+          <button
+            className={`basicButton ${user.isOwner ? "bg-purple-500" : "bg-red-500"}`}
+          >
+            Login
+          </button>
           <Link to="/register">
             <label className=" cursor-pointer text-blue-400">
               Not Registered yet...?

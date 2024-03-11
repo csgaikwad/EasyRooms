@@ -4,11 +4,13 @@ import cors from "cors";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import passport from "passport";
 import compression from "compression";
 import multer from "multer";
 import cookieParser from "cookie-parser";
+import { v4 as uuidv4 } from "uuid";
 import User from "./models/User.js";
+import PropertyDetails from "./models/Property.js";
+import cloudinary from "cloudinary";
 
 dotenv.config();
 
@@ -18,7 +20,6 @@ const port = 8000;
 app.use(compression());
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -35,17 +36,28 @@ mongoose
     console.log(err);
   });
 
-const saltRounds = parseInt(process.env.SALTING_ROUNDS);
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "uploads/");
+//   },
+//   filename: function (req, file, cb) {
+//     const fileExtension = 'jpeg';
+//     const originalFilename = file.originalname;
+//     const cleanFilename = originalFilename.replace(/\.[^.]+$/, '');
+//     const uniqueFilename = `${cleanFilename}.${fileExtension}`;
+//     cb(null, uniqueFilename);
+//   },
+// });
+
+// const upload = multer({ storage: storage });
+
 const secretKey = process.env.SECRET_KEY;
-
-
-
-
-
-
-
-
-
 
 async function hashPassword(password) {
   try {
@@ -55,7 +67,6 @@ async function hashPassword(password) {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     return hashedPassword;
   } catch (error) {
-    // console.error('Error hashing password:', error);
     throw new Error("Error hashing password");
   }
 }
@@ -78,35 +89,43 @@ async function verifyPassword(password, hashedPassword) {
 
 
 
+// Routes
+
+// Home route
 app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-
-
-
-
+// Route to get user information
 app.get("/me", async (req, res) => {
   try {
     const token = req.cookies.jwt;
-    const mail = jwt.verify(token, secretKey);
-    const foundUser = await User.findOne({ userEmail: mail.userEmail });
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const decoded = jwt.verify(token, secretKey);
+    const userId = decoded.userId;
+
+    const foundUser = await User.findById(userId);
+    if (!foundUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const ResUserDoc = {
+      id: foundUser._id,
       userEmail: foundUser.userEmail,
       username: foundUser.username,
       isOwner: foundUser.isOwner,
     };
     res.json(ResUserDoc);
   } catch (error) {
-    res.json({ message: "Cookie Not found" });
+    console.error(error);
+    res.status(500).json({ error: "An internal server error occurred" });
   }
 });
 
-
-
-
-
-
+// Route to logout
 app.get("/logout", async (req, res) => {
   try {
     res
@@ -132,19 +151,128 @@ app.get("/logout", async (req, res) => {
 
 
 
+
+
+
+
+// Route to upload property photo and get preview   upload.single("propertyPhoto")
+app.post("/preview", async (req, res) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      throw new Error("No file uploaded");
+    }
+    const result = await cloudinary.uploader.upload(file.path);
+    res.json({ imageUrl: result.secure_url });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
+// Route to add a new property
+app.post("/property", async (req, res) => {
+  try {
+    const {
+      imageUrl,
+      title,
+      location,
+      details,
+      price,
+      numberOfGuests,
+      wifi,
+      parking,
+      tv,
+      radio,
+      pets,
+      entrance,
+    } = req.body;
+    const propertyPhotos = [imageUrl];
+
+    // Get user ID from the cookie
+    const token = req.cookies.jwt;
+    const decoded = jwt.verify(token, secretKey);
+    const user = await User.findOne({ userEmail: decoded.userEmail });
+
+    const property = new PropertyDetails({
+      title,
+      location,
+      details,
+      price,
+      numberOfGuests,
+      wifi: wifi || false,
+      parking: parking || false,
+      tv: tv || false,
+      radio: radio || false,
+      pets: pets || false,
+      entrance: entrance || false,
+      propertyPhotos,
+      user: user._id, // Store the user ID with the property
+    });
+
+    await property.save();
+
+    res.status(201).json({
+      property: property,
+      photoUrls: propertyPhotos,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
+// Route to get all properties
+app.get("/properties", async (req, res) => {
+  try {
+    const properties = await PropertyDetails.find();
+    res.json(properties);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
+// Route to get properties by user ID
+app.get("/properties/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    // Handle case where userId is undefined
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+    const isValidObjectId = mongoose.isValidObjectId(userId);
+    if (!isValidObjectId) {
+      return res.status(400).json({ error: "Invalid user ID" });
+    }
+    const properties = await PropertyDetails.find({ user: userId });
+    res.json(properties);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Route to register a new user
 app.post("/register", async (req, res) => {
   const { username, userEmail, password, isOwner } = req.body;
-  console.log(req.body);
   try {
-    // const duplicateUser = await UserModel.findOne({
-    //   userEmail: req.body.userEmail,
-    // });
-    // if (duplicateUser) {
-    //   return res
-    //     .status(400)
-    //     .json({ error: "User with this email already exists" });
-    // }
-
     const hashedPassword = await hashPassword(password);
     const userDoc = await User.create({
       userEmail,
@@ -153,17 +281,17 @@ app.post("/register", async (req, res) => {
       isOwner,
     });
     const ResUserDoc = {
+      id: userDoc._id,
       userEmail: userDoc.userEmail,
       username: userDoc.username,
       isOwner: userDoc.isOwner,
     };
     const token = jwt.sign(
       {
-        userEmail: userDoc.userEmail,
+        userId: userDoc._id,
       },
       secretKey
     );
-    console.log(token);
     res
       .cookie("jwt", token, {
         httpOnly: true,
@@ -184,13 +312,7 @@ app.post("/register", async (req, res) => {
 
 
 
-
-
-
-
-
-
-
+// Route to log in a user
 app.post("/login", async (req, res) => {
   try {
     const { userEmail, password } = req.body;
@@ -209,12 +331,13 @@ app.post("/login", async (req, res) => {
     }
 
     const userDoc = {
+      id: user._id,
       userEmail: user.userEmail,
       username: user.username,
       isOwner: user.isOwner,
     };
 
-    const token = jwt.sign({ userEmail }, secretKey);
+    const token = jwt.sign({ userId: user._id }, secretKey);
     res
       .cookie("jwt", token, {
         httpOnly: true,
@@ -227,6 +350,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
