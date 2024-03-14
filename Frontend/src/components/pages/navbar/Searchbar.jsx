@@ -23,9 +23,9 @@ export default function Searchbar() {
   }, []);
 
   return (
-    <div className="md:w-125 flex w-[70%] items-center justify-center gap-4 ">
+    <div className="md:w-125 flex w-[70%] items-center justify-center gap-4  ">
       {showFirstBar ? (
-        <div className="  searching hidden w-full items-center justify-around gap-2 rounded-full border p-2 shadow-md md:flex">
+        <div className="  searching hidden md:flex w-full items-center justify-around gap-2 rounded-full border p-2 shadow-md ">
           <div className=" searching text-md hoverable-item w-[25%] p-1 pl-2 text-center font-serif cursor-pointer">
             Where
           </div>
@@ -74,7 +74,7 @@ export default function Searchbar() {
           </div>
         </div>
       ) : (
-        <div className=" searching flex w-[50%] min-w-80 items-center justify-around gap-2 rounded-full border shadow-md md:p-2 ">
+        <div className=" searching  flex w-[50%] min-w-80 items-center justify-around gap-2 rounded-full border shadow-md md:p-2 ">
           <div className="cursor-pointer searching text-md hoverable-item w-[33%] p-1 pl-2 text-center font-serif">
             Anywhere
           </div>

@@ -36,10 +36,10 @@ export default function Profile() {
           <p>My Bookings</p>
         </div>
       </div>
-      <div className="grid  grid-cols-[1fr,3fr] gap-4">
+      <div className="grid  grid-cols-[1fr,4fr] gap-4">
         <UserTile />
         {user.isOwner && (
-          <div className="bg-purple-100 h-[40rem] border-2 border-gray-200 shadow-lg rounded-xl overflow-y-scroll customScrollbar">
+          <div className="bg-purple-200 h-[40rem] border-2 border-gray-200 shadow-lg rounded-xl overflow-y-scroll customScrollbar">
             <UserProperties/>
           </div>
         )}

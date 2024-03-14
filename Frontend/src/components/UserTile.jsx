@@ -37,19 +37,19 @@ export default function UserTile() {
   }
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-start">
       {userData && (
-        <div className="shadow-2xl h-[30rem] w-96 bg-purple-200 rounded-xl flex flex-col items-center justify-between py-4">
-          <div className="size-40 bg-purple-400 rounded-full"></div>
-          <div className="text-black text-2xl my-2 grid grid-cols-[2fr,2fr]  justify-items-center">
+        <div className="shadow-2xl h-[30rem] w-80 bg-purple-200 rounded-xl flex flex-col items-center justify-between py-4 ">
+          <div className="size-40 bg-purple-400 rounded-full "></div>
+          <div className="text-black text-2xl my-2 grid grid-cols-[1fr,2fr] gap-4 justify-items-center ">
             <div className="flex flex-col items-end">
-              <p>Username:</p>
-              <p>Email: </p>
-              <p>Owner: </p>
+              <p>Name :</p>
+              <p >Email : </p>
+              <p>Owner : </p>
             </div>
-            <div className="underline">
+            <div className="underline ">
               <p>{userData.username ?? "null"}</p>
-              <p>{userData.userEmail ?? "null"}</p>
+              <p className="text-[1.2rem] whitespace-nowrap  truncate max-w-[170px]">{userData.userEmail ?? "null"}asdfasdfa</p>
               <p className="text-xl">{userData.isOwner ? "Yes" : "Not an owner yet"}</p>
             </div>
           </div>

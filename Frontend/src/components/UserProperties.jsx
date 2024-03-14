@@ -15,9 +15,9 @@ export default function UserProperties() {
       try {
         const response = await axios.get(`/properties`);
         setPropertyAtom(response.data);
-        setUserProperties(() =>
-          response.data.filter((res) => res.user === user.id)
-        );
+        // console.log(user.id, response.data[1].user);
+        const filteredProperties = response.data.filter((a) => a.user === user.id);
+        setUserProperties(filteredProperties);
       } catch (error) {
         console.error("Error fetching user properties:", error);
       }
@@ -28,19 +28,19 @@ export default function UserProperties() {
     }
   }, [user.isOwner, user.id]);
 
-  console.log(userProperties);
+  console.log("userProperties: ",userProperties);
 
   return (
-    <div className="grid grid-cols-2 gap-1  my-4 justify-items-center p-4 ">
-      {properties.map((property) => (
+    <div className="grid grid-cols-1  xl:grid-cols-2 gap-1  my-4 justify-items-center p-4 ">
+      {userProperties.map((property) => (
         <div
           key={property._id}
-          className="  rounded-xl min-h-96 min-w-80 max-w-96 bg-transparent my-4 bg-white border-2"
-        >
-          <Carousel showThumbs={false} showStatus={false} showIndicators={true} >
+          className=" shadow-xl rounded-xl min-h-96 min-w-80 max-w-96 bg-transparent my-5 border-2 bg-white "
+          >
+          <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
               <div className="min-w-44 min-h-60 max-w-96  m-2 " key={index}>
-                {console.log(photoUrl)}
+                {/* {console.log(photoUrl)} */}
                 <img
                   className="rounded-xl h-80 w-96 object-cover shadow-sm"
                   src={photoUrl}
@@ -53,9 +53,11 @@ export default function UserProperties() {
             <h2 className="text-xl font-semibold  ">{property.title}</h2>
             <p className="text-gray-600 ">{property.location}</p>
             <p className="text-gray-600 text-lg ">
-              <span className="text-black font-semibold font-serif">${property.price}</span>/night {/*₹ */}
+              <span className="text-black font-semibold font-serif">
+                $ {property.price}
+              </span>
+              /night {/*₹ */}
             </p>
-            <p className="text-sm text-gray-500 truncate">{property.details}</p>
             <p className="text-sm text-gray-500 truncate">{property.details}</p>
           </div>
         </div>
