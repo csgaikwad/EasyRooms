@@ -11,7 +11,7 @@ export default function Logo() {
   }
   return (
     <div onClick={goToHome} className="flex items-center gap-1 cursor-pointer">
-      <div className="relative size-10">
+      <div className="relative size-12 ">
         {user.isOwner ? (
           <img
             src="/purpleLogo.svg"

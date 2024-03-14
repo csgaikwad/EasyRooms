@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
+import { Routes, Route, BrowserRouter,  } from "react-router-dom";
 import Navbar from "./components/pages/navbar/Navbar";
 import Footer from "./components/pages/Footer";
 import Home from "./components/pages/Home";
@@ -11,6 +11,7 @@ import { useRecoilState } from "recoil";
 import { UserAtom } from "./components/atoms/UserAtom";
 import axios from "axios";
 import { Property } from "./components/pages/Property";
+import Places from "./components/pages/Places";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/newproperty" element={<Property />} />
+          <Route path="/places/:id" element={<Places />} />
         </Routes>
       </BrowserRouter>
       <Footer />

@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  /* @apply bg-gray-50; */
 }
 .basicText {
   @apply text-red-500;

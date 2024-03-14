@@ -305,25 +305,26 @@ app.get("/properties", async (req, res) => {
   }
 });
 
-// Route to get properties by user ID
-// app.get("/properties/:userId", async (req, res) => {
-//   try {
-//     const userId = req.params.userId;
-//     // Handle case where userId is undefined
-//     if (!userId) {
-//       return res.status(400).json({ error: "User ID is required" });
-//     }
-//     const isValidObjectId = mongoose.isValidObjectId(userId);
-//     if (!isValidObjectId) {
-//       return res.status(400).json({ error: "Invalid user ID" });
-//     }
-//     const properties = await PropertyDetails.find({ user: userId });
-//     res.json(properties);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "An internal server error occurred" });
-//   }
-// });
+
+
+
+// Route to get properties by property ID
+app.get("/properties/:propertyId", async (req, res) => {
+  try {
+    const propertyId = req.params.propertyId;
+    const property = await PropertyDetails.findById(propertyId);
+
+    if (!property) {
+      return res.status(404).json({ error: "Property not found" });
+    }
+
+    res.json(property);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
 
 
 
