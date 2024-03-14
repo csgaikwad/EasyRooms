@@ -12,11 +12,12 @@ export function Property() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 1500);
     if (!loading && !user.isAuthenticated) {
       setTimeout(() => {
-        navigate("/login");
-      }, 1000);
+        alert("Try Logging in again")
+        // navigate("/login");
+      }, 2000);
     }
   }, [loading]);
 

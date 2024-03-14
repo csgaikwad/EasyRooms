@@ -57,11 +57,11 @@ export default function CreateProperties() {
         const formData = new FormData();
         formData.append("propertyPhoto", selectedFile);
 
-
-        const res = await axios.post("/preview", formData);
+        const res = await axios.post("/preview", formData,{
+          headers:{'Content-Type':'multipart/form-data'}
+        });
         const imageUrl = res.data.imageUrl;
-        console.log(imageUrl);
-
+        // console.log(imageUrl);
         setPreviews([...previews, imageUrl]);
         setSelectedFiles([...selectedFiles, selectedFile]);
       } catch (error) {
@@ -176,7 +176,7 @@ export default function CreateProperties() {
               </label>
               <textarea
                 id="details"
-                className="border border-gray-300 rounded-md p-2 h-40 w-full font-serif text-lg ml-2"
+                className="border border-gray-300 rounded-xl p-2 h-40 w-full font-serif text-lg ml-2 outline-none"
                 value={details}
                 onChange={(e) => setDetails(e.target.value)}
               />

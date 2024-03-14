@@ -8,9 +8,11 @@ import compression from "compression";
 import multer from "multer";
 import cookieParser from "cookie-parser";
 import { v4 as uuidv4 } from "uuid";
+import fs from "fs";
 import User from "./models/User.js";
 import PropertyDetails from "./models/Property.js";
 import { v2 as cloudinary } from 'cloudinary';
+import fileUpload from "express-fileupload";
 
 dotenv.config();
 
@@ -19,8 +21,14 @@ const port = 8000;
 
 app.use('/uploads', express.static('uploads'));
 
-app.use(compression());
+// app.use(compression());
 app.use(express.json());
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/', // Specify the temporary directory path
+}));
+
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
@@ -149,22 +157,27 @@ app.get("/logout", async (req, res) => {
 
 
 
-
 // Route to upload property photo and get preview
 app.post("/preview", async (req, res) => {
   try {
-    const file = req.file;
-    console.log("Uploaded file:", file);
-
+    const file = req.files && req.files.propertyPhoto;
     if (!file) {
       throw new Error("No file uploaded");
     }
-
-    const result = await cloudinary.uploader.upload(file.path, {
+    // console.log("Uploaded file:", file);
+    const result = await cloudinary.uploader.upload(file.tempFilePath, {
       folder: "property-photos",
       public_id: `property-photos/photo-${Date.now()}`,
     });
+
     console.log("Cloudinary upload result:", result);
+    fs.unlink(file.tempFilePath, (err) => {
+      if (err) {
+        console.error("Error deleting temporary file:", err);
+      } else {
+        console.log("Temporary file deleted successfully");
+      }
+    });
 
     res.json({ imageUrl: result.secure_url });
   } catch (error) {
