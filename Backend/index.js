@@ -10,12 +10,14 @@ import cookieParser from "cookie-parser";
 import { v4 as uuidv4 } from "uuid";
 import User from "./models/User.js";
 import PropertyDetails from "./models/Property.js";
-import cloudinary from "cloudinary";
+import { v2 as cloudinary } from 'cloudinary';
 
 dotenv.config();
 
 const app = express();
 const port = 8000;
+
+app.use('/uploads', express.static('uploads'));
 
 app.use(compression());
 app.use(express.json());
@@ -47,17 +49,21 @@ cloudinary.config({
 //     cb(null, "uploads/");
 //   },
 //   filename: function (req, file, cb) {
-//     const fileExtension = 'jpeg';
-//     const originalFilename = file.originalname;
-//     const cleanFilename = originalFilename.replace(/\.[^.]+$/, '');
-//     const uniqueFilename = `${cleanFilename}.${fileExtension}`;
-//     cb(null, uniqueFilename);
+//     cb(null, file.originalname);
 //   },
 // });
 
 // const upload = multer({ storage: storage });
 
+
+const upload = multer({ dest: 'uploads/' });
+
+
+
+
 const secretKey = process.env.SECRET_KEY;
+const saltRounds = 12;
+
 
 async function hashPassword(password) {
   try {
@@ -128,12 +134,7 @@ app.get("/me", async (req, res) => {
 // Route to logout
 app.get("/logout", async (req, res) => {
   try {
-    res
-      .cookie("jwt", "", {
-        httpOnly: true,
-        expires: new Date(0),
-      })
-      .json({ message: "Logout successful" });
+    res.clearCookie("jwt").json({ message: "Logout successful" });
   } catch (error) {
     console.error("Error logging out:", error.message);
     res.status(500).json({ error: "An internal server error occurred" });
@@ -149,32 +150,75 @@ app.get("/logout", async (req, res) => {
 
 
 
-
-
-
-
-
-
-// Route to upload property photo and get preview   upload.single("propertyPhoto")
+// Route to upload property photo and get preview
 app.post("/preview", async (req, res) => {
   try {
     const file = req.file;
+    console.log("Uploaded file:", file);
+
     if (!file) {
       throw new Error("No file uploaded");
     }
-    const result = await cloudinary.uploader.upload(file.path);
+
+    const result = await cloudinary.uploader.upload(file.path, {
+      folder: "property-photos",
+      public_id: `property-photos/photo-${Date.now()}`,
+    });
+    console.log("Cloudinary upload result:", result);
+
     res.json({ imageUrl: result.secure_url });
   } catch (error) {
-    console.error(error);
+    console.error("Error uploading file:", error);
     res.status(500).json({ error: "An internal server error occurred" });
   }
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // Route to upload property photo and get preview
+// app.post("/preview",upload.single("propertyPhoto"), async (req, res) => {
+//   try {
+//     const file = req.file;
+//     console.log(file)
+//     if (!file) {
+//       throw new Error("No file uploaded");
+//     }
+//     const result = await cloudinary.uploader.upload(file.path, {
+//       folder: "property-photos",
+//       public_id: `property-photos/photo-${Date.now()}`,
+//     });
+//     res.json({ imageUrl: result.secure_url });
+
+
+//     // const baseUrl = "http://localhost:8000/uploads/";
+//     // const imageUrl = baseUrl + file.filename; // Construct the full URL
+//     // res.json({ imageUrl: imageUrl });
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "An internal server error occurred" });
+//   }
+// });
+
+
+
+
 // Route to add a new property
 app.post("/property", async (req, res) => {
+    // console.log("req photo: ",req.body.propertyPhotos)
   try {
     const {
-      imageUrl,
       title,
       location,
       details,
@@ -186,13 +230,15 @@ app.post("/property", async (req, res) => {
       radio,
       pets,
       entrance,
+      propertyPhotos
     } = req.body;
-    const propertyPhotos = [imageUrl];
 
-    // Get user ID from the cookie
     const token = req.cookies.jwt;
     const decoded = jwt.verify(token, secretKey);
     const user = await User.findOne({ userEmail: decoded.userEmail });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
     const property = new PropertyDetails({
       title,
@@ -207,20 +253,33 @@ app.post("/property", async (req, res) => {
       pets: pets || false,
       entrance: entrance || false,
       propertyPhotos,
-      user: user._id, // Store the user ID with the property
+      user: user._id,
     });
 
+    // Save the property document to the database
     await property.save();
 
+    // Return the response
     res.status(201).json({
-      property: property,
+      property,
       photoUrls: propertyPhotos,
+      message:"Property Created Successfully"
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An internal server error occurred" });
   }
 });
+
+
+
+
+
+
+
+
+
+
 
 // Route to get all properties
 app.get("/properties", async (req, res) => {
@@ -234,24 +293,24 @@ app.get("/properties", async (req, res) => {
 });
 
 // Route to get properties by user ID
-app.get("/properties/:userId", async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    // Handle case where userId is undefined
-    if (!userId) {
-      return res.status(400).json({ error: "User ID is required" });
-    }
-    const isValidObjectId = mongoose.isValidObjectId(userId);
-    if (!isValidObjectId) {
-      return res.status(400).json({ error: "Invalid user ID" });
-    }
-    const properties = await PropertyDetails.find({ user: userId });
-    res.json(properties);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "An internal server error occurred" });
-  }
-});
+// app.get("/properties/:userId", async (req, res) => {
+//   try {
+//     const userId = req.params.userId;
+//     // Handle case where userId is undefined
+//     if (!userId) {
+//       return res.status(400).json({ error: "User ID is required" });
+//     }
+//     const isValidObjectId = mongoose.isValidObjectId(userId);
+//     if (!isValidObjectId) {
+//       return res.status(400).json({ error: "Invalid user ID" });
+//     }
+//     const properties = await PropertyDetails.find({ user: userId });
+//     res.json(properties);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "An internal server error occurred" });
+//   }
+// });
 
 
 
@@ -286,12 +345,8 @@ app.post("/register", async (req, res) => {
       username: userDoc.username,
       isOwner: userDoc.isOwner,
     };
-    const token = jwt.sign(
-      {
-        userId: userDoc._id,
-      },
-      secretKey
-    );
+    const token = jwt.sign({ userId: userDoc._id ,userEmail: userDoc.userEmail }, secretKey);
+
     res
       .cookie("jwt", token, {
         httpOnly: true,
@@ -337,7 +392,7 @@ app.post("/login", async (req, res) => {
       isOwner: user.isOwner,
     };
 
-    const token = jwt.sign({ userId: user._id }, secretKey);
+    const token = jwt.sign({ userId: user._id ,userEmail: user.userEmail }, secretKey);
     res
       .cookie("jwt", token, {
         httpOnly: true,

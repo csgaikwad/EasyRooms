@@ -38,7 +38,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/property" element={<Property />} />
+          <Route path="/newproperty" element={<Property />} />
         </Routes>
       </BrowserRouter>
       <Footer />

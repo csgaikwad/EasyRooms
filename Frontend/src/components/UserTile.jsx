@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { UserAtom } from "./atoms/UserAtom";
+import { useNavigate } from "react-router-dom";
 
-export default function UserTile({ setUser }) {
-  const [userData, setUserData] = useState(null);
+export default function UserTile() {
+  const [userData, setUserData] = useRecoilState(UserAtom);
+  const navigate=useNavigate();
 
   useEffect(() => {
     async function fetchUserData() {
       try {
         const response = await axios.get("/me");
-        console.log(response.data);
         setUserData(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -21,12 +24,13 @@ export default function UserTile({ setUser }) {
     try {
       const res = await axios.get("/logout");
 
-      setUser({
+      setUserData({
         isAuthenticated: false,
         userEmail: "",
         username: "",
         isOwner: false,
       });
+      navigate("/");
     } catch (err) {
       console.error("Error logging out:", err);
     }

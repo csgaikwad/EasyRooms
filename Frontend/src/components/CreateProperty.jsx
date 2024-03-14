@@ -1,53 +1,23 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateProperties() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
-  const [details, setDetails] = useState("");
-  const [price, setPrice] = useState("");
+  const [title, setTitle] = useState("absc");
+  const [location, setLocation] = useState("sdfw");
+  const [details, setDetails] = useState("weaers");
+  const [price, setPrice] = useState("324");
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [wifi, setWifi] = useState(false);
-  const [parking, setParking] = useState(false);
+  const [parking, setParking] = useState(true);
   const [tv, setTv] = useState(false);
-  const [radio, setRadio] = useState(false);
+  const [radio, setRadio] = useState(true);
   const [pets, setPets] = useState(false);
   const [entrance, setEntrance] = useState(false);
 
-  // async function showImage(imgFile) {
-  //   const formData = new FormData();
-  //   formData.append("propertyPhoto", imgFile);
-  //   try {
-  //     const res = await axios.post("/preview", formData);
-  //     console.log(res.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-  const handleFileChange = async (event) => {
-    const selectedFile = event.target.files[0];
-    const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
-
-    if (selectedFile && selectedFile.size > maxSizeInBytes) {
-      alert("File size exceeds the maximum allowed size (10MB).");
-      event.target.value = "";
-    } else {
-      try {
-        const formData = new FormData();
-        formData.append("propertyPhoto", selectedFile);
-        const res = await axios.post("/preview", formData);
-        const imageUrl = res.data.imageUrl;
-
-        setPreviews([...previews, imageUrl]);
-        setSelectedFiles([...selectedFiles, selectedFile]);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
+  const navigate=useNavigate();
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
@@ -75,36 +45,61 @@ export default function CreateProperties() {
     }
   };
 
+  const handleFileChange = async (event) => {
+    const selectedFile = event.target.files[0];
+    const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
+
+    if (selectedFile && selectedFile.size > maxSizeInBytes) {
+      alert("File size exceeds the maximum allowed size (10MB).");
+      event.target.value = "";
+    } else {
+      try {
+        const formData = new FormData();
+        formData.append("propertyPhoto", selectedFile);
+
+
+        const res = await axios.post("/preview", formData);
+        const imageUrl = res.data.imageUrl;
+        console.log(imageUrl);
+
+        setPreviews([...previews, imageUrl]);
+        setSelectedFiles([...selectedFiles, selectedFile]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("previews Arrary : ",previews)
     try {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("location", location);
-      formData.append("details", details);
-      formData.append("price", price);
-      formData.append("numberOfGuests", numberOfGuests);
-      formData.append("wifi", wifi);
-      formData.append("parking", parking);
-      formData.append("tv", tv);
-      formData.append("radio", radio);
-      formData.append("pets", pets);
-      formData.append("entrance", entrance);
-
-      selectedFiles.forEach((file, index) => {
-        formData.append(`propertyPhoto${index}`, file);
-      });
-
-      const res = await axios.post("/property", formData);
+      const propertyData = {
+        title,
+        location,
+        details,
+        price,
+        numberOfGuests: parseInt(numberOfGuests),
+        wifi,
+        parking,
+        tv,
+        radio,
+        pets,
+        entrance,
+        propertyPhotos: previews,
+      };
+      // console.log(propertyData)
+      const res = await axios.post("/property", propertyData);
       console.log(res.data.message);
       alert(res.data.message);
+      // navigate("/profile");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="border-2 h-auto w-full rounded-xl">
+    <div className=" h-auto w-full rounded-xl">
       <div className="py-8 flex items-center justify-center">
         <form
           className="flex flex-col justify-center items-center w-[60rem] border-2 rounded-2xl shadow-lg mb-20"

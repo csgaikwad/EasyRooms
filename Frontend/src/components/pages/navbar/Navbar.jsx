@@ -6,7 +6,6 @@ import UserProfile from "./UserProfile";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
-import axios from "axios";
 
 export default function Navbar() {
   const [user, setUser] = useRecoilState(UserAtom);

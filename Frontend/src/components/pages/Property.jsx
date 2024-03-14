@@ -38,9 +38,9 @@ export function Property() {
       <div className="flex items-center justify-center">
         {user.isOwner ? (
           <div className="w-full flex flex-col justify-center items-center">
-            <div className="py-4">
-              <h1 className="text-lg font-medium">
-                Add new properties here{" "}
+            <div className="pt-8">
+              <h1 className="text-xl font-medium">
+                Add your new properties here{" "}
                 <span className=" cursor-default font-bold text-xl text-purple-500 underline capitalize">
                   {user.username}!
                 </span>

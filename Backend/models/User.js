@@ -1,14 +1,15 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const UserSchema=new Schema({
-    userEmail:{type:String, unique:true , required:true},
-    password:{type:String,required:true},
-    username:{type:String,required:true},
-    isOwner:Boolean
-})
+const userSchema = new mongoose.Schema({
+  userEmail: { type: String, unique: true, required: true },
+  password: { type: String, required: true },
+  username: { type: String, required: true },
+  isOwner: Boolean,
+  properties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PropertyDetails' }]
+});
 
-UserSchema.index({ userEmail: 1 }, { unique: true });
+userSchema.index({ userEmail: 1 }, { unique: true });
 
-const UserModel=mongoose.model('User',UserSchema);
+const UserModel = mongoose.model('User', userSchema);
 
 export default UserModel;
