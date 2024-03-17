@@ -38,7 +38,6 @@ export default function UserProperties() {
           className=" shadow-xl rounded-xl min-h-96 min-w-80 max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
           onClick={()=>{
             navigate("/property/"+property._id)
-            // console.log(property._id)
           }}
           >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>

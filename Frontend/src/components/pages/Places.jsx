@@ -33,7 +33,6 @@ export default function Places() {
       setSelectedProperty(property);
     }
   }, [properties, reqId]);
-  console.log(selectedProperty);
 
   const scrollToPhotos = () => {
     photosRef.current.scrollIntoView({ behavior: "smooth" });

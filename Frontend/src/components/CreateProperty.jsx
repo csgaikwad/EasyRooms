@@ -145,12 +145,11 @@ export default function CreateProperties() {
     };
 
     if (id) {
-      console.log(propertyData);
       try {
         const res = await axios.put(`/property/${id}`, propertyData);
         console.log(res.data.message);
         alert(res.data.message);
-        // navigate("/profile");
+        navigate("/profile");
       } catch (error) {
         console.error(error);
       }
@@ -162,7 +161,7 @@ export default function CreateProperties() {
         const res = await axios.post("/property", propertyData);
         console.log(res.data.message);
         alert(res.data.message);
-        // navigate("/profile");
+        navigate("/profile");
       } catch (error) {
         console.error(error);
       }
