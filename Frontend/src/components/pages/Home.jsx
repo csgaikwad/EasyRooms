@@ -55,7 +55,7 @@ export default function Home() {
                   // lg:min-w-40 lg:min-h-52
                   <div className=" object-cover " key={index}>
                     <img
-                      className="rounded-xl size-60 lg:size-80  shadow-sm"
+                      className="rounded-xl size-60 lg:size-72  shadow-sm"
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />
@@ -70,7 +70,7 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold truncate">{property.title}</h2>
+                <h2 className="text-lg font-semibold truncate text-nowrap">{property.title}</h2>
                 <p className="text-gray-600">{property.location}</p>
                 <p className="text-gray-600 text-lg">
                   <span className="text-black font-semibold font-sans">
