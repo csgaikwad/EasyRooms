@@ -32,7 +32,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
+<<<<<<< HEAD
     origin: ["https://airbnd-blush.vercel.app","http://localhost:8000"],
+=======
+    origin: "https://airbnd-blush.vercel.app",
+>>>>>>> 80f7bb4cfddebf62675f2ece72c0a7f943362457
     credentials: true,
   })
 );
