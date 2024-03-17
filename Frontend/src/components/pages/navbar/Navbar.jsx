@@ -16,9 +16,13 @@ export default function Navbar() {
   }, [user.isAuthenticated,user]);
 
   return (
-    <div className="sticky top-0 px-8 bg-white z-20 stroke-lime-50 rounded-md shadow-sm border-b-2 border-gray-300">
-      <div className="flex flex-col  sm:flex-row items-center gap-3 justify-center md:justify-between py-5 md:p-5 px-8">
+    <div className="sticky flex flex-row top-0 lg:px-8 bg-white z-20 stroke-lime-50 rounded-md shadow-sm border-b-2 border-gray-300">
+      <div className="flex  flex-row w-full h-16 lg:h-auto flex-nowrap  items-center gap-3 justify-around py-5 lg:p-5 px-8">
+      
+      <div>
+
         <Logo />
+      </div>
         <Searchbar />
         {hideLogin ? (
           <></>
@@ -27,7 +31,10 @@ export default function Navbar() {
             <Link to={"/login"}>Login</Link>
           </div>
         )}
+        <div>
+
         <UserProfile />
+        </div>
       </div>
     </div>
   );

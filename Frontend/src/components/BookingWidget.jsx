@@ -60,16 +60,16 @@ export default function BookingWidget(props) {
 
   return (
     <div className="flex flex-col items-center py-10">
-      <h1 className="self-center text-[2rem] font-sans font-semibold mb-4">
+      <h1 className="self-center text-xl lg:text-[2rem] font-sans font-semibold mb-4">
         <span className="line-through text-gray-800">
           ${parseInt(props.price + props.price * 0.1)}
         </span>{" "}
         <span className=""> ${parseInt(props.price)} </span>
-        <span className="text-gray-700 text-2xl font-normal font-serif">
+        <span className="text-gray-700 lg:text-2xl font-normal font-serif">
           night
         </span>{" "}
       </h1>
-      <div className="mb-4">
+      <div className="mb-4 w-full">
         <div className="flex flex-col my-4">
           <label
             htmlFor="check-in"

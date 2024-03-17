@@ -33,18 +33,18 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen h-auto py-4 2xl:px-5 mb-20">
+    <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
       {!shuffleProperties ? (
         <div className="flex items-center justify-center min-h-screen">
           <h1 className="text-pink-600 text-2xl">Loading...</h1>
           <img className="size-20" src="/loader.svg" alt="Loading..." />
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8 m-8 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-4 m-8 justify-items-center">
           {shuffledProperties.map((property) => (
             <div
               key={property._id}
-              className="shadow-xl rounded-xl min-h-96 min-w-80 max-w-[30rem] bg-transparent my-7 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+              className="shadow-xl rounded-xl  max-w-[30rem] bg-transparent my-7 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
@@ -52,9 +52,10 @@ export default function Home() {
                 showIndicators={true}
               >
                 {property.propertyPhotos.map((photoUrl, index) => (
-                  <div className="min-w-44 min-h-60 object-cover " key={index}>
+                  // lg:min-w-40 lg:min-h-52
+                  <div className=" object-cover " key={index}>
                     <img
-                      className="rounded-xl size-80  shadow-sm"
+                      className="rounded-xl size-60  shadow-sm"
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />

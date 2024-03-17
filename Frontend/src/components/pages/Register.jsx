@@ -45,8 +45,8 @@ export default function Register() {
   }
 
   return (
-    <div className="h-screen p-4">
-      <div className=" min-w-96 flex items-center justify-center mt-6">
+    <div className="min-h-screen p-4">
+      <div className=" md:min-w-96 flex items-center justify-center mb-4 md:mt-6">
         <form
           className="flex flex-col items-center justify-center border-2 rounded-3xl p-6 py-12 pb-2 shadow-md gap-5 "
           onSubmit={handleSubmit}
