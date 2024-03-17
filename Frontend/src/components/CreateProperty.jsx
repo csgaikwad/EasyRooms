@@ -169,13 +169,13 @@ export default function CreateProperties() {
   };
 
   return (
-    <div className=" h-auto w-full rounded-xl">
+    <div className=" lg:h-auto lg:w-full rounded-xl">
       <div className="py-8 flex items-center justify-center">
         <form
-          className="flex flex-col justify-center items-center w-[60rem] border-2 rounded-2xl shadow-lg mb-20"
+          className="flex flex-col justify-center items-center lg:w-[60rem] border-2 rounded-2xl shadow-lg mb-20"
           encType="multipart/form-data"
         >
-          <label className="w-96 bg-transparent border-2 shadow-md text-black p-10 rounded-xl cursor-pointer hover:bg-gray-100 flex items-center justify-center gap-4 my-10">
+          <label className=" lg:w-96 bg-transparent border-2 shadow-md text-black p-4 lg:p-10 rounded-xl cursor-pointer hover:bg-gray-100 flex items-center justify-center gap-4 my-10">
             Choose Photos
             <img
               className="bg-purple-400 rounded-full size-10"
@@ -222,7 +222,7 @@ export default function CreateProperties() {
             </div>
           )}
 
-          <div className="flex flex-col space-y-4 mb-8 w-[40rem]">
+          <div className="flex flex-col space-y-4 mb-8 lg:w-[40rem]">
             <div className="flex flex-col">
               <label
                 htmlFor="title"
@@ -262,7 +262,7 @@ export default function CreateProperties() {
               </label>
               <textarea
                 id="details"
-                className="border border-gray-300 rounded-xl p-2 h-40 w-full font-serif text-lg ml-2 outline-none"
+                className="border border-gray-300 rounded-xl p-2 h-40 w-full font-serif text-lg lg:ml-2 outline-none"
                 value={details}
                 onChange={(e) => setDetails(e.target.value)}
               />
@@ -368,7 +368,7 @@ export default function CreateProperties() {
             </div>
           </div>
           <button
-            className="basicButton bg-purple-500 w-1/2 mb-20"
+            className="basicButton bg-purple-500 lg:w-1/2 mb-20"
             onClick={(e) => handleSubmit(e)}
           >
             Save

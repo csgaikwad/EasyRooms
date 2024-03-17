@@ -47,7 +47,7 @@ export function Property() {
     <div className="h-auto">
       <div className="flex items-center justify-center">
         {userAuth ? (
-          <div className="w-full flex flex-col justify-center items-center">
+          <div className="lg:w-full flex flex-col justify-center items-center">
             <div className="pt-8">
               <h1 className="text-xl font-medium">
                 Add your new properties here{" "}

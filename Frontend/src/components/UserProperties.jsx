@@ -15,7 +15,6 @@ export default function UserProperties() {
   useEffect(() => {
     const fetchUserProperties = async () => {
       try {
-        console.log(properties)
         const response = await axios.get(`/properties`);
         setPropertyAtom(response.data);
         const filteredProperties = response.data.filter((a) => a.user === user.id);
