@@ -42,7 +42,7 @@ export default function Profile() {
         <UserTile />
         </div>
         {user.isOwner && (
-          <div className="bg-purple-200 h-[40rem] border-2 border-gray-200 shadow-lg rounded-xl overflow-y-scroll md:customScrollbar">
+          <div className="bg-purple-200 h-[40rem] min-w-40 border-2 border-gray-200 shadow-lg rounded-xl overflow-y-scroll md:customScrollbar">
             <UserProperties/>
           </div>
         )}

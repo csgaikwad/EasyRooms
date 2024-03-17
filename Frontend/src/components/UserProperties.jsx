@@ -31,7 +31,7 @@ export default function UserProperties() {
 
 
   return (
-    <div className="block md:grid grid-cols-1  xl:grid-cols-2 2xl:grid-cols-3 gap-1  my-4 justify-items-center p-4 ">
+    <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-1  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
         <div
           key={property._id}
