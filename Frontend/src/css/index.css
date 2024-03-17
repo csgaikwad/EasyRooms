@@ -18,7 +18,7 @@ html {
 }
 
 .basicButton {
-  @apply border-2 rounded-full  py-3 text-white text-xl min-w-48 md:min-w-96 mt-2;
+  @apply border-2 rounded-full  py-3 text-white text-xl min-w-48 md:min-w-96 mt-2 hover:scale-110;
 }
 
 .hoverable-item:hover {
