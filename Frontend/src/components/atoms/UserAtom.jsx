@@ -5,7 +5,7 @@ export const UserAtom = atom({
     key: "UserAtom",
     default: {
       isAuthenticated: false,
-      userId: null,
+      id: null,
       userEmail:"",
       username: "",
       isOwner: false,
