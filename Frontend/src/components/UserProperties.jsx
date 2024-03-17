@@ -11,50 +11,46 @@ export default function UserProperties() {
   const [userProperties, setUserProperties] = useState([]);
   const user = useRecoilValue(UserAtom);
   const setPropertyAtom = useSetRecoilState(PropertyAtom);
-  const navigate=useNavigate();
-
+  const navigate = useNavigate();
 
   const fetchUserProperties = async () => {
     try {
-        if(properties.length === 0){
-          const response = await axios.get(`/properties`);
-          // setPropertyAtom(response.data);
-          const filteredProperties = response.data.filter((a) => a.user === user.id);
+      if (properties.length === 0) {
+        const response = await axios.get(`/properties`);
+        setPropertyAtom(response.data);
+        const filteredProperties = response.data.filter(
+          (a) => a.user === user.id
+        );
         setUserProperties(filteredProperties);
-      }else{
-        console.log(user.id)
+      } else {
         const filteredProperties = properties.filter((a) => a.user === user.id);
         setUserProperties(filteredProperties);
       }
-      } catch (error) {
-        console.error("Error fetching user properties:", error);
-      }
-    };
-    useEffect(() => {
-      console.log("trying to call function")
-      console.log(user)
+    } catch (error) {
+      console.error("Error fetching user properties:", error);
+    }
+  };
+  useEffect(() => {
     if (user.isOwner && user.id) {
-      console.log("trying to call the function in the fn")
-
       fetchUserProperties();
     }
-  }, [user.isOwner, user.id,properties]);
+  }, [user.isOwner, user.id, properties]);
 
-// console.log(properties)
-console.log(userProperties)
   return (
     <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-1  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
         <div
           key={property._id}
           className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
-          >
+        >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
-              <div className="lg:min-w-44 lg:min-h-60 max-w-96  m-2 " key={index}
-              onClick={()=>{
-                navigate("/places/"+property._id)
-              }}
+              <div
+                className="lg:min-w-44 lg:min-h-60 max-w-96  m-2 "
+                key={index}
+                onClick={() => {
+                  navigate("/places/" + property._id);
+                }}
               >
                 <img
                   className="rounded-xl lg:h-80 lg:w-96 object-cover shadow-sm"
@@ -64,10 +60,11 @@ console.log(userProperties)
               </div>
             ))}
           </Carousel>
-          <div className="px-5 mt-2 "
-           onClick={()=>{
-            navigate("/places/"+property._id)
-          }}
+          <div
+            className="px-5 mt-2 "
+            onClick={() => {
+              navigate("/places/" + property._id);
+            }}
           >
             <h2 className="md:text-xl font-semibold  ">{property.title}</h2>
             <p className="text-gray-600 ">{property.location}</p>
@@ -80,12 +77,16 @@ console.log(userProperties)
             {/* <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p> */}
           </div>
           <div
-          className="hidden lg:block"
-          onClick={()=>{
-            navigate("/property/"+property._id)
-          }}
+            className="hidden lg:block"
+            onClick={() => {
+              navigate("/property/" + property._id);
+            }}
           >
-            <img className="  m-4 size-10 bg-red-500 opacity-50 hover:opacity-100 transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1" src="/pencil.svg" alt="edit" />
+            <img
+              className="  m-4 size-10 bg-red-500 opacity-50 hover:opacity-100 transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1"
+              src="/pencil.svg"
+              alt="edit"
+            />
           </div>
         </div>
       ))}
