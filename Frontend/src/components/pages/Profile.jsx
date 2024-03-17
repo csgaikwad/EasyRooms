@@ -43,7 +43,7 @@ export default function Profile() {
         </div>
         {user.isOwner && (
           <div className="bg-purple-200 h-[40rem] min-w-40 border-2 border-gray-200 shadow-lg rounded-xl overflow-y-scroll md:customScrollbar">
-            <UserProperties/>
+            <UserProperties userDetails={user}/>
           </div>
         )}
         {/* hideScrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-300 */}

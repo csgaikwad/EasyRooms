@@ -6,15 +6,16 @@ import { UserAtom } from "./atoms/UserAtom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function UserProperties() {
+export default function UserProperties(userDetails) {
   const properties = useRecoilValue(PropertyAtom);
   const [userProperties, setUserProperties] = useState([]);
-  const user = useRecoilValue(UserAtom);
+  // const user = useRecoilValue(UserAtom);
+  const user= userDetails;
   const setPropertyAtom = useSetRecoilState(PropertyAtom);
   const navigate=useNavigate();
 
 
-  const fetchUserProperties = async () => {
+  const fetchUserProperties = async ({}) => {
     try {
         if(properties.length === 0){
           const response = await axios.get(`/properties`);
