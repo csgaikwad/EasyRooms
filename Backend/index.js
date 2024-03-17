@@ -330,6 +330,30 @@ app.get("/properties/:propertyId", async (req, res) => {
 
 
 
+// Route to update a property
+app.put("/property/:propertyId", async (req, res) => {
+  try {
+    const propertyId = req.params.propertyId;
+
+    const updateObj = req.body;
+
+    const result = await PropertyDetails.updateOne({ _id: propertyId }, updateObj);
+
+    if (result.nModified === 0) {
+      return res.status(404).json({ error: "Property not found or not updated" });
+    }
+
+    res.json({ message: "Property updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
+
+
+
+
 
 
 

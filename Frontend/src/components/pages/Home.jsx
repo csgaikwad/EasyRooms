@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { PropertyAtom } from "../atoms/PropertyAtom";
 import { useNavigate } from "react-router-dom";
+import { UserAtom } from "../atoms/UserAtom";
 
 export default function Home() {
+  const user = useRecoilValue(UserAtom);
   const [properties, setProperties] = useState([]);
   const [shuffledProperties, setShuffledProperties] = useState([]);
   const setPropertyAtom = useSetRecoilState(PropertyAtom);
@@ -17,7 +19,6 @@ export default function Home() {
         const response = await axios.get("/properties");
         setProperties(response.data);
         setPropertyAtom(response.data);
-        // Shuffle properties when fetched
         shuffleProperties(response.data);
       } catch (error) {
         console.error("Error fetching properties:", error);
@@ -26,14 +27,13 @@ export default function Home() {
     fetchProperties();
   }, []);
 
-  // Function to shuffle the properties array
   const shuffleProperties = (properties) => {
     const shuffled = [...properties].sort(() => Math.random() - 0.5);
     setShuffledProperties(shuffled);
   };
 
   return (
-    <div className="min-h-screen h-auto py-4 3xl:px-10 mb-20">
+    <div className="min-h-screen h-auto py-4 2xl:px-5 mb-20">
       {!shuffleProperties ? (
         <div className="flex items-center justify-center min-h-screen">
           <h1 className="text-pink-600 text-2xl">Loading...</h1>
@@ -52,12 +52,9 @@ export default function Home() {
                 showIndicators={true}
               >
                 {property.propertyPhotos.map((photoUrl, index) => (
-                  <div
-                    className="min-w-44 min-h-60 object-cover "
-                    key={index}
-                  >
+                  <div className="min-w-44 min-h-60 object-cover " key={index}>
                     <img
-                      className="rounded-xl h-80 w-[30rem] shadow-sm"
+                      className="rounded-xl size-80  shadow-sm"
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />
@@ -67,7 +64,9 @@ export default function Home() {
               <div
                 className="px-5 mt-2 hover:bg-gray-200 rounded-md py-4"
                 onClick={() => {
-                  navigate(`/places/${property._id}`);
+                  user.isAuthenticated
+                    ? navigate(`/places/${property._id}`)
+                    : navigate("/login");
                 }}
               >
                 <h2 className="text-lg font-semibold">{property.title}</h2>

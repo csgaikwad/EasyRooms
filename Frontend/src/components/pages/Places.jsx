@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { PropertyAtom } from "../atoms/PropertyAtom";
 import axios from "axios";
+import BookingWidget from "../BookingWidget";
 
 export default function Places() {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const { id: reqId } = useParams();
   const properties = useRecoilValue(PropertyAtom);
+  const photosRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,7 +33,14 @@ export default function Places() {
       setSelectedProperty(property);
     }
   }, [properties, reqId]);
-  console.log(selectedProperty);
+
+  const scrollToPhotos = () => {
+    const offsetTop = photosRef.current.offsetTop;
+    window.scrollTo({
+      top: offsetTop - 100,
+      behavior: "auto"
+    });
+  };
 
   return (
     <div key={reqId} className="min-h-screen py-10 px-20 mb-20">
@@ -42,57 +51,61 @@ export default function Places() {
               {selectedProperty.title}
             </h1>
           </div>
-          <div className="grid grid-cols-4 grid-rows-2 gap-4 h-[28rem] w-full py-8">
+          <div className=" lg:grid grid-cols-4 grid-rows-2 gap-4 h-[28rem] w-full py-8">
             <img
               src={selectedProperty.propertyPhotos[0]}
               alt="Property Image"
               className="col-span-2 row-span-2 w-full h-full object-cover rounded-xl transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+              onClick={scrollToPhotos}
             />
+
             {selectedProperty.propertyPhotos.slice(1, 5).map((photo, index) => (
               <img
+                onClick={scrollToPhotos}
                 key={index}
                 src={photo}
                 alt={`Property Image ${index}`}
-                className=" object-cover rounded-xl h-full w-full transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer "
+                className="hidden lg:inline object-cover rounded-xl h-full w-full transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer "
               />
             ))}
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="flex flex-col lg:grid grid-cols-2 gap-2">
             <div>
               <div className="text-[1.4rem] font-semibold font-sans text-black">
-                {selectedProperty.location}
+                <img
+                  className="size-6 inline-block mb-2 mr-1"
+                  src="/LocationPin.svg"
+                  alt="Location"
+                />
+                <p className="inline-block">{selectedProperty.location}</p>
               </div>
               <div className="text-[1.1rem] text-gray-500 py-4">
-                {selectedProperty.details}
+                <p>{selectedProperty.details}</p>
               </div>
               <div className="mb-4 grid grid-cols-3 grid-rows-2 place-items-center justify-items-center p-10">
-                <div>
-                  <img src="/pet.svg" alt="pet" className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer" />
-                  <h1 className="text-gray-700 my-2 ">Pets allowed</h1>
-                </div>
-                <div>
-                  <img src="/parking.svg" alt="parking" className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer" />
-                  <h1 className="text-gray-700 my-2 ">Parking available</h1>
-                </div>
-                <div>
-                  <img src="/wifi.svg" alt="wifi" className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer" />
-                  <h1 className="text-gray-700 my-2 ">WiFi available</h1>
-                </div>
-                <div>
-                  <img src="/tv.svg" alt="tv" className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer" />
-                  <h1 className="text-gray-700 my-2 ">TV available</h1>
-                </div>
-                <div>
-                  <img src="/entrance.svg" alt="entrance" className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer" />
-                  <h1 className="text-gray-700 my-2 ">Private entrance </h1>
-                </div>
-                <div>
-                  <img src="/radio.svg" alt="radio" className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer" />
-                  <h1 className="text-gray-700 my-2 ">Radio available</h1>
-                </div>
+                {/* Add your property details here */}
               </div>
             </div>
-            <div className="bg-red-300 rounded-xl   "></div>
+            <div className="bg-blue-100 rounded-xl   ">
+              <BookingWidget
+                price={selectedProperty.price}
+                numberOfGuests={selectedProperty.numberOfGuests}
+              />
+            </div>
+          </div>
+          <div className=" flex flex-col gap-8 my-10 items-center  ">
+            <h1
+              ref={photosRef}
+              className="text-[2.4rem] font-semibold font-serif text-gray-600 border-b-4 border-gray-500 items-start flex  "
+            >
+              <p className="pt-1 px-2">*</p> All the Photos{" "}
+              <p className="pt-1 px-2">*</p>
+            </h1>
+            {selectedProperty.propertyPhotos.map((photo, index) => {
+              return (
+                <img className="rounded-xl h-[30rem]  lg:h-[38rem] transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer" key={index} src={photo} />
+              );
+            })}
           </div>
         </>
       ) : (

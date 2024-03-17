@@ -17,7 +17,7 @@ export default function Profile() {
           <div
             className="px-8 pr-4 gap-3 cursor-pointer bg-purple-500 hover:bg-purple-700 rounded-full h-14 max-w-72 flex items-center justify-around text-white text-xl"
             onClick={() => {
-              navigate("/newproperty");
+              navigate("/property");
             }}
           >
             <h1 className="cursor-pointer">Add New Property</h1>

@@ -49,7 +49,7 @@ export default function UserTile() {
             </div>
             <div className="underline ">
               <p>{userData.username ?? "null"}</p>
-              <p className="text-[1.2rem] whitespace-nowrap  truncate max-w-[170px]">{userData.userEmail ?? "null"}asdfasdfa</p>
+              <p className="text-[1.2rem] whitespace-nowrap  truncate max-w-[170px]">{userData.userEmail ?? "null"}</p>
               <p className="text-xl">{userData.isOwner ? "Yes" : "Not an owner yet"}</p>
             </div>
           </div>

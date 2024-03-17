@@ -1,6 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { PropertyAtom } from "./atoms/PropertyAtom";
 
 export default function CreateProperties() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -17,7 +19,62 @@ export default function CreateProperties() {
   const [pets, setPets] = useState(false);
   const [entrance, setEntrance] = useState(false);
 
-  const navigate=useNavigate();
+  const { id } = useParams();
+  console.log(id);
+  const propertyAtom = useRecoilValue(PropertyAtom);
+  const [selectedProperty, setSelectedProperty] = useState();
+
+  const navigate = useNavigate();
+
+  // console.log(propertyAtom);
+
+  useEffect(() => {
+    const fetchPropertyData = async () => {
+      try {
+        if (id) {
+          if (propertyAtom.length > 0) {
+            const selectedProperty = propertyAtom.find(
+              (property) => property._id === id
+            );
+            if (selectedProperty) {
+              setSelectedProperty(selectedProperty);
+              setTitle(selectedProperty.title);
+              setLocation(selectedProperty.location);
+              setPreviews(selectedProperty.propertyPhotos);
+              setDetails(selectedProperty.details);
+              setPrice(selectedProperty.price);
+              setNumberOfGuests(selectedProperty.numberOfGuests);
+              setWifi(selectedProperty.wifi);
+              setParking(selectedProperty.parking);
+              setTv(selectedProperty.tv);
+              setRadio(selectedProperty.radio);
+              setPets(selectedProperty.pets);
+              setEntrance(selectedProperty.entrance);
+            }
+          } else {
+            const response = await axios.get("/properties/" + id);
+            const foundProperty = response.data;
+            setTitle(foundProperty.title);
+            setLocation(foundProperty.location);
+            setPreviews(foundProperty.propertyPhotos);
+            setDetails(foundProperty.details);
+            setPrice(foundProperty.price);
+            setNumberOfGuests(foundProperty.numberOfGuests);
+            setWifi(foundProperty.wifi);
+            setParking(foundProperty.parking);
+            setTv(foundProperty.tv);
+            setRadio(foundProperty.radio);
+            setPets(foundProperty.pets);
+            setEntrance(foundProperty.entrance);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching property:", error);
+      }
+    };
+
+    fetchPropertyData();
+  }, [id, propertyAtom]);
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
@@ -57,11 +114,10 @@ export default function CreateProperties() {
         const formData = new FormData();
         formData.append("propertyPhoto", selectedFile);
 
-        const res = await axios.post("/preview", formData,{
-          headers:{'Content-Type':'multipart/form-data'}
+        const res = await axios.post("/preview", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
         });
         const imageUrl = res.data.imageUrl;
-        // console.log(imageUrl);
         setPreviews([...previews, imageUrl]);
         setSelectedFiles([...selectedFiles, selectedFile]);
       } catch (error) {
@@ -72,29 +128,44 @@ export default function CreateProperties() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("previews Arrary : ",previews)
-    try {
-      const propertyData = {
-        title,
-        location,
-        details,
-        price,
-        numberOfGuests: parseInt(numberOfGuests),
-        wifi,
-        parking,
-        tv,
-        radio,
-        pets,
-        entrance,
-        propertyPhotos: previews,
-      };
-      // console.log(propertyData)
-      const res = await axios.post("/property", propertyData);
-      console.log(res.data.message);
-      alert(res.data.message);
-      // navigate("/profile");
-    } catch (error) {
-      console.error(error);
+
+    const propertyData = {
+      title,
+      location,
+      details,
+      price,
+      numberOfGuests: parseInt(numberOfGuests),
+      wifi,
+      parking,
+      tv,
+      radio,
+      pets,
+      entrance,
+      propertyPhotos: previews,
+    };
+
+    if (id) {
+      console.log(propertyData);
+      try {
+        const res = await axios.put(`/property/${id}`, propertyData);
+        console.log(res.data.message);
+        alert(res.data.message);
+        // navigate("/profile");
+      } catch (error) {
+        console.error(error);
+      }
+
+
+
+    } else {
+      try {
+        const res = await axios.post("/property", propertyData);
+        console.log(res.data.message);
+        alert(res.data.message);
+        // navigate("/profile");
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -125,12 +196,28 @@ export default function CreateProperties() {
               className={`flex ${previews.length === 1 && "justify-center"} items-center  gap-4 my-4 w-[40rem] h-80  mb-10 rounded-xl overflow-x-auto scroll-smooth customScrollbar `}
             >
               {previews.map((preview, index) => (
-                <div className="shrink-0 bg-cover" key={index}>
+                <div className="relative shrink-0 bg-cover" key={index}>
                   <img
                     className="shrink-0 rounded-xl w-80 h-72 "
                     src={preview}
                     alt={`Preview ${index} `}
                   />
+                  <div
+                    className="absolute top-2 left-4 text-white"
+                    onClick={() => {
+                      const updatedPreviews = [...previews];
+                      updatedPreviews.unshift(
+                        updatedPreviews.splice(index, 1)[0]
+                      );
+                      setPreviews(updatedPreviews);
+                    }}
+                  >
+                    <img
+                      className="size-10 bg-red-500 opacity-60 hover:opacity-90 cursor-pointer hover:scale-110 transition-all transform duration-300 p-1 rounded-full"
+                      src={index === 0 ? "/starfilled.svg" : "/starHollow.svg"}
+                      alt="star"
+                    />
+                  </div>
                 </div>
               ))}
             </div>

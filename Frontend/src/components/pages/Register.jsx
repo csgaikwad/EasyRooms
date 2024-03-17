@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../atoms/UserAtom";
@@ -11,11 +11,14 @@ export default function Register() {
   const [userEmail, setUserEmail] = useState("owner@gm.com");
   const [password, setPassword] = useState("123");
   const [isOwner, setisOwner] = useState(false);
-  const [user,setUser] = useRecoilState(UserAtom);
+  const [user, setUser] = useRecoilState(UserAtom);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
-
 
     try {
       const userDetails = {
@@ -100,7 +103,11 @@ export default function Register() {
               }}
             />
           </div>
-          <button className={`basicButton ${user.isOwner ? 'bg-purple-500' : 'bg-red-500'}`}>Register</button>
+          <button
+            className={`basicButton ${user.isOwner ? "bg-purple-500" : "bg-red-500"}`}
+          >
+            Register
+          </button>
           <Link to="/login">
             <label className=" text-blue-400 cursor-pointer">
               Already Registered...

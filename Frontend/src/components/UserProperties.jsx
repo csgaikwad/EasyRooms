@@ -4,18 +4,19 @@ import { PropertyAtom } from "./atoms/PropertyAtom";
 import { Carousel } from "react-responsive-carousel";
 import { UserAtom } from "./atoms/UserAtom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function UserProperties() {
   const properties = useRecoilValue(PropertyAtom);
   const [userProperties, setUserProperties] = useState([]);
   const user = useRecoilValue(UserAtom);
   const setPropertyAtom = useSetRecoilState(PropertyAtom);
+  const navigate=useNavigate();
   useEffect(() => {
     const fetchUserProperties = async () => {
       try {
         const response = await axios.get(`/properties`);
         setPropertyAtom(response.data);
-        // console.log(user.id, response.data[1].user);
         const filteredProperties = response.data.filter((a) => a.user === user.id);
         setUserProperties(filteredProperties);
       } catch (error) {
@@ -28,19 +29,21 @@ export default function UserProperties() {
     }
   }, [user.isOwner, user.id]);
 
-  console.log("userProperties: ",userProperties);
 
   return (
     <div className="grid grid-cols-1  xl:grid-cols-2 gap-1  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
         <div
           key={property._id}
-          className=" shadow-xl rounded-xl min-h-96 min-w-80 max-w-96 bg-transparent my-5 border-2 bg-white "
+          className=" shadow-xl rounded-xl min-h-96 min-w-80 max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+          onClick={()=>{
+            navigate("/property/"+property._id)
+            // console.log(property._id)
+          }}
           >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
               <div className="min-w-44 min-h-60 max-w-96  m-2 " key={index}>
-                {/* {console.log(photoUrl)} */}
                 <img
                   className="rounded-xl h-80 w-96 object-cover shadow-sm"
                   src={photoUrl}
@@ -58,7 +61,7 @@ export default function UserProperties() {
               </span>
               /night {/*₹ */}
             </p>
-            <p className="text-sm text-gray-500 truncate">{property.details}</p>
+            <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p>
           </div>
         </div>
       ))}

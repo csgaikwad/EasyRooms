@@ -1,15 +1,19 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../atoms/UserAtom";
+import Swal from 'sweetalert2';
 
 export default function Login() {
   const [userEmail, setEmail] = useState("user1@gm.com");
   const [password, setPassword] = useState("123");
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserAtom);
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -20,7 +24,7 @@ export default function Login() {
         password,
       };
       const response = await axios.post("/login", userDetails);
-      alert(response.data.message);
+      // alert(response.data.message);
 
       if (response.data) {
         const UserAtomDetails = {
@@ -30,12 +34,26 @@ export default function Login() {
           isOwner: response.data.userDoc.isOwner,
         };
         setUser(UserAtomDetails);
+        // Show SweetAlert on successful login
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Login Successful",
+          showConfirmButton: false,
+          timer: 1200
+        });
         navigate("/");
       }
-    } catch (e) {
-      alert("Login failed. Please try again! Or try Registering...");
+    } catch (error) {
+      // Show SweetAlert on login failure
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Login failed. Please try again! Or try Registering...',
+      });
     }
   }
+
   return (
     <div className="h-screen p-4">
       <div className=" mt-16 flex min-w-96 items-center justify-center">

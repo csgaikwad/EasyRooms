@@ -7,15 +7,22 @@ import CreateProperties from "../CreateProperty";
 export function Property() {
   const user = useRecoilValue(UserAtom);
   const [loading, setLoading] = useState(true);
+  const [userAuth, setUserAuth] = useState(false);
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    setUserAuth(user.isOwner);
+  }, [user, user.isOwner]);
+
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
-    if (!loading && !user.isAuthenticated) {
+    }, 1000);
+    if (!loading && !user.isOwner) {
       setTimeout(() => {
-        alert("Try Logging in again")
+        alert("Try Logging in again");
         // navigate("/login");
       }, 2000);
     }
@@ -23,21 +30,23 @@ export function Property() {
 
   useEffect(() => {
     if (!loading) {
-      if (user.isAuthenticated) {
-        if (!user.isOwner) {
-          console.log("Not an Owner bye bye ");
-          navigate("/profile");
-        }
+      if (!user.isOwner) {
+        alert("Not an Owner bye bye ");
+        navigate("/profile");
       } else {
         console.log("Not auth");
       }
     }
   }, [user, loading]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [user.isAuthenticated, user]);
+
   return (
     <div className="h-auto">
       <div className="flex items-center justify-center">
-        {user.isOwner ? (
+        {userAuth ? (
           <div className="w-full flex flex-col justify-center items-center">
             <div className="pt-8">
               <h1 className="text-xl font-medium">

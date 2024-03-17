@@ -39,7 +39,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/newproperty" element={<Property />} />
+          <Route path="/property" element={<Property />} />
+          <Route path="/property/:id" element={<Property />} />
           <Route path="/places/:id" element={<Places />} />
         </Routes>
       </BrowserRouter>
