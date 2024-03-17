@@ -6,16 +6,15 @@ import { UserAtom } from "./atoms/UserAtom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function UserProperties(userDetails) {
+export default function UserProperties() {
   const properties = useRecoilValue(PropertyAtom);
   const [userProperties, setUserProperties] = useState([]);
-  // const user = useRecoilValue(UserAtom);
-  const user= userDetails;
+  const user = useRecoilValue(UserAtom);
   const setPropertyAtom = useSetRecoilState(PropertyAtom);
   const navigate=useNavigate();
 
 
-  const fetchUserProperties = async ({}) => {
+  const fetchUserProperties = async () => {
     try {
         if(properties.length === 0){
           const response = await axios.get(`/properties`);
@@ -31,18 +30,17 @@ export default function UserProperties(userDetails) {
         console.error("Error fetching user properties:", error);
       }
     };
-
     useEffect(() => {
+      console.log("trying to call function")
     if (user.isOwner && user.id) {
+      console.log("trying to call the function in the fn")
+
       fetchUserProperties();
     }
   }, [user.isOwner, user.id,properties]);
 
-
 // console.log(properties)
 console.log(userProperties)
-
-
   return (
     <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-1  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
