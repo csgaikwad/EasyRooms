@@ -39,19 +39,19 @@ export default function Places() {
   };
 
   return (
-    <div key={reqId} className="min-h-screen py-10 px-20 mb-20">
+    <div key={reqId} className="min-h-screen py-10 px-2 lg:px-20 mb-20">
       {selectedProperty ? (
         <>
           <div>
-            <h1 className="text-[1.8rem] font-semibold font-sans text-black cursor-text">
+            <h1 className="lg:text-[1.8rem] pl-2 font-semibold font-sans text-black cursor-text">
               {selectedProperty.title}
             </h1>
           </div>
-          <div className=" lg:grid grid-cols-4 grid-rows-2 gap-4 h-[28rem] w-full py-8">
+          <div className=" lg:grid grid-cols-4 grid-rows-2 gap-4 lg:h-[28rem] w-full py-8">
             <img
               src={selectedProperty.propertyPhotos[0]}
               alt="Property Image"
-              className="col-span-2 row-span-2 w-full h-full object-cover rounded-xl transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+              className="col-span-2 row-span-2 lg:w-full lg:h-full object-cover rounded-xl transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
               onClick={scrollToPhotos}
             />
 
@@ -66,15 +66,15 @@ export default function Places() {
           </div>
           <div className="flex flex-col lg:grid grid-cols-2 gap-2">
             <div>
-              <div className="text-[1.4rem] font-semibold font-sans text-black">
+              <div className="lg:text-[1.4rem] font-semibold font-sans text-black">
                 <img
                   className="size-6 inline-block mb-2 mr-1"
                   src="/LocationPin.svg"
                   alt="Location"
                 />
-                <p className="inline-block">{selectedProperty.location}</p>
+                <p className="inline">{selectedProperty.location}</p>
               </div>
-              <div className="text-[1.1rem] text-gray-500 py-4">
+              <div className="lg:text-[1.1rem] text-gray-500 py-4">
                 <p>{selectedProperty.details}</p>
               </div>
               <div className="mb-4 grid grid-cols-3 grid-rows-2 place-items-center justify-items-center p-10">
@@ -148,17 +148,17 @@ export default function Places() {
                 </div>
               </div>
             </div>
-            <div className="bg-blue-100 rounded-xl   ">
+            <div className="bg-blue-100 rounded-xl hidden lg:flex  ">
               <BookingWidget price={selectedProperty.price} numberOfGuests={selectedProperty.numberOfGuests} />
             </div>
           </div>
           <div ref={photosRef} className=" flex flex-col gap-4 my-10 items-center  ">
-            <h1 className="text-[2.4rem] font-semibold font-serif text-gray-600 border-b-4 border-gray-500 items-start flex  ">
+            <h1 className="text-xl lg:text-[2.4rem] font-semibold font-serif text-gray-600 border-b-4 border-gray-500 items-start flex  ">
               <p className="pt-1 px-2">*</p> All the Photos     <p className="pt-1 px-2">*</p>
             </h1>
             {selectedProperty.propertyPhotos.map((photo, index) => {
               return (
-                <img className="rounded-xl h-[40rem] w-[60rem]" key={index} src={photo} />
+                <img className="rounded-xl lg:h-[40rem] lg:w-[60rem]" key={index} src={photo} />
               );
             })}
           </div>

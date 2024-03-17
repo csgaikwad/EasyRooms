@@ -26,7 +26,7 @@ export default function UserProfile() {
     fetchDataOnLogin();
   }, [setUser]);
   return (
-    <div className="flex items-center w-auto h-10 border-2 rounded-full py-6 px-2 pl-2 gap-1 shadow-md">
+    <div className="flex items-center w-24 lg:w-auto h-10 border-2 rounded-full py-6 px-2 pl-2 gap-1 shadow-md">
       <div
         className="transition duration-300 ease-in-out transform hover:scale-125 cursor-pointer"
         onClick={showDivOnEvent}

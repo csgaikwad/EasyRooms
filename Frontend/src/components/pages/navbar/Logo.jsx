@@ -11,7 +11,7 @@ export default function Logo() {
   }
   return (
     <div onClick={goToHome} className="flex items-center gap-1 cursor-pointer">
-      <div className="relative size-12 ">
+      <div className="relative size-8 lg:size-12 ">
         {user.isOwner ? (
           <img
             src="/purpleLogo.svg"
@@ -28,7 +28,7 @@ export default function Logo() {
       </div>
       <div className={`${user.isOwner? "text-purple-800" : "text-red-500"}`}>
 
-      <h1 className=" text-3xl font-bold font-serif  underline transition duration-300 ease-in-out transform hover:scale-90 cursor-pointer">
+      <h1 className=" text-2xl lg:text-3xl font-bold font-serif  underline transition duration-300 ease-in-out transform hover:scale-90 cursor-pointer">
         Airbnd
       </h1>
       </div>

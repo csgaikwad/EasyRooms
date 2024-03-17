@@ -31,21 +31,21 @@ export default function UserProperties() {
 
 
   return (
-    <div className="grid grid-cols-1  xl:grid-cols-2 gap-1  my-4 justify-items-center p-4 ">
+    <div className="block md:grid grid-cols-1  xl:grid-cols-2 2xl:grid-cols-3 gap-1  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
         <div
           key={property._id}
-          className=" shadow-xl rounded-xl min-h-96 min-w-80 max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
           >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
-              <div className="min-w-44 min-h-60 max-w-96  m-2 " key={index}
+              <div className="lg:min-w-44 lg:min-h-60 max-w-96  m-2 " key={index}
               onClick={()=>{
                 navigate("/places/"+property._id)
               }}
               >
                 <img
-                  className="rounded-xl h-80 w-96 object-cover shadow-sm"
+                  className="rounded-xl lg:h-80 lg:w-96 object-cover shadow-sm"
                   src={photoUrl}
                   alt={`Property ${index}`}
                 />
@@ -57,7 +57,7 @@ export default function UserProperties() {
             navigate("/places/"+property._id)
           }}
           >
-            <h2 className="text-xl font-semibold  ">{property.title}</h2>
+            <h2 className="md:text-xl font-semibold  ">{property.title}</h2>
             <p className="text-gray-600 ">{property.location}</p>
             <p className="text-gray-600 text-lg ">
               <span className="text-black font-semibold font-serif">
@@ -65,14 +65,15 @@ export default function UserProperties() {
               </span>
               /night {/*₹ */}
             </p>
-            <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p>
+            {/* <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p> */}
           </div>
           <div
+          className="hidden lg:block"
           onClick={()=>{
             navigate("/property/"+property._id)
           }}
           >
-            <img className=" m-4 size-10 bg-red-500 opacity-50 hover:opacity-100 transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1" src="/pencil.svg" alt="edit" />
+            <img className="  m-4 size-10 bg-red-500 opacity-50 hover:opacity-100 transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1" src="/pencil.svg" alt="edit" />
           </div>
         </div>
       ))}

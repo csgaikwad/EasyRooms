@@ -39,9 +39,9 @@ export default function UserTile() {
   return (
     <div className="flex items-start">
       {userData && (
-        <div className="shadow-2xl h-[30rem] w-80 bg-purple-200 rounded-xl flex flex-col items-center justify-between py-4 ">
-          <div className="size-40 bg-purple-400 rounded-full "></div>
-          <div className="text-black text-2xl my-2 grid grid-cols-[1fr,2fr] gap-4 justify-items-center ">
+        <div className="shadow-2xl text-lg md:text-2xl h-[20rem] md:h-[30rem] w-80 lg:w-80 bg-purple-200 rounded-xl flex flex-col items-center justify-between py-4 mb-8 ">
+          <div className="size-20 md:size-28 m-1 p-1 lg:size-40 bg-purple-400 rounded-full "></div>
+          <div className="text-black  my-2 grid grid-cols-[1fr,2fr] gap-4 justify-items-center ">
             <div className="flex flex-col items-end">
               <p>Name :</p>
               <p >Email : </p>
@@ -54,7 +54,7 @@ export default function UserTile() {
             </div>
           </div>
           <div
-            className="bg-purple-400 p-4 my-2 shadow-lg  rounded-xl text-2xl underline text-white font-serif tracking-wide cursor-pointer"
+            className="bg-purple-400 p-4 my-2 shadow-lg  rounded-xl text-lg md:text-2xl underline text-white font-serif tracking-wide cursor-pointer"
             onClick={logout}
           >
             Logout

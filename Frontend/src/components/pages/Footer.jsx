@@ -3,7 +3,7 @@ import React from "react";
 export default function Footer() {
   var currentYear = new Date().getFullYear();
   return (
-    <div className="bg-gray-100 h-auto rounded-md flex flex-col items-center justify-end pb-4 pl-4 ">
+    <div className="bg-gray-100 h-auto rounded-md flex flex-col items-center justify-end pb-4 pl-4 z-0">
       <h1 className="m-4 text-xl font-bold">- Contact Me -</h1>
       <div className="flex justify-around gap-8 mb-4 ">
         <a className="cursor-pointer"
