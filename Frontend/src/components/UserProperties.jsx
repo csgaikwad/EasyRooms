@@ -15,10 +15,15 @@ export default function UserProperties() {
   useEffect(() => {
     const fetchUserProperties = async () => {
       try {
+        if(properties.length === 0){
         const response = await axios.get(`/properties`);
         setPropertyAtom(response.data);
         const filteredProperties = response.data.filter((a) => a.user === user.id);
         setUserProperties(filteredProperties);
+      }else{
+        const filteredProperties = properties.filter((a) => a.user === user.id);
+        setUserProperties(filteredProperties);
+      }
       } catch (error) {
         console.error("Error fetching user properties:", error);
       }
@@ -27,9 +32,9 @@ export default function UserProperties() {
     if (user.isOwner && user.id) {
       fetchUserProperties();
     }
-  }, [user.isOwner, user.id]);
+  }, [user.isOwner, user.id,properties]);
 
-
+console.log(properties)
   return (
     <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-1  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
