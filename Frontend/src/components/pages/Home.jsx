@@ -40,7 +40,7 @@ export default function Home() {
           <img className="size-32" src="/loader.svg" alt="Loading..." />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-5 m-8 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-4 m-8 justify-items-center">
           {shuffledProperties.map((property) => (
             <div
               key={property._id}
@@ -55,7 +55,7 @@ export default function Home() {
                   // lg:min-w-40 lg:min-h-52
                   <div className=" object-cover " key={index}>
                     <img
-                      className="rounded-xl size-60 lg:size-80  shadow-sm"
+                      className="rounded-xl size-60 lg:size-72  shadow-sm"
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />
@@ -70,7 +70,7 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold">{property.title}</h2>
+                <h2 className="text-lg font-semibold ">{property.title}</h2>
                 <p className="text-gray-600">{property.location}</p>
                 <p className="text-gray-600 text-lg">
                   <span className="text-black font-semibold font-sans">
