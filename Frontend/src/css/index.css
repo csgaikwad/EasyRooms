@@ -88,3 +88,8 @@ h1{
 
 }
 
+@media (max-width: 768px) {
+  .lg\:carousel-mobile .carousel .control-arrow {
+    display: none;
+  }
+}

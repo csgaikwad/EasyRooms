@@ -50,6 +50,8 @@ export default function Home() {
                 showThumbs={false}
                 showStatus={false}
                 showIndicators={true}
+                // showArrows={false}
+                className="lg:carousel-mobile"
               >
                 {property.propertyPhotos.map((photoUrl, index) => (
                   // lg:min-w-40 lg:min-h-52
