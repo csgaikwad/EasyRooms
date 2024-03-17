@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { PropertyAtom } from "../atoms/PropertyAtom";
@@ -33,13 +33,10 @@ export default function Places() {
       setSelectedProperty(property);
     }
   }, [properties, reqId]);
+  console.log(selectedProperty);
 
   const scrollToPhotos = () => {
-    const offsetTop = photosRef.current.offsetTop;
-    window.scrollTo({
-      top: offsetTop - 100,
-      behavior: "auto"
-    });
+    photosRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -61,7 +58,6 @@ export default function Places() {
 
             {selectedProperty.propertyPhotos.slice(1, 5).map((photo, index) => (
               <img
-                onClick={scrollToPhotos}
                 key={index}
                 src={photo}
                 alt={`Property Image ${index}`}
@@ -83,27 +79,87 @@ export default function Places() {
                 <p>{selectedProperty.details}</p>
               </div>
               <div className="mb-4 grid grid-cols-3 grid-rows-2 place-items-center justify-items-center p-10">
-                {/* Add your property details here */}
+                <div
+                  className={`${selectedProperty.pets ? "" : "rounded-lg opacity-40  line-through"}`}
+                >
+                  <img
+                    src="/pet.svg"
+                    alt="pet"
+                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                  />
+                  <h1 className="text-gray-700 mb-8 text-lg ">Pets allowed</h1>
+                </div>
+                <div
+                  className={`${selectedProperty.parking ? "" : "rounded-lg opacity-40  line-through"}`}
+                >
+                  <img
+                    src="/parking.svg"
+                    alt="parking"
+                    className="  size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                  />
+                  <h1 className="text-gray-700 mb-8 text-lg  ">
+                    Parking available
+                  </h1>
+                </div>
+                <div
+                  className={`${selectedProperty.wifi ? "" : "rounded-lg opacity-40  line-through"}`}
+                >
+                  <img
+                    src="/wifi.svg"
+                    alt="wifi"
+                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                  />
+                  <h1 className="text-gray-700 mb-8 text-lg ">
+                    WiFi available
+                  </h1>
+                </div>
+                <div
+                  className={`${selectedProperty.tv ? "" : "rounded-lg opacity-40  line-through"}`}
+                >
+                  <img
+                    src="/tv.svg"
+                    alt="tv"
+                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                  />
+                  <h1 className="text-gray-700 mb-8 text-lg ">TV available</h1>
+                </div>
+                <div
+                  className={`${selectedProperty.entrance ? "" : "rounded-lg opacity-40  line-through"}`}
+                >
+                  <img
+                    src="/entrance.svg"
+                    alt="entrance"
+                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                  />
+                  <h1 className="text-gray-700 mb-8 text-lg ">
+                    Private entrance{" "}
+                  </h1>
+                </div>
+                <div
+                  className={`${selectedProperty.radio ? "" : "rounded-lg opacity-40  line-through"}`}
+                >
+                  <img
+                    src="/radio.svg"
+                    alt="radio"
+                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                  />
+                  <h1 className="text-gray-700 mb-8 text-lg ">
+                    Radio available
+                  </h1>
+                </div>
               </div>
             </div>
             <div className="bg-blue-100 rounded-xl   ">
-              <BookingWidget
-                price={selectedProperty.price}
-                numberOfGuests={selectedProperty.numberOfGuests}
-              />
+              <BookingWidget price={selectedProperty.price} numberOfGuests={selectedProperty.numberOfGuests} />
             </div>
           </div>
-          <div className=" flex flex-col gap-8 my-10 items-center  ">
-            <h1
-              ref={photosRef}
-              className="text-[2.4rem] font-semibold font-serif text-gray-600 border-b-4 border-gray-500 items-start flex  "
-            >
-              <p className="pt-1 px-2">*</p> All the Photos{" "}
-              <p className="pt-1 px-2">*</p>
+          <div ref={photosRef} className=" flex flex-col gap-4 my-10 items-center  ">
+            <h1 className="text-[2.4rem] font-semibold font-serif text-gray-600 border-b-4 border-gray-500 items-start flex  ">
+              <p className="pt-1 px-2">*</p> All the Photos     <p className="pt-1 px-2">*</p>
             </h1>
             {selectedProperty.propertyPhotos.map((photo, index) => {
               return (
-                <img className="rounded-xl h-[30rem]  lg:h-[38rem] transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer" key={index} src={photo} />
+                <img className="rounded-xl h-[40rem] w-[60rem]" key={index} src={photo} />
               );
             })}
           </div>
