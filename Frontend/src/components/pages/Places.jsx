@@ -148,7 +148,7 @@ export default function Places() {
                 </div>
               </div>
             </div>
-            <div className="bg-blue-100 rounded-xl hidden lg:flex  ">
+            <div className="bg-blue-100 rounded-xl hidden lg:flex items-center justify-center ">
               <BookingWidget price={selectedProperty.price} numberOfGuests={selectedProperty.numberOfGuests} />
             </div>
           </div>
