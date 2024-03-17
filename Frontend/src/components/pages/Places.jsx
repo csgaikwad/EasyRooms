@@ -74,10 +74,10 @@ export default function Places() {
                 />
                 <p className="inline">{selectedProperty.location}</p>
               </div>
-              <div className="lg:text-[1.1rem] text-gray-500 py-4">
+              <div className="lg:text-[1.1rem] text-gray-500 px-2 py-4">
                 <p>{selectedProperty.details}</p>
               </div>
-              <div className="mb-4 grid grid-cols-3 grid-rows-2 place-items-center justify-items-center p-10">
+              <div className="mb-4 grid grid-cols-3 gap-2 grid-rows-2 place-items-center justify-items-center p-10">
                 <div
                   className={`${selectedProperty.pets ? "" : "rounded-lg opacity-40  line-through"}`}
                 >
