@@ -55,7 +55,7 @@ export default function Home() {
                   // lg:min-w-40 lg:min-h-52
                   <div className=" object-cover " key={index}>
                     <img
-                      className="rounded-xl size-60 lg:size-72  shadow-sm"
+                      className="rounded-xl size-60 lg:size-64  shadow-sm"
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />
