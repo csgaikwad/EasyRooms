@@ -35,7 +35,9 @@ export default function UserProperties() {
       fetchUserProperties();
     }
   }, [user.isOwner, user.id, properties]);
-
+console.log("properties: ",properties)
+console.log("userproperties: ",userProperties)
+console.log("user: ",user)
   return (
     <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-1  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
