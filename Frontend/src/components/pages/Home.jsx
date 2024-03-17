@@ -44,7 +44,7 @@ export default function Home() {
           {shuffledProperties.map((property) => (
             <div
               key={property._id}
-              className="shadow-xl rounded-xl  max-w-[30rem] bg-transparent hover:my-5 my-7 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+              className="shadow-xl rounded-xl  max-w-[30rem] bg-transparent hover:my-5 my-7 border-2 transition-transform duration-300 transform hover:scale-100 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
@@ -57,7 +57,7 @@ export default function Home() {
                   // lg:min-w-40 lg:min-h-52
                   <div className=" object-cover " key={index}>
                     <img
-                      className="rounded-xl size-60 lg:size-60  shadow-sm"
+                      className="rounded-xl size-60 lg:size-72  shadow-sm"
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />
