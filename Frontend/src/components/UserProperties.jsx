@@ -32,6 +32,7 @@ export default function UserProperties() {
     };
     useEffect(() => {
       console.log("trying to call function")
+      console.log(user)
     if (user.isOwner && user.id) {
       console.log("trying to call the function in the fn")
 
