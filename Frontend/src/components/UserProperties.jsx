@@ -15,6 +15,7 @@ export default function UserProperties() {
   useEffect(() => {
     const fetchUserProperties = async () => {
       try {
+        console.log(properties)
         const response = await axios.get(`/properties`);
         setPropertyAtom(response.data);
         const filteredProperties = response.data.filter((a) => a.user === user.id);
@@ -31,7 +32,7 @@ export default function UserProperties() {
 
 
   return (
-    <div className="block md:grid grid-cols-1  xl:grid-cols-2 2xl:grid-cols-3 gap-1  my-4 justify-items-center p-4 ">
+    <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-1  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
         <div
           key={property._id}

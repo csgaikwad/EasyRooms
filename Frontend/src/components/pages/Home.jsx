@@ -36,8 +36,8 @@ export default function Home() {
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
       {shuffleProperties.length === 0 ? (
         <div className="flex items-center justify-center min-h-screen">
-          <h1 className="text-pink-600 text-2xl">Loading...</h1>
-          <img className="size-20" src="/loader.svg" alt="Loading..." />
+          <h1 className="text-pink-600 text-[2rem]">Loading...</h1>
+          <img className="size-32" src="/loader.svg" alt="Loading..." />
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-4 m-8 justify-items-center">
