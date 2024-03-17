@@ -36,7 +36,7 @@ export default function Profile() {
           <p>My Bookings</p>
         </div>
       </div>
-      <div className="flex flex-col items-center  lg:grid  grid-cols-[1fr,4fr] gap-4">
+      <div className={`flex flex-col items-center  lg:grid  ${user.isOwner ? "grid-cols-[1fr,4fr]" : "grid-cols-1 place-items-center" } gap-4`}>
         <div className="w-72 sm:w-auto">
 
         <UserTile />
