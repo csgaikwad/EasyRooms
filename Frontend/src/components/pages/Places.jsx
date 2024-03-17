@@ -77,7 +77,7 @@ export default function Places() {
               <div className="lg:text-[1.1rem] text-gray-500 px-2 py-4">
                 <p>{selectedProperty.details}</p>
               </div>
-              <div className="mb-4 grid grid-cols-3 gap-2 grid-rows-2 place-items-center justify-items-center p-10">
+              <div className="mb-4 grid grid-cols-3 gap-5 grid-rows-2 place-items-center justify-items-center p-10">
                 <div
                   className={`${selectedProperty.pets ? "" : "rounded-lg opacity-40  line-through"}`}
                 >
@@ -86,7 +86,7 @@ export default function Places() {
                     alt="pet"
                     className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
-                  <h1 className="text-gray-700 mb-8 text-lg ">Pets allowed</h1>
+                  <h1 className="text-gray-700 mb-8 text-lg  ">Pets allowed</h1>
                 </div>
                 <div
                   className={`${selectedProperty.parking ? "" : "rounded-lg opacity-40  line-through"}`}
