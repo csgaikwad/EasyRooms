@@ -12,15 +12,17 @@ export default function UserProperties() {
   const user = useRecoilValue(UserAtom);
   const setPropertyAtom = useSetRecoilState(PropertyAtom);
   const navigate=useNavigate();
-  useEffect(() => {
-    const fetchUserProperties = async () => {
-      try {
+
+
+  const fetchUserProperties = async () => {
+    try {
         if(properties.length === 0){
-        const response = await axios.get(`/properties`);
-        setPropertyAtom(response.data);
-        const filteredProperties = response.data.filter((a) => a.user === user.id);
+          const response = await axios.get(`/properties`);
+          // setPropertyAtom(response.data);
+          const filteredProperties = response.data.filter((a) => a.user === user.id);
         setUserProperties(filteredProperties);
       }else{
+        console.log(user.id)
         const filteredProperties = properties.filter((a) => a.user === user.id);
         setUserProperties(filteredProperties);
       }
@@ -29,12 +31,17 @@ export default function UserProperties() {
       }
     };
 
+    useEffect(() => {
     if (user.isOwner && user.id) {
       fetchUserProperties();
     }
   }, [user.isOwner, user.id,properties]);
 
-console.log(properties)
+
+// console.log(properties)
+console.log(userProperties)
+
+
   return (
     <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-1  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
