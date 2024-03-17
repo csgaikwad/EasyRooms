@@ -8,7 +8,7 @@ import { UserAtom } from "../atoms/UserAtom";
 export default function Register() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("ab");
-  const [userEmail, setUserEmail] = useState("owner@gm.com");
+  const [userEmail, setUserEmail] = useState("user@gm.com");
   const [password, setPassword] = useState("123");
   const [isOwner, setisOwner] = useState(false);
   const [user, setUser] = useRecoilState(UserAtom);
