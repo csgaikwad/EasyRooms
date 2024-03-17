@@ -29,7 +29,7 @@ export default function Login() {
       if (response.data) {
         const UserAtomDetails = {
           isAuthenticated: true,
-          userId:response.data.userDoc.id,
+          id:response.data.userDoc.id,
           userEmail: response.data.userDoc.userEmail,
           username: response.data.userDoc.username,
           isOwner: response.data.userDoc.isOwner,
