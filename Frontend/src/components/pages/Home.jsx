@@ -42,14 +42,14 @@ export default function Home() {
   return (
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
       {properties.length != 0 ? (
-        <div className="grid grid-cols-1 gap-4  lg:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5  lg:grid-cols-2 xl:grid-cols-3 px-8 mt-4">
           {Array.from({ length: 3 }).map((_, index) => (
             <Skeleton
               key={index}
               height={200}
               width={300}
               borderRadius={15}
-              className="hidden lg:block"
+              className="block"
             />
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
