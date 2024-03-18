@@ -15,10 +15,15 @@ export default function UserProperties() {
   useEffect(() => {
     const fetchUserProperties = async () => {
       try {
+        if(properties.length ===0){
         const response = await axios.get(`/properties`);
         setPropertyAtom(response.data);
         const filteredProperties = response.data.filter((a) => a.user === user.id);
         setUserProperties(filteredProperties);
+      }else{
+        const filteredProperties = properties.filter((a) => a.user === user.id);
+        setUserProperties(filteredProperties);
+      }
       } catch (error) {
         console.error("Error fetching user properties:", error);
       }
