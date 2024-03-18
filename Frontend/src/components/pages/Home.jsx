@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
-      {!properties.length === 0 ? (
+      {properties.length != 0 ? (
         <div className="flex items-center justify-center min-h-screen">
           <Skeleton
             height={200}
