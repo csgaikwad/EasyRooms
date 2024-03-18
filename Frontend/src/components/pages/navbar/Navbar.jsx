@@ -16,9 +16,9 @@ export default function Navbar() {
   }, [user.isAuthenticated,user]);
 
   return (
-    <div className="sticky flex flex-row top-0 lg:px-8 bg-white z-20 stroke-lime-50 rounded-md shadow-sm border-b-2 border-gray-300">
+    <div className="sticky flex flex-row top-0 lg:px-8 bg-white z-50 stroke-lime-50 rounded-md shadow-sm border-b-2 border-gray-300">
       <div className="flex  flex-row w-full h-16 lg:h-auto flex-nowrap  items-center gap-3 justify-around py-5 lg:p-5 px-8">
-      
+
       <div>
 
         <Logo />

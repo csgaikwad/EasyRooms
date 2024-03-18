@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://airbnd-blush.vercel.app","http://localhost:5173"],
+    origin: ["https://airbndweb.vercel.app","http://localhost:5173"],
     credentials: true,
   })
 );
@@ -142,7 +142,7 @@ app.get("/me", async (req, res) => {
 // Route to logout
 app.get("/logout", async (req, res) => {
   try {
-    res.clearCookie("jwt").json({ message: "Logout successful" });
+    res.cookie("jwt","").json({ message: "Logout successful" });
   } catch (error) {
     console.error("Error logging out:", error.message);
     res.status(500).json({ error: "An internal server error occurred" });
@@ -388,6 +388,8 @@ app.post("/register", async (req, res) => {
     res
       .cookie("jwt", token, {
         httpOnly: true,
+        sameSite:"none",
+        secure:true,
         maxAge: 24 * 60 * 60 * 1000,
       })
       .status(201)
@@ -434,6 +436,8 @@ app.post("/login", async (req, res) => {
     res
       .cookie("jwt", token, {
         httpOnly: true,
+        sameSite:"none",
+        secure:true,
         maxAge: 24 * 60 * 60 * 1000,
       })
       .json({ userDoc, message: "User logged in successfully" });

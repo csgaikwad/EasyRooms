@@ -18,7 +18,7 @@ html {
 }
 
 .basicButton {
-  @apply border-2 rounded-full  py-3 text-white text-xl min-w-48 md:min-w-96 mt-2 hover:scale-110;
+  @apply border-2 rounded-full  py-3 text-white text-xl min-w-48 md:min-w-96 mt-2 hover:scale-105 transition-all transform duration-300;
 }
 
 .hoverable-item:hover {
@@ -88,3 +88,8 @@ h1{
 
 }
 
+@media (max-width: 768px) {
+  .lg\:carousel-mobile .carousel .control-arrow {
+    display: none;
+  }
+}
