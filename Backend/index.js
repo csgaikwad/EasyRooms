@@ -142,7 +142,7 @@ app.get("/me", async (req, res) => {
 // Route to logout
 app.get("/logout", async (req, res) => {
   try {
-    res.clearCookie("jwt").json({ message: "Logout successful" });
+    res.cookie("jwt","").json({ message: "Logout successful" });
   } catch (error) {
     console.error("Error logging out:", error.message);
     res.status(500).json({ error: "An internal server error occurred" });
