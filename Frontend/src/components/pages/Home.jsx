@@ -50,7 +50,7 @@ export default function Home() {
                 highlightColor="white"
                 key={index}
                 height={300}
-                width={410}
+                width={415}
                 borderRadius={15}
               />
             </div>
@@ -62,7 +62,7 @@ export default function Home() {
               highlightColor="white"
                 key={index}
                 height={300}
-                width={410}
+                width={415}
                 borderRadius={15}
               />
             </div>
