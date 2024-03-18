@@ -43,13 +43,31 @@ export default function Home() {
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
       {properties.length != 0 ? (
         <div className="flex items-center justify-center min-h-screen">
-          {Array.from({ length: 12 }).map((_, index) => (
+          {Array.from({ length: 3 }).map((_, index) => (
               <Skeleton
                 key={index}
                 height={200}
                 width={300}
                 borderRadius={15}
-                className="hidden md:block"
+                className="hidden lg:block"
+              />
+            ))}
+            {Array.from({ length: 3 }).map((_, index) => (
+              <Skeleton
+                key={index}
+                height={200}
+                width={300}
+                borderRadius={15}
+                className="hidden lg:block"
+              />
+            ))}
+            {Array.from({ length: 3 }).map((_, index) => (
+              <Skeleton
+                key={index}
+                height={200}
+                width={300}
+                borderRadius={15}
+                className="hidden lg:block"
               />
             ))}
         </div>
