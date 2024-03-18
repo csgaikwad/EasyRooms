@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
       {properties.length === 0 ? (
-        <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-5  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-12">
+        <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-5  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-1">
           {Array.from({ length: 3 }).map((_, index) => (
             <div className="hidden lg:block">
               <Skeleton
@@ -85,7 +85,7 @@ export default function Home() {
           {shuffledProperties.map((property) => (
             <div
               key={property._id}
-              className="shadow-xl rounded-xl  min-w-[10rem] max-w-[30rem] bg-transparent hover:my-5 my-7 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
+              className="shadow-xl rounded-xl  min-w-[10rem] max-w-[30rem] bg-transparent hover:my-5 my-4 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
