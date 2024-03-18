@@ -42,12 +42,12 @@ export default function Home() {
   return (
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
       {properties.length != 0 ? (
-        <div className="grid grid-cols-1 gap-5  lg:grid-cols-2 xl:grid-cols-3 px-8 mt-4">
+        <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-5  lg:grid-cols-2 xl:grid-cols-3 sm:px-8 mt-5">
           {Array.from({ length: 3 }).map((_, index) => (
             <Skeleton
               key={index}
-              height={200}
-              width={300}
+              height={300}
+              width={400}
               borderRadius={15}
               className="block"
             />
