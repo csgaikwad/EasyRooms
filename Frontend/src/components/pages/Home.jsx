@@ -6,7 +6,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { PropertyAtom } from "../atoms/PropertyAtom";
 import { useNavigate } from "react-router-dom";
 import { UserAtom } from "../atoms/UserAtom";
-import Skeleton from "react-loading-skeleton"; // Import the skeleton loading component
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Home() {
   const user = useRecoilValue(UserAtom);
@@ -42,7 +43,13 @@ export default function Home() {
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
       {!properties.length === 0 ? (
         <div className="flex items-center justify-center min-h-screen">
-          <Skeleton height={100} width={100} count={3} />
+          <Skeleton
+            height={200}
+            width={300}
+            count={5}
+            borderRadius={15}
+            className="hidden  md:block"
+          />
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-4 m-8 justify-items-center">
@@ -76,8 +83,12 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold whitespace-nowrap truncate max-w-80">{property.title}</h2>
-                <p className="text-gray-600 whitespace-nowrap truncate max-w-72">{property.location}</p>
+                <h2 className="text-lg font-semibold whitespace-nowrap truncate max-w-80">
+                  {property.title}
+                </h2>
+                <p className="text-gray-600 whitespace-nowrap truncate max-w-72">
+                  {property.location}
+                </p>
                 <p className="text-gray-600 text-lg">
                   <span className="text-black font-semibold font-sans">
                     $ {property.price}
