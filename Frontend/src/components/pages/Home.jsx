@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
-      {shuffleProperties.length === 0 ? (
+      {properties.length === 0 ? (
         <div className="flex items-center justify-center min-h-screen">
           <h1 className="text-pink-600 text-[2rem]">Loading...</h1>
           <img className="size-32" src="/loader.svg" alt="Loading..." />
