@@ -48,6 +48,8 @@ export default function Home() {
             className="hidden lg:block"
             >
               <Skeleton
+              baseColor="gray"
+              highlightColor="red"
                 key={index}
                 height={300}
                 width={400}
