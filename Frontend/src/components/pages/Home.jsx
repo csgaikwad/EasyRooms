@@ -44,7 +44,7 @@ export default function Home() {
           {shuffledProperties.map((property) => (
             <div
               key={property._id}
-              className="shadow-xl rounded-xl  max-w-[30rem] bg-transparent hover:my-5 my-7 border-2 transition-transform duration-300 transform hover:scale-105  hover:border-white hover:border-4 cursor-pointer"
+              className="shadow-xl rounded-xl  max-w-[30rem] bg-transparent hover:my-5 my-7 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
@@ -72,7 +72,7 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold whitespace-nowrap truncate">{property.title}asd fghuy hjg</h2>
+                <h2 className="text-lg font-semibold whitespace-nowrap truncate max-w-40">{property.title}asd fghuy hjg</h2>
                 <p className="text-gray-600">{property.location}</p>
                 <p className="text-gray-600 text-lg">
                   <span className="text-black font-semibold font-sans">
