@@ -41,14 +41,24 @@ export default function Home() {
 
   return (
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
-      {properties.length != 0 ? (
+      {properties.length === 0 ? (
         <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-5  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-11">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div
-            className="hidden lg:block"
-            >
+            <div className="hidden lg:block">
               <Skeleton
-              baseColor="#bec3d4"
+                baseColor="#c8cddb"
+                highlightColor="white"
+                key={index}
+                height={300}
+                width={400}
+                borderRadius={15}
+              />
+            </div>
+          ))}
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div className="hidden md:block">
+              <Skeleton
+              baseColor="#c8cddb"
               highlightColor="white"
                 key={index}
                 height={300}
@@ -58,22 +68,10 @@ export default function Home() {
             </div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <div
-            className="hidden md:block"
-            >
+            <div className="block md:hidden">
               <Skeleton
-                key={index}
-                height={300}
-                width={400}
-                borderRadius={15}
-              />
-            </div>
-          ))}
-          {Array.from({ length: 3 }).map((_, index) => (
-            <div
-            className="block md:hidden"
-            >
-              <Skeleton
+              baseColor="#c8cddb"
+              highlightColor="white"
                 key={index}
                 height={200}
                 width={300}
