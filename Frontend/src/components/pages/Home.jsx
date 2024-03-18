@@ -6,6 +6,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { PropertyAtom } from "../atoms/PropertyAtom";
 import { useNavigate } from "react-router-dom";
 import { UserAtom } from "../atoms/UserAtom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Home() {
   const user = useRecoilValue(UserAtom);
@@ -14,9 +16,9 @@ export default function Home() {
   const setPropertyAtom = useSetRecoilState(PropertyAtom);
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     async function fetchProperties() {
@@ -38,18 +40,52 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
-      {shuffleProperties.length === 0 ? (
-        <div className="flex items-center justify-center min-h-screen">
-          <h1 className="text-pink-600 text-[2rem]">Loading...</h1>
-          <img className="size-32" src="/loader.svg" alt="Loading..." />
+    <div className="min-h-screen h-auto  xl:px-5 mb-20">
+      {properties.length === 0 ? (
+        <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-7  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-11">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div className="hidden lg:block">
+              <Skeleton
+                baseColor="#c8cddb"
+                highlightColor="white"
+                key={index}
+                height={300}
+                width={415}
+                borderRadius={15}
+              />
+            </div>
+          ))}
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div className="hidden md:block">
+              <Skeleton
+              baseColor="#c8cddb"
+              highlightColor="white"
+                key={index}
+                height={300}
+                width={415}
+                borderRadius={15}
+              />
+            </div>
+          ))}
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div className="block md:hidden">
+              <Skeleton
+              baseColor="#c8cddb"
+              highlightColor="white"
+                key={index}
+                height={200}
+                width={300}
+                borderRadius={15}
+              />
+            </div>
+          ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 m-8 justify-items-center">
           {shuffledProperties.map((property) => (
             <div
               key={property._id}
-              className="shadow-xl rounded-xl  max-w-[30rem] bg-transparent hover:my-5 my-7 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
+              className="shadow-xl rounded-xl  md:min-w-[10rem] max-w-[25rem] md:max-w-[30rem] bg-transparent hover:my-5 my-4 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
@@ -61,7 +97,7 @@ export default function Home() {
                 {property.propertyPhotos.map((photoUrl, index) => (
                   <div className=" object-cover " key={index}>
                     <img
-                      className="rounded-xl size-60 lg:size-72  shadow-sm"
+                      className="rounded-xl size-52 sm:size-60 lg:size-72  shadow-sm"
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />
@@ -76,8 +112,12 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold whitespace-nowrap truncate max-w-80">{property.title}</h2>
-                <p className="text-gray-600 whitespace-nowrap truncate max-w-72">{property.location}</p>
+                <h2 className="text-lg font-semibold whitespace-nowrap truncate w-52 md:max-w-80">
+                  {property.title}
+                </h2>
+                <p className="text-gray-600 whitespace-nowrap truncate max-w-72">
+                  {property.location}
+                </p>
                 <p className="text-gray-600 text-lg">
                   <span className="text-black font-semibold font-sans">
                     $ {property.price}
