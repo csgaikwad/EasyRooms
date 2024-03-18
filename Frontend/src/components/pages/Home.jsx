@@ -44,22 +44,40 @@ export default function Home() {
       {properties.length != 0 ? (
         <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-5  lg:grid-cols-2 xl:grid-cols-3 sm:px-8 mt-5">
           {Array.from({ length: 3 }).map((_, index) => (
-            <Skeleton
-              key={index}
-              height={300}
-              width={400}
-              borderRadius={15}
-              className="block"
-            />
+            <div
+            className="hidden lg:block"
+            >
+              <Skeleton
+                key={index}
+                height={200}
+                width={300}
+                borderRadius={15}
+              />
+            </div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <Skeleton
-              key={index}
-              height={200}
-              width={300}
-              borderRadius={15}
-              className="hidden lg:block"
-            />
+            <div
+            className="hidden lg:block"
+            >
+              <Skeleton
+                key={index}
+                height={200}
+                width={300}
+                borderRadius={15}
+              />
+            </div>
+          ))}
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div
+            className="block lg:hidden"
+            >
+              <Skeleton
+                key={index}
+                height={200}
+                width={300}
+                borderRadius={15}
+              />
+            </div>
           ))}
         </div>
       ) : (
