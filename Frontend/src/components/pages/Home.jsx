@@ -72,8 +72,8 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold whitespace-nowrap truncate max-w-40">{property.title}asd fghuy hjg</h2>
-                <p className="text-gray-600">{property.location}</p>
+                <h2 className="text-lg font-semibold whitespace-nowrap truncate max-w-52">{property.title}asd fghuy hjg</h2>
+                <p className="text-gray-600 whitespace-nowrap truncate max-w-52">{property.location}</p>
                 <p className="text-gray-600 text-lg">
                   <span className="text-black font-semibold font-sans">
                     $ {property.price}
