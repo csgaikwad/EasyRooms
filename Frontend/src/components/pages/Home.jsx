@@ -81,11 +81,11 @@ export default function Home() {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 m-8 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-4 m-4 sm:m-8 justify-items-center">
           {shuffledProperties.map((property) => (
             <div
               key={property._id}
-              className="shadow-xl rounded-xl  md:min-w-[10rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-5 my-4 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
+              className="shadow-xl rounded-xl  md:min-w-[10rem] w-[100%] md:w-auto md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
@@ -112,13 +112,13 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold whitespace-nowrap truncate max-w-80">
+                <h2 className="text-md sm:text-lg font-semibold whitespace-nowrap truncate max-w-80">
                   {property.title}
                 </h2>
-                <p className="text-gray-600 whitespace-nowrap truncate max-w-72">
+                <p className="text-gray-600 whitespace-nowrap truncate max-w-72 text-md sm:text-lg">
                   {property.location}
                 </p>
-                <p className="text-gray-600 text-lg">
+                <p className="text-gray-600 text-md sm:text-lg">
                   <span className="text-black font-semibold font-sans">
                     $ {property.price}
                   </span>{" "}

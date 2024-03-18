@@ -6,8 +6,11 @@ export default function Footer() {
     <div className="bg-gray-100 h-auto rounded-md flex flex-col items-center justify-end pb-4 pl-4 z-0">
       <h1 className="m-4 text-xl font-bold">- Contact Me -</h1>
       <div className="flex justify-around gap-8 mb-4 ">
-        <a className="cursor-pointer"
-        href="https://github.com/csgaikwad">
+        <a
+          className="cursor-pointer"
+          target="_blank"
+          href="https://github.com/csgaikwad"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
@@ -21,6 +24,7 @@ export default function Footer() {
         </a>
         <a
           className="text-blue-400 text-xl cursor-pointer "
+          target="_blank"
           href="https://www.linkedin.com/in/csgaikwad"
         >
           <svg
@@ -36,7 +40,8 @@ export default function Footer() {
         </a>
         <a
           className="text-black-600 text-xl cursor-pointer"
-          href="https://twitter.com/CS_Gaikwad107"
+          target="_blank"
+          href="https://twitter.com/SSG_tweet"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
