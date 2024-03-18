@@ -112,7 +112,7 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold whitespace-nowrap truncate md:max-w-80">
+                <h2 className="text-lg font-semibold whitespace-nowrap truncate w-52 md:max-w-80">
                   {property.title}
                 </h2>
                 <p className="text-gray-600 whitespace-nowrap truncate max-w-72">
