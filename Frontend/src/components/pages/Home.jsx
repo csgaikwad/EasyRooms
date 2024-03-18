@@ -42,14 +42,14 @@ export default function Home() {
   return (
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
       {properties.length === 0 ? (
-        <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-5  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-10">
+        <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-5  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-11">
           {Array.from({ length: 3 }).map((_, index) => (
             <div
             className="hidden lg:block"
             >
               <Skeleton
-              baseColor="gray"
-              highlightColor="red"
+              baseColor="#a0a8c1"
+              highlightColor="white"
                 key={index}
                 height={300}
                 width={400}
