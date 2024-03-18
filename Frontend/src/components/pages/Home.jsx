@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { PropertyAtom } from "../atoms/PropertyAtom";
 import { useNavigate } from "react-router-dom";
 import { UserAtom } from "../atoms/UserAtom";
+import Skeleton from "react-loading-skeleton"; // Import the skeleton loading component
 
 export default function Home() {
   const user = useRecoilValue(UserAtom);
@@ -14,9 +15,9 @@ export default function Home() {
   const setPropertyAtom = useSetRecoilState(PropertyAtom);
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     async function fetchProperties() {
@@ -41,8 +42,7 @@ export default function Home() {
     <div className="min-h-screen h-auto py-4 xl:px-5 mb-20">
       {properties.length === 0 ? (
         <div className="flex items-center justify-center min-h-screen">
-          <h1 className="text-pink-600 text-[2rem]">Loading...</h1>
-          <img className="size-32" src="/loader.svg" alt="Loading..." />
+          <Skeleton height={100} width={100} count={3} /> {/* Display skeleton loading UI */}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-4 m-8 justify-items-center">
