@@ -85,7 +85,7 @@ export default function Home() {
           {shuffledProperties.map((property) => (
             <div
               key={property._id}
-              className="shadow-xl rounded-xl  md:min-w-[10rem] w-[19rem] md:max-w-[30rem] bg-transparent hover:my-5 my-4 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
+              className="shadow-xl rounded-xl  md:min-w-[10rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-5 my-4 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
@@ -97,7 +97,7 @@ export default function Home() {
                 {property.propertyPhotos.map((photoUrl, index) => (
                   <div className=" object-cover " key={index}>
                     <img
-                      className="rounded-xl size-52 sm:size-60 lg:size-72  shadow-sm"
+                      className="rounded-xl size-60 lg:size-72  shadow-sm"
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />
@@ -112,7 +112,7 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold whitespace-nowrap truncate w-52 md:max-w-80">
+                <h2 className="text-lg font-semibold whitespace-nowrap truncate max-w-80">
                   {property.title}
                 </h2>
                 <p className="text-gray-600 whitespace-nowrap truncate max-w-72">
