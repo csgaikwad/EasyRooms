@@ -72,7 +72,7 @@ export default function Home() {
                     : navigate("/login");
                 }}
               >
-                <h2 className="text-lg font-semibold whitespace-nowrap">{property.title}asd fghuy hjg</h2>
+                <h2 className="text-lg font-semibold whitespace-nowrap truncate">{property.title}asd fghuy hjg</h2>
                 <p className="text-gray-600">{property.location}</p>
                 <p className="text-gray-600 text-lg">
                   <span className="text-black font-semibold font-sans">
