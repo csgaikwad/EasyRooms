@@ -27,7 +27,7 @@ export default function Navbar() {
         {hideLogin ? (
           <></>
           ) : (
-            <div className="text-2xl underline text-blue-400 font-serif tracking-tighter w-auto cursor-pointer">
+            <div className="text-lg sm:text-2xl underline text-blue-400 font-serif tracking-tighter w-auto cursor-pointer">
             <Link to={"/login"}>Login</Link>
           </div>
         )}
