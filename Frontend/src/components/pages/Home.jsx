@@ -13,6 +13,11 @@ export default function Home() {
   const [shuffledProperties, setShuffledProperties] = useState([]);
   const setPropertyAtom = useSetRecoilState(PropertyAtom);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
+
   useEffect(() => {
     async function fetchProperties() {
       try {
