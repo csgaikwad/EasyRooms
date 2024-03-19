@@ -142,7 +142,7 @@ app.get("/me", async (req, res) => {
 // Route to logout
 app.get("/logout", async (req, res) => {
   try {
-    res.cookie("jwt","").json({ message: "Logout successful" });
+    res.clearCookie("jwt").json({ message: "Logout successful" });
   } catch (error) {
     console.error("Error logging out:", error.message);
     res.status(500).json({ error: "An internal server error occurred" });
@@ -435,7 +435,7 @@ app.post("/login", async (req, res) => {
     const token = jwt.sign({ userId: user._id ,userEmail: user.userEmail }, secretKey);
     res
       .cookie("jwt", token, {
-        httpOnly: true,
+        // httpOnly: true,
         sameSite:"none",
         secure:true,
         maxAge: 24 * 60 * 60 * 1000,
