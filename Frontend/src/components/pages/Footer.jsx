@@ -7,7 +7,7 @@ export default function Footer() {
       <h1 className="m-4 text-xl font-bold">- Contact Me -</h1>
       <div className="flex justify-around gap-8 mb-4 ">
         <a
-          className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
+          className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-110"
           target="_blank"
           href="https://github.com/csgaikwad"
         >
@@ -23,7 +23,7 @@ export default function Footer() {
           </svg>
         </a>
         <a
-          className="text-blue-400 text-xl cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 "
+          className="text-blue-400 text-xl cursor-pointer transition duration-300 ease-in-out transform hover:scale-110 "
           target="_blank"
           href="https://www.linkedin.com/in/csgaikwad"
         >
@@ -39,7 +39,7 @@ export default function Footer() {
           </svg>
         </a>
         <a
-          className="text-black-600 text-xl cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
+          className="text-black-600 text-xl cursor-pointer transition duration-300 ease-in-out transform hover:scale-110"
           target="_blank"
           href="https://twitter.com/SSG_tweet"
         >
