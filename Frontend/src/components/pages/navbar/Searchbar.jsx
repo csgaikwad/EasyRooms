@@ -57,7 +57,7 @@ export default function Searchbar() {
             <h1 className="cursor-pointer searching text-md hoverable-item w-14 grow p-1 text-center font-serif">
               Who
             </h1>
-            <div className={`${user.isOwner ? "bg-purple-500" : "bg-red-500"} rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer ` } >
+            <div className={`${user.isOwner ? "bg-purple-500" : "bg-red-500"} rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer z-10 ` } >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -82,7 +82,7 @@ export default function Searchbar() {
             Anyweek
           </div>
           <div className="cursor-pointer searching flex w-[33%] items-center justify-between ">
-            <h1 className="text-md hoverable-item p-1 text-center font-serif md:w-24 md:text-nowrap">
+            <h1 className="text-md hoverable-item p-1 text-center font-serif md:w-24 md:text-nowrap cursor-pointer">
               Add Guest
             </h1>
             <div className={`${user.isOwner ? "bg-purple-500" : "bg-red-500"} rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer` } >
