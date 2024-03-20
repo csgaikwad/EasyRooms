@@ -78,7 +78,7 @@ export default function UserProperties() {
             </p>
             {/* <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p> */}
           </div>
-          <div className=" w-full mt-4 absolute bottom-0 flex items-end justify-center">
+          <div className=" w-full mt-6 absolute bottom-0 flex items-end justify-center">
           <div
             className="hidden sm:flex  w-full  items-center justify-center font-serif font-semibold text-xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
             onClick={() => {
