@@ -47,7 +47,7 @@ export default function UserProfile() {
         </svg>
         <div
           onMouseLeave={showDivOnEvent}
-          className={`block  border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-20px] ${showDiv ? "" : "hidden"}`}
+          className={`block py-2 border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-20px] ${showDiv ? "" : "hidden"}`}
         >
           <div
             className="border-b-2 text-xl font-serif"
@@ -66,7 +66,7 @@ export default function UserProfile() {
             Login
           </div>
           <div
-            className="border-b-2 text-xl font-serif"
+            className=" text-xl font-serif"
             onClick={() => {
               navigate("/profile");
             }}
