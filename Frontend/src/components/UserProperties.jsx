@@ -43,7 +43,7 @@ export default function UserProperties() {
       {userProperties.map((property) => (
         <div
           key={property._id}
-          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer size-full pb-4 "
+          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-2 cursor-pointer size-full pb-4 grow "
         >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
