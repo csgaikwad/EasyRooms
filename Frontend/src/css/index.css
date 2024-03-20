@@ -87,7 +87,7 @@ h1{
 .customScrollbar::-webkit-scrollbar-thumb {
 
   background: lightblue;
-  border-radius: 3rem;
+  border-radius: 5rem;
 
 }
 
