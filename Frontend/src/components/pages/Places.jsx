@@ -43,7 +43,7 @@ export default function Places() {
       {selectedProperty ? (
         <>
           <div>
-            <h1 className="lg:text-[1.8rem] pl-2 font-semibold font-sans text-black cursor-text">
+            <h1 className="md:text-[1.8rem] pl-2 font-semibold font-sans text-black cursor-text">
               {selectedProperty.title}
             </h1>
           </div>
@@ -66,7 +66,7 @@ export default function Places() {
           </div>
           <div className="flex flex-col lg:grid grid-cols-2 gap-2">
             <div>
-              <div className="lg:text-[1.4rem] font-semibold font-sans text-black">
+              <div className="md:text-[1.4rem] font-semibold font-sans text-black">
                 <img
                   className="size-6 inline-block mb-2 mr-1"
                   src="/LocationPin.svg"
@@ -74,7 +74,7 @@ export default function Places() {
                 />
                 <p className="inline">{selectedProperty.location}</p>
               </div>
-              <div className="lg:text-[1.1rem] text-gray-500 px-2 py-4">
+              <div className="md:text-[1.1rem] text-gray-500 px-2 py-4">
                 <p>{selectedProperty.details}</p>
               </div>
               <div className="mb-4 grid grid-cols-3 gap-5 grid-rows-2 place-items-center justify-items-center p-10">
