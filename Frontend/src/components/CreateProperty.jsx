@@ -163,6 +163,7 @@ export default function CreateProperties() {
         alert(res.data.message);
         navigate("/profile");
       } catch (error) {
+        alert("Error occured,try allowing cookies")
         console.error(error);
       }
     }
