@@ -47,10 +47,10 @@ export default function UserProfile() {
         </svg>
         <div
           onMouseLeave={showDivOnEvent}
-          className={`block  border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-18px] ${showDiv ? "" : "hidden"}`}
+          className={`block  border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-20px] ${showDiv ? "" : "hidden"}`}
         >
           <div
-          className="border-b-2 text-xl font-serif"
+            className="border-b-2 text-xl font-serif"
             onClick={() => {
               navigate("/home");
             }}
@@ -58,6 +58,7 @@ export default function UserProfile() {
             Home
           </div>
           <div
+            className="border-b-2 text-xl font-serif"
             onClick={() => {
               navigate("/login");
             }}
@@ -65,6 +66,7 @@ export default function UserProfile() {
             Login
           </div>
           <div
+            className="border-b-2 text-xl font-serif"
             onClick={() => {
               navigate("/profile");
             }}
