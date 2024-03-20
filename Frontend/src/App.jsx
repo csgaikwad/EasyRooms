@@ -33,20 +33,53 @@ export default function App() {
     fetchDataOnLoad();
   }, []);
 
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: "-10vw",
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 150,
+        damping: 11,
+      },
+    },
+    exit: {
+      opacity: 0,
+      x: "50vw",
+      transition: {
+        type: "spring",
+        stiffness: 150,
+        damping: 10,
+      },
+    },
+  };
+
   return (
     <div>
       <BrowserRouter>
         <Navbar />
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence>
           <Routes>
             <Route
               path="/"
               element={
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  key="home"
+                  initial={{ opacity: 0, scale: 1}}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    transition: { duration: 1.5 },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    x: "50vw",
+                    transition: { duration: 1 },
+                  }}
                 >
                   <Home />
                 </motion.div>
@@ -56,10 +89,11 @@ export default function App() {
               path="/login"
               element={
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  key="login"
+                  variants={pageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
                 >
                   <Login />
                 </motion.div>
@@ -69,10 +103,11 @@ export default function App() {
               path="/register"
               element={
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  key="register"
+                  variants={pageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
                 >
                   <Register />
                 </motion.div>
@@ -82,10 +117,11 @@ export default function App() {
               path="/profile"
               element={
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  key="profile"
+                  variants={pageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
                 >
                   <Profile />
                 </motion.div>
@@ -95,10 +131,11 @@ export default function App() {
               path="/property"
               element={
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  key="property"
+                  variants={pageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
                 >
                   <Property />
                 </motion.div>
@@ -108,10 +145,11 @@ export default function App() {
               path="/places/:id"
               element={
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  key="places"
+                  variants={pageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
                 >
                   <Places />
                 </motion.div>

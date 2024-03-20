@@ -7,6 +7,13 @@ import { useNavigate } from "react-router-dom";
 export default function UserTile() {
   const [userData, setUserData] = useRecoilState(UserAtom);
   const navigate = useNavigate();
+  const [isAuth,setIsAuth]=useState(false);
+  console.log(userData.isAuthenticated)
+
+  useEffect(()=>{
+    console.log("in the effect")
+    userData.isAuthenticated && setIsAuth(userData.isAuthenticated || false)
+  },[userData.isAuthenticated,userData]);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -58,7 +65,7 @@ export default function UserTile() {
             </div>
           </div>
 
-          {userData.isAuthenticated ? (
+          {userData.isAuthenticated || isAuth ? (
             <div
               className="bg-purple-400 p-4 my-2 shadow-lg  rounded-xl text-lg md:text-2xl underline text-white font-serif tracking-wide cursor-pointer"
               onClick={logout}
