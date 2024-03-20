@@ -80,7 +80,7 @@ export default function UserProperties() {
           </div>
           <div className="size-full flex items-end">
           <div
-            className="hidden sm:flex  w-full mt-2 items-center justify-center font-serif font-semibold text-2xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
+            className="hidden sm:flex  w-[70%] mt-2 items-center justify-center font-serif font-semibold text-2xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
             onClick={() => {
               navigate("/property/" + property._id);
             }}
