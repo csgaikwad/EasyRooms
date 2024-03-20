@@ -63,7 +63,7 @@ h1{
 
 
 :root::-webkit-scrollbar {
-  width: 12px; /* Set the width of the scrollbar */
+  width: 10px; /* Set the width of the scrollbar */
 }
 
 :root::-webkit-scrollbar-thumb {
