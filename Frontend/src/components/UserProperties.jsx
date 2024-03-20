@@ -43,7 +43,7 @@ export default function UserProperties() {
       {userProperties.map((property) => (
         <div
           key={property._id}
-          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer size-full max-h-[26rem]"
+          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer size-full sm:h-[30rem]"
         >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
@@ -55,11 +55,7 @@ export default function UserProperties() {
                 }}
               >
                 <img
-<<<<<<< HEAD
-                  className="rounded-xl size-60  object-cover shadow-sm"
-=======
                   className="rounded-xl size-60 md:size-72 object-cover shadow-sm"
->>>>>>> 21f64f12adce38fbcc491ccbb4ea176923c1c601
                   src={photoUrl}
                   alt={`Property ${index}`}
                 />
@@ -72,8 +68,8 @@ export default function UserProperties() {
               navigate("/places/" + property._id);
             }}
           >
-            <h2 className="md:text-xl font-semibold  ">{property.title}</h2>
-            <p className="text-gray-600 ">{property.location}</p>
+            <h2 className="md:text-xl font-semibold  whitespace-nowrap truncate max-w-80 ">{property.title}</h2>
+            <p className="text-gray-600  whitespace-nowrap truncate max-w-80">{property.location}</p>
             <p className="text-gray-600 text-lg ">
               <span className="text-black font-semibold font-serif">
                 $ {property.price}
