@@ -39,11 +39,11 @@ export default function UserProperties() {
   console.log("userproperties: ", userProperties);
   console.log("user: ", user);
   return (
-    <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-8  my-4 justify-items-center p-4 ">
+    <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-10  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
         <div
           key={property._id}
-          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-2 cursor-pointer size-full pb-4 grow "
+          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-2 cursor-pointer size-full pb-4  "
         >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
@@ -80,7 +80,7 @@ export default function UserProperties() {
           </div>
           <div className=" w-full mt-4 absolute bottom-0 flex items-end justify-center">
           <div
-            className="hidden sm:flex  w-[70%]  items-center justify-center font-serif font-semibold text-xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
+            className="hidden sm:flex  w-full  items-center justify-center font-serif font-semibold text-xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
             onClick={() => {
               navigate("/property/" + property._id);
             }}
