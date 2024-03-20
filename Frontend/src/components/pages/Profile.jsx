@@ -15,7 +15,7 @@ export default function Profile() {
       <div className="flex flex-col lg:flex-row items-center justify-center gap-4 pt-2 pb-7">
         {user.isOwner && (
           <div
-            className="hidden px-8 pr-4 gap-3 my-2 cursor-pointer bg-purple-500 hover:bg-purple-700 rounded-full h-14 max-w-72 lg:flex items-center justify-around text-white text-xl"
+            className=" px-8 pr-4 gap-3 my-2 cursor-pointer bg-purple-500 hover:bg-purple-700 rounded-full h-14 max-w-72 flex items-center justify-around text-white text-xl"
             onClick={() => {
               navigate("/property");
             }}
@@ -42,7 +42,7 @@ export default function Profile() {
         <UserTile />
         </div>
         {user.isOwner && (
-          <div className="bg-purple-200 h-[40rem] min-w-40 border-2 border-gray-200 shadow-lg rounded-xl overflow-y-scroll md:customScrollbar">
+          <div className="bg-purple-200 h-[60rem] min-w-40 border-2 border-gray-200 shadow-lg rounded-xl overflow-y-scroll sm:customScrollbar">
             <UserProperties />
           </div>
         )}
