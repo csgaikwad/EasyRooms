@@ -77,7 +77,7 @@ h1{
 
 
 .customScrollbar::-webkit-scrollbar {
-  width: 20px;
+  width: 10px;
 }
 
 .customScrollbar::-webkit-scrollbar-track {
