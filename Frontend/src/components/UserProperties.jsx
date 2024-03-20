@@ -48,14 +48,18 @@ export default function UserProperties() {
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
               <div
-                className="sm:min-w-44  sm:min-h-60 max-w-96  m-2  "
+                className="md:min-w-44 sm:min-h-60 max-w-96  m-2 "
                 key={index}
                 onClick={() => {
                   navigate("/places/" + property._id);
                 }}
               >
                 <img
+<<<<<<< HEAD
                   className="rounded-xl size-60  object-cover shadow-sm"
+=======
+                  className="rounded-xl size-60 md:size-72 object-cover shadow-sm"
+>>>>>>> 21f64f12adce38fbcc491ccbb4ea176923c1c601
                   src={photoUrl}
                   alt={`Property ${index}`}
                 />

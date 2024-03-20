@@ -163,6 +163,7 @@ export default function CreateProperties() {
         alert(res.data.message);
         navigate("/profile");
       } catch (error) {
+        alert("Error occured,try allowing cookies")
         console.error(error);
       }
     }
@@ -197,7 +198,7 @@ export default function CreateProperties() {
               {previews.map((preview, index) => (
                 <div className="relative shrink-0 bg-cover" key={index}>
                   <img
-                    className="shrink-0 rounded-xl size-56 md:w-80 md:h-72 "
+                    className="shrink-0 rounded-xl size-56 sm:w-80 sm:h-72 "
                     src={preview}
                     alt={`Preview ${index} `}
                   />
