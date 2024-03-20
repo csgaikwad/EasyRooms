@@ -143,7 +143,7 @@ export default function Places() {
                     className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg ">
-                    Radio available
+                    Electricity available
                   </h1>
                 </div>
               </div>
