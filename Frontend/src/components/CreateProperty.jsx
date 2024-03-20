@@ -178,7 +178,7 @@ export default function CreateProperties() {
           <label className=" lg:w-96 bg-transparent border-2 shadow-md text-black p-4 lg:p-10 rounded-xl cursor-pointer hover:bg-gray-100 flex items-center justify-center gap-4 my-10">
             Choose Photos
             <img
-              className="bg-purple-400 rounded-full size-10"
+              className="bg-purple-400 rounded-full size-10 "
               src="/plus.svg"
             />
             <input
@@ -192,12 +192,12 @@ export default function CreateProperties() {
           </label>
           {previews.length > 0 && (
             <div
-              className={`flex ${previews.length === 1 && "justify-center"} items-center  gap-4 my-4 w-[20rem] lg:w-[40rem] h-80  mb-10 rounded-xl overflow-x-auto scroll-smooth customScrollbar `}
+              className={`flex ${previews.length === 1 && "justify-center"} items-center  gap-4 my-4 w-[100%] lg:w-[40rem] h-80  mb-10 rounded-xl overflow-x-auto scroll-smooth customScrollbar `}
             >
               {previews.map((preview, index) => (
                 <div className="relative shrink-0 bg-cover" key={index}>
                   <img
-                    className="shrink-0 rounded-xl w-80 h-72 "
+                    className="shrink-0 rounded-xl size-56 md:w-80 md:h-72 "
                     src={preview}
                     alt={`Preview ${index} `}
                   />

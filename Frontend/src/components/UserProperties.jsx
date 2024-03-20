@@ -43,19 +43,19 @@ export default function UserProperties() {
       {userProperties.map((property) => (
         <div
           key={property._id}
-          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer size-full max-h-[26rem]"
         >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
               <div
-                className="lg:min-w-44 lg:min-h-60 max-w-96  m-2 "
+                className="sm:min-w-44  sm:min-h-60 max-w-96  m-2  "
                 key={index}
                 onClick={() => {
                   navigate("/places/" + property._id);
                 }}
               >
                 <img
-                  className="rounded-xl lg:h-80 lg:w-96 object-cover shadow-sm"
+                  className="rounded-xl size-60  object-cover shadow-sm"
                   src={photoUrl}
                   alt={`Property ${index}`}
                 />
@@ -79,7 +79,7 @@ export default function UserProperties() {
             {/* <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p> */}
           </div>
           <div
-            className="hidden lg:block"
+            className="hidden md:block"
             onClick={() => {
               navigate("/property/" + property._id);
             }}
