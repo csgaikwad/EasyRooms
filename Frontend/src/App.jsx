@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { Routes, Route, BrowserRouter,  } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/pages/navbar/Navbar";
 import Footer from "./components/pages/Footer";
 import Home from "./components/pages/Home";
@@ -36,15 +37,88 @@ export default function App() {
     <div>
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/property" element={<Property />} />
-          <Route path="/property/:id" element={<Property />} />
-          <Route path="/places/:id" element={<Places />} />
-        </Routes>
+        <AnimatePresence exitBeforeEnter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Home />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Login />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Register />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Profile />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/property"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Property />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/places/:id"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Places />
+                </motion.div>
+              }
+            />
+          </Routes>
+        </AnimatePresence>
       </BrowserRouter>
       <Footer />
     </div>
