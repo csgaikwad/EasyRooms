@@ -20,7 +20,7 @@ export default function CreateProperties() {
   const [entrance, setEntrance] = useState(false);
 
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const propertyAtom = useRecoilValue(PropertyAtom);
   const [selectedProperty, setSelectedProperty] = useState();
 

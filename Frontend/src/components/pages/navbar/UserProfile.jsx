@@ -47,13 +47,44 @@ export default function UserProfile() {
         </svg>
         <div
           onMouseLeave={showDivOnEvent}
-          onClick={() => {navigate("/login");}}
-          className={`block border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-18px] ${showDiv ? "" : "hidden"}`}
+          className={`block py-2 border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-20px] ${showDiv ? "" : "hidden"}`}
+          // onBlur={showDivOnEvent}
+          // tabIndex="0"
         >
-          <h1>Hi There</h1>
+          <div
+            className="border-b-2 text-xl font-serif"
+            onClick={() => {
+              navigate("/");
+              showDivOnEvent();
+            }}
+          >
+            Home
+          </div>
+          <div
+            className="border-b-2 text-xl font-serif"
+            onClick={() => {
+              navigate("/login");
+              showDivOnEvent();
+            }}
+          >
+            Login
+          </div>
+          <div
+            className=" text-xl font-serif"
+            onClick={() => {
+              navigate("/profile");
+              showDivOnEvent();
+            }}
+          >
+            Profile
+          </div>
         </div>
       </div>
-      <div onClick={() => user.isAuthenticated ?navigate("/profile") : navigate("/login")}>
+      <div
+        onClick={() =>
+          user.isAuthenticated ? navigate("/profile") : navigate("/login")
+        }
+      >
         {user.username ? (
           <div className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
             <Avatar

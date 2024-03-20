@@ -54,13 +54,16 @@ input:not([type="checkbox"]) {
 h1{
    @apply cursor-default
 }
+
+
+
 .hideScrollbar::-webkit-scrollbar {
   display: none;
 }
 
 
 :root::-webkit-scrollbar {
-  width: 12px; /* Set the width of the scrollbar */
+  width: 10px; /* Set the width of the scrollbar */
 }
 
 :root::-webkit-scrollbar-thumb {
@@ -74,7 +77,7 @@ h1{
 
 
 .customScrollbar::-webkit-scrollbar {
-  width: 20px;
+  width: 10px;
 }
 
 .customScrollbar::-webkit-scrollbar-track {

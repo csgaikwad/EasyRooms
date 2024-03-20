@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function UserTile() {
   const [userData, setUserData] = useRecoilState(UserAtom);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUserData() {
@@ -44,21 +44,37 @@ export default function UserTile() {
           <div className="text-black  my-2 grid grid-cols-[1fr,2fr] gap-4 justify-items-center ">
             <div className="flex flex-col items-end">
               <p>Name :</p>
-              <p >Email : </p>
+              <p>Email : </p>
               <p>Owner : </p>
             </div>
             <div className="underline ">
               <p>{userData.username ?? "null"}</p>
-              <p className="text-[1.2rem] whitespace-nowrap  truncate max-w-[170px]">{userData.userEmail ?? "null"}</p>
-              <p className="text-xl">{userData.isOwner ? "Yes" : "Not an owner yet"}</p>
+              <p className="text-[1.2rem] whitespace-nowrap  truncate max-w-[170px]">
+                {userData.userEmail ?? "null"}
+              </p>
+              <p className="text-xl">
+                {userData.isOwner ? "Yes" : "Not an owner yet"}
+              </p>
             </div>
           </div>
-          <div
-            className="bg-purple-400 p-4 my-2 shadow-lg  rounded-xl text-lg md:text-2xl underline text-white font-serif tracking-wide cursor-pointer"
-            onClick={logout}
-          >
-            Logout
-          </div>
+
+          {userData.isAuthenticated ? (
+            <div
+              className="bg-purple-400 p-4 my-2 shadow-lg  rounded-xl text-lg md:text-2xl underline text-white font-serif tracking-wide cursor-pointer"
+              onClick={logout}
+            >
+              Logout
+            </div>
+          ) : (
+            <div
+              className="bg-purple-400 p-4 my-2 shadow-lg  rounded-xl text-lg md:text-2xl underline text-white font-serif tracking-wide cursor-pointer"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Login
+            </div>
+          )}
         </div>
       )}
     </div>
