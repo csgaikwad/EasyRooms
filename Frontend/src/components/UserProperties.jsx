@@ -78,18 +78,20 @@ export default function UserProperties() {
             </p>
             {/* <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p> */}
           </div>
+          <div className="size-full flex items-end">
           <div
-            className="hidden sm:flex w-full mt-2 items-end justify-center font-serif font-semibold text-2xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
+            className="hidden sm:flex  w-full mt-2 items-center justify-center font-serif font-semibold text-2xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
             onClick={() => {
               navigate("/property/" + property._id);
             }}
           ><span className="opacity-100">Edit </span>
             <img
-              className=" border-2 border-white mx-2 size-10   transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1"
+              className=" border-2 border-white m-2 size-10   transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1"
               src="/pencil.svg"
               alt="edit"
             />
           </div>
+        </div>
         </div>
       ))}
     </div>
