@@ -48,8 +48,8 @@ export default function UserProfile() {
         <div
           onMouseLeave={showDivOnEvent}
           className={`block py-2 border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-20px] ${showDiv ? "" : "hidden"}`}
-          onBlur={showDivOnEvent}
-          tabIndex="0"
+          // onBlur={showDivOnEvent}
+          // tabIndex="0"
         >
           <div
             className="border-b-2 text-xl font-serif"
