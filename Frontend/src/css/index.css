@@ -54,6 +54,9 @@ input:not([type="checkbox"]) {
 h1{
    @apply cursor-default
 }
+
+
+
 .hideScrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -84,7 +87,7 @@ h1{
 .customScrollbar::-webkit-scrollbar-thumb {
 
   background: lightblue;
-  border-radius: 5rem;
+  border-radius: 3rem;
 
 }
 
