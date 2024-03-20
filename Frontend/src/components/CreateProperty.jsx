@@ -192,7 +192,7 @@ export default function CreateProperties() {
           </label>
           {previews.length > 0 && (
             <div
-              className={`flex ${previews.length === 1 && "justify-center"} items-center  gap-4 my-4 w-[40rem] h-80  mb-10 rounded-xl overflow-x-auto scroll-smooth customScrollbar `}
+              className={`flex ${previews.length === 1 && "justify-center"} items-center  gap-4 my-4 w-[20rem] lg:w-[40rem] h-80  mb-10 rounded-xl overflow-x-auto scroll-smooth customScrollbar `}
             >
               {previews.map((preview, index) => (
                 <div className="relative shrink-0 bg-cover" key={index}>
@@ -368,7 +368,7 @@ export default function CreateProperties() {
             </div>
           </div>
           <button
-            className="basicButton bg-purple-500 lg:w-1/2 mb-20"
+            className="basicButton bg-purple-500 lg:w-1/2 mb-20 hover:bg-purple-700"
             onClick={(e) => handleSubmit(e)}
           >
             Save
