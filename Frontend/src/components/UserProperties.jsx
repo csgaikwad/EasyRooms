@@ -79,7 +79,7 @@ export default function UserProperties() {
             {/* <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p> */}
           </div>
           <div
-            className="hidden lg:block"
+            className="hidden sm:block"
             onClick={() => {
               navigate("/property/" + property._id);
             }}
