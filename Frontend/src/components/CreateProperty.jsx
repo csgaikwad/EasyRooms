@@ -343,7 +343,7 @@ export default function CreateProperties() {
                   checked={radio}
                   onChange={handleCheckboxChange}
                 />
-                <span>Radio</span>
+                <span>Electricity</span>
               </label>
               <label className="border-2 border-gray-400 mt-2 p-4 flex rounded-2xl gap-2 items-center cursor-pointer text-gray-600 hover:bg-gray-200">
                 <input
