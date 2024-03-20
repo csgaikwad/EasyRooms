@@ -15,7 +15,7 @@ export default function Profile() {
       <div className="flex flex-col lg:flex-row items-center justify-center gap-4 pt-2 pb-7">
         {user.isOwner && (
           <div
-            className=" lg:flex px-8 pr-4 gap-3 my-2 cursor-pointer bg-purple-500 hover:bg-purple-700 rounded-full h-14 max-w-72  items-center justify-around text-white text-xl"
+            className=" lg:flex px-8 pr-4 gap-3 my-2 cursor-pointer bg-purple-500 hover:bg-purple-700 rounded-full min-h-14 max-w-72  items-center justify-around text-white text-xl"
             onClick={() => {
               navigate("/property");
             }}
