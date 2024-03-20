@@ -52,7 +52,8 @@ export default function UserProfile() {
           <div
             className="border-b-2 text-xl font-serif"
             onClick={() => {
-              navigate("/home");
+              navigate("/");
+              showDivOnEvent();
             }}
           >
             Home
@@ -61,6 +62,7 @@ export default function UserProfile() {
             className="border-b-2 text-xl font-serif"
             onClick={() => {
               navigate("/login");
+              showDivOnEvent();
             }}
           >
             Login
@@ -69,6 +71,7 @@ export default function UserProfile() {
             className=" text-xl font-serif"
             onClick={() => {
               navigate("/profile");
+              showDivOnEvent();
             }}
           >
             Profile
