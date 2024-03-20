@@ -39,11 +39,11 @@ export default function UserProperties() {
   console.log("userproperties: ", userProperties);
   console.log("user: ", user);
   return (
-    <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-4  my-4 justify-items-center p-4 ">
+    <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-8  my-4 justify-items-center p-4 ">
       {userProperties.map((property) => (
         <div
           key={property._id}
-          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer size-full pb-2 "
+          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer size-full pb-4 "
         >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
