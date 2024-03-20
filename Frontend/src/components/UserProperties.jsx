@@ -79,13 +79,13 @@ export default function UserProperties() {
             {/* <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p> */}
           </div>
           <div
-            className="hidden sm:flex w-full mt-2 items-center justify-center "
+            className="hidden sm:flex w-full mt-2 items-center justify-center text-xl bg-red-500 opacity-50 hover:opacity-100 transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer "
             onClick={() => {
               navigate("/property/" + property._id);
             }}
           >Edit
             <img
-              className="  m-4 size-10 bg-red-500 opacity-50 hover:opacity-100 transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1"
+              className=" border-2 border-white m-4 size-10    rounded-full p-1"
               src="/pencil.svg"
               alt="edit"
             />
