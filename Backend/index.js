@@ -127,6 +127,7 @@ app.get("/me", async (req, res) => {
     }
 
     const ResUserDoc = {
+      isAuthenticated: true,
       id: foundUser._id,
       userEmail: foundUser.userEmail,
       username: foundUser.username,
