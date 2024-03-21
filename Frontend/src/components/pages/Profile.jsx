@@ -21,7 +21,7 @@ export default function Profile() {
             }}
           >
             <h1 className="cursor-pointer">Add New Property</h1>
-            <div className="size-10 p-1 flex items-center hover:p-0 border-2 rounded-full transition-all duration-200">
+            <div className="size-10 p-1 flex items-center  border-2 rounded-full ">
               <img src="/plus.svg" alt="Add New Property" />
             </div>
           </div>
