@@ -35,7 +35,7 @@ export default function App() {
 
   const pageVariants = {
     initial: {
-      opacity: 0,
+      opacity: 1,
       x: "-10vw",
     },
     animate: {
