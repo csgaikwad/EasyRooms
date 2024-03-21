@@ -35,11 +35,7 @@ export default function App() {
 
   const pageVariants = {
     initial: {
-<<<<<<< HEAD
-      opacity: 1,
-=======
       opacity: 0,
->>>>>>> aa656e2e5b21621435fa66c2e17e08f69c88d9f4
       x: "-10vw",
     },
     animate: {
@@ -77,20 +73,12 @@ export default function App() {
                   animate={{
                     opacity: 1,
                     scale: 1,
-<<<<<<< HEAD
-                    transition: { duration: 1.5 },
-=======
                     transition: { duration: 2 },
->>>>>>> aa656e2e5b21621435fa66c2e17e08f69c88d9f4
                   }}
                   exit={{
                     opacity: 0,
                     x: "50vw",
-<<<<<<< HEAD
-                    transition: { duration: 1 },
-=======
                     transition: { duration: 2 },
->>>>>>> aa656e2e5b21621435fa66c2e17e08f69c88d9f4
                   }}
                 >
                   <Home />
