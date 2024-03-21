@@ -1,47 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValueLoadable } from "recoil";
 import { UserAtom } from "../atoms/UserAtom";
 import { useNavigate } from "react-router-dom";
 import CreateProperties from "../CreateProperty";
 
 export function Property() {
-  const user = useRecoilValue(UserAtom);
-  const [loading, setLoading] = useState(true);
+  const userDataLoadable = useRecoilValueLoadable(UserAtom);
   const [userAuth, setUserAuth] = useState(false);
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    setUserAuth(user.isOwner);
-  }, [user, user.isOwner]);
-
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    if (!loading && !user.isOwner) {
-      setTimeout(() => {
-        alert("Try Logging in again");
-        // navigate("/login");
-      }, 2000);
+    if (userDataLoadable.state === "hasValue") {
+      setUserAuth(userDataLoadable.contents.isAuthenticated || false);
     }
-  }, [loading]);
-
-  useEffect(() => {
-    if (!loading) {
-      if (!user.isOwner) {
-        alert("Not an Owner bye bye ");
-        navigate("/profile");
-      } else {
-        console.log("Not auth");
-      }
-    }
-  }, [user, loading]);
+  }, [userDataLoadable]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [user.isAuthenticated, user]);
+  }, []);
 
   return (
     <div className="h-auto">
@@ -51,22 +27,17 @@ export function Property() {
             <div className="pt-8">
               <h1 className="text-xl font-medium">
                 Add your new properties here{" "}
-                <span className=" cursor-default font-bold text-xl text-purple-500 underline capitalize">
-                  {user.username}!
+                <span className="cursor-default font-bold text-xl text-purple-500 underline capitalize">
+                  {userDataLoadable.contents.username}!
                 </span>
               </h1>
             </div>
             <CreateProperties />
           </div>
-        ) : loading ? (
-          <div className="h-screen flex items-center text-2xl text-pink-500">
-            <h1>Loading... </h1>
-            <img src="/loader.svg" />
-          </div>
         ) : (
           <div className="h-screen flex items-center">
-            <h1 className=" text-2xl text-red-500 ">
-              Unauthorized Access Try Loggin In...
+            <h1 className="text-2xl text-red-500">
+              Unauthorized access. Please log in as an owner or try refreshing the page.
             </h1>
           </div>
         )}
