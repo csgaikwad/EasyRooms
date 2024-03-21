@@ -9,8 +9,6 @@ export default function UserTile() {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(false);
 
-  console.log(userDataLoadable.contents.isAuthenticated)
-
   useEffect(() => {
     if (userDataLoadable.state === "hasValue") {
       const userData = userDataLoadable.contents;
