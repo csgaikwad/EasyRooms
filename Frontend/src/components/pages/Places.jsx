@@ -67,7 +67,10 @@ export default function Places() {
           <div className="flex flex-col lg:grid grid-cols-2 gap-2">
             <div>
               <div className="md:text-[1.4rem] font-semibold font-sans text-black">
-                <a href={`https://www.google.com/maps/search/${selectedProperty.location}`} target="_blank">
+                <a
+                  href={`https://www.google.com/maps/search/${selectedProperty.location}`}
+                  target="_blank"
+                >
                   <img
                     className="size-6 inline-block mb-2 mr-1"
                     src="/LocationPin.svg"
