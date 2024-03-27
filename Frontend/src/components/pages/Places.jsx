@@ -67,12 +67,17 @@ export default function Places() {
           <div className="flex flex-col lg:grid grid-cols-2 gap-2">
             <div>
               <div className="md:text-[1.4rem] font-semibold font-sans text-black">
-                <img
-                  className="size-6 inline-block mb-2 mr-1"
-                  src="/LocationPin.svg"
-                  alt="Location"
-                />
-                <p className="inline">{selectedProperty.location}</p>
+                <a
+                  href={`https://www.google.com/maps/search/${selectedProperty.location}`}
+                  target="_blank"
+                >
+                  <img
+                    className="size-6 inline-block mb-2 mr-1"
+                    src="/LocationPin.svg"
+                    alt="Location"
+                  />
+                  <p className="inline">{selectedProperty.location}</p>
+                </a>
               </div>
               <div className="md:text-[1.1rem] text-gray-500 px-2 py-4">
                 <p>{selectedProperty.details}</p>
@@ -149,16 +154,27 @@ export default function Places() {
               </div>
             </div>
             <div className="bg-blue-100 rounded-xl hidden lg:flex items-center justify-center ">
-              <BookingWidget price={selectedProperty.price} numberOfGuests={selectedProperty.numberOfGuests} />
+              <BookingWidget
+                price={selectedProperty.price}
+                numberOfGuests={selectedProperty.numberOfGuests}
+              />
             </div>
           </div>
-          <div ref={photosRef} className=" flex flex-col gap-4 my-10 items-center  ">
+          <div
+            ref={photosRef}
+            className=" flex flex-col gap-4 my-10 items-center  "
+          >
             <h1 className="text-xl lg:text-[2.4rem] font-semibold font-serif text-gray-600 border-b-4 border-gray-500 items-start flex  ">
-              <p className="pt-1 px-2">*</p> All the Photos     <p className="pt-1 px-2">*</p>
+              <p className="pt-1 px-2">*</p> All the Photos{" "}
+              <p className="pt-1 px-2">*</p>
             </h1>
             {selectedProperty.propertyPhotos.map((photo, index) => {
               return (
-                <img className="rounded-xl lg:h-[40rem] lg:w-[60rem]" key={index} src={photo} />
+                <img
+                  className="rounded-xl lg:h-[40rem] lg:w-[60rem]"
+                  key={index}
+                  src={photo}
+                />
               );
             })}
           </div>

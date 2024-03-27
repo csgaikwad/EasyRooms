@@ -142,6 +142,20 @@ export default function App() {
               }
             />
             <Route
+              path="/property/:id"
+              element={
+                <motion.div
+                  key="property"
+                  variants={pageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                >
+                  <Property />
+                </motion.div>
+              }
+            />
+            <Route
               path="/places/:id"
               element={
                 <motion.div
