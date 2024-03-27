@@ -69,7 +69,7 @@ export default function App() {
               element={
                 <motion.div
                   key="home"
-                  initial={{ opacity: 0, scale: 1}}
+                  initial={{ sca: 0, scale: 1}}
                   animate={{
                     opacity: 1,
                     scale: 1,
@@ -129,6 +129,20 @@ export default function App() {
             />
             <Route
               path="/property"
+              element={
+                <motion.div
+                  key="property"
+                  variants={pageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                >
+                  <Property />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/property/:id"
               element={
                 <motion.div
                   key="property"
