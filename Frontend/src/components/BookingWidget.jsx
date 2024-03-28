@@ -203,11 +203,7 @@ export default function BookingWidget(props) {
       >
         {loading ? "Booking..." : "Book Now"}
       </button>
-      {orderId && (
-        <div className="mt-4">
-          <p>Order ID: {orderId}</p>
-        </div>
-      )}{" "}
+
     </div>
   );
 }
