@@ -77,7 +77,7 @@ export default function Places() {
                     src="/LocationPin.svg"
                     alt="Location"
                   />
-                  <p className="inline">{selectedProperty.location}</p>
+                  <p className="inline">{selectedProperty.location} (Click here to see the location)</p>
                 </a>
               </div>
               <div className="md:text-[1.1rem] text-gray-500 px-2 py-4">
