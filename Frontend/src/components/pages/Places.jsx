@@ -60,6 +60,7 @@ export default function Places() {
                 key={index}
                 src={photo}
                 alt={`Property Image ${index}`}
+                onClick={scrollToPhotos}
                 className="hidden lg:inline object-cover rounded-xl h-full w-full transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer "
               />
             ))}
@@ -153,7 +154,7 @@ export default function Places() {
                 </div>
               </div>
             </div>
-            <div className="bg-blue-100 rounded-xl hidden lg:flex items-center justify-center ">
+            <div className="bg-blue-100 rounded-xl  lg:flex items-center justify-center ">
               <BookingWidget
                 price={selectedProperty.price}
                 numberOfGuests={selectedProperty.numberOfGuests}

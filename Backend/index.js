@@ -13,6 +13,11 @@ import User from "./models/User.js";
 import PropertyDetails from "./models/Property.js";
 import { v2 as cloudinary } from 'cloudinary';
 import fileUpload from "express-fileupload";
+import Razorpay from "razorpay";
+import crypto from 'crypto';
+
+
+
 
 dotenv.config();
 
@@ -36,6 +41,15 @@ app.use(
     credentials: true,
   })
 );
+
+
+
+const razorpay = new Razorpay({
+  key_id: process.env.RazorpayId,
+  key_secret: process.env.RazorpaySecret,
+});
+
+
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -353,6 +367,56 @@ app.put("/property/:propertyId", async (req, res) => {
 
 
 
+
+// Route to book a property and process payment
+app.post("/book", async (req, res) => {
+  try {
+    // const { userId, propertyId, startDate, endDate, totalAmount } = req.body;
+    const { totalAmount } = req.body;
+
+    const order = await razorpay.orders.create({
+      amount: totalAmount * 100,
+      currency: "INR",
+      receipt: uuidv4(),
+      payment_capture: 1,
+    });
+
+    // Return the Razorpay order ID to the client
+    res.json({ orderId: order.id, key: razorpay.key_id, amount:totalAmount*100 });
+  } catch (error) {
+    console.error("Error processing payment:", error);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+// Route to handle payment verification
+app.use("/verify", (req, res) => {
+
+
+  let body = req.body.response.razorpay_order_id + "|" + req.body.response.razorpay_payment_id;
+
+  var expectedSignature = crypto.createHmac("sha256", process.env.RazorpaySecret).update(body.toString()).digest('hex');
+
+
+  if (expectedSignature === req.body.response.razorpay_signature) {
+
+      res.status(200).json("Signature Valid ")
+  } else {
+
+      res.status(500).json("Signature Invalid ")
+  }
+
+
+})
 
 
 
