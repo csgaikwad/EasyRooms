@@ -181,7 +181,7 @@ export default function BookingWidget(props) {
             Number of Guests
           </label>
           <input
-            className="border border-gray-300 rounded-md p-2 cursor-pointer w-52 sm:w-56 "
+            className="border border-gray-300 rounded-md p-2 cursor-pointer w-[14rem] "
             min={1}
             max={props.numberOfGuests}
             type="number"
