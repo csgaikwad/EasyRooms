@@ -43,7 +43,7 @@ export default function Places() {
       {selectedProperty ? (
         <>
           <div>
-            <h1 className="md:text-[1.8rem] pl-2 font-semibold font-sans text-black cursor-text">
+            <h1 className="text-[1.2rem] sm:text-[1.8rem] pl-2 font-semibold font-sans text-black cursor-text">
               {selectedProperty.title}
             </h1>
           </div>
@@ -67,7 +67,7 @@ export default function Places() {
           </div>
           <div className="flex flex-col lg:grid grid-cols-2 gap-2">
             <div>
-              <div className="md:text-[1.4rem] font-semibold font-sans text-black">
+              <div className="sm:text-[1.4rem] font-semibold font-sans text-black">
                 <a
                   href={`https://www.google.com/maps/search/${selectedProperty.location}`}
                   target="_blank"
