@@ -90,7 +90,7 @@ export default function Places() {
                   <img
                     src="/pet.svg"
                     alt="pet"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg  ">Pets allowed</h1>
                 </div>
@@ -100,7 +100,7 @@ export default function Places() {
                   <img
                     src="/parking.svg"
                     alt="parking"
-                    className="  size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="  size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg  ">
                     Parking available
@@ -112,7 +112,7 @@ export default function Places() {
                   <img
                     src="/wifi.svg"
                     alt="wifi"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg ">
                     WiFi available
@@ -124,7 +124,7 @@ export default function Places() {
                   <img
                     src="/tv.svg"
                     alt="tv"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg ">TV available</h1>
                 </div>
@@ -134,7 +134,7 @@ export default function Places() {
                   <img
                     src="/entrance.svg"
                     alt="entrance"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg ">
                     Private entrance{" "}
@@ -146,7 +146,7 @@ export default function Places() {
                   <img
                     src="/radio.svg"
                     alt="radio"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg ">
                     Electricity available
