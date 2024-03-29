@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Terms() {
   return (
-    <div className='h-auto my-4 px-4 font-serif text-lg w-screen '><pre>Terms and Conditions:
+    <div className='h-auto my-4 px-4 font-serif text-lg w-screen '>Terms and Conditions:
 
     Last updated on Mar 29 2024
     
@@ -35,6 +35,8 @@ export default function Terms() {
     I understand that the content provided is not legal advice, and by using it I freely and voluntarily agree to this disclaimer.
     
     © 2017-2024 · 
-    Terms of use · Privacy policy · Support</pre></div>
+    Terms of use · Privacy policy · Support
+    
+    </div>
   )
 }
