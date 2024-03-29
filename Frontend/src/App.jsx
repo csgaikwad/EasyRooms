@@ -70,9 +70,12 @@ export default function App() {
               element={
                 <motion.div
                   key="home"
-                  initial={{ opacity: 0, scale: 1 }}
+                  initial={{
+                    // opacity: 0,
+                    scale: 1,
+                  }}
                   animate={{
-                    opacity: 1,
+                    // opacity: 1,
                     scale: 1,
                     transition: { duration: 2 },
                   }}
