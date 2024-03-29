@@ -1,9 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
   var currentYear = new Date().getFullYear();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div className="bg-gray-100 h-auto rounded-md flex flex-col items-center justify-end pb-4 pl-4 z-0">
       <h1 className="m-4 text-xl font-bold">- Contact Me -</h1>
