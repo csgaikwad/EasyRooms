@@ -174,7 +174,7 @@ export default function App() {
               path="/terms"
               element={
                 <motion.div
-                  key="places"
+                  key="terms"
                   variants={pageVariants}
                   initial="initial"
                   animate="animate"
