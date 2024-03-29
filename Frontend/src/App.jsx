@@ -170,7 +170,7 @@ export default function App() {
                 </motion.div>
               }
             />
-            <Route
+            {/* <Route
               path="/terms"
               element={
                 <motion.div
@@ -183,7 +183,7 @@ export default function App() {
                   <Terms />
                 </motion.div>
               }
-            />
+            /> */}
           </Routes>
         </AnimatePresence>
       </BrowserRouter>
