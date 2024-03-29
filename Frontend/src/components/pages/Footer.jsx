@@ -63,7 +63,7 @@ export default function Footer() {
           onClick={() => {
             navigate("/terms");
           }}
-          className="text-blue-500"
+          className="text-blue-500 cursor-pointer"
         >
           Terms and conditions
         </h1>

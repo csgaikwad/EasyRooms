@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Terms() {
   return (
-    <div><pre>Terms and Conditions:
+    <div className='h-auto my-4'><pre>Terms and Conditions:
 
     Last updated on Mar 29 2024
     
