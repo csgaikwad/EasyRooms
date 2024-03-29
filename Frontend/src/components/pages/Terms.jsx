@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function Terms() {
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[]);
   return (
     <div className='h-auto  font-mono text-md flex justify-center'>
       <pre className='whitespace-pre-wrap w-[50rem] my-8 mb-14 border-2 p-8 rounded-xl'>{`
