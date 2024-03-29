@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 
 export default function BookingWidget(props) {
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
   const [numGuests, setNumGuests] = useState(1);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [orderId, setOrderId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const today = new Date();
-    const threeMonthsLater = new Date(
-      today.getTime() + 90 * 24 * 60 * 60 * 1000
-    );
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    // const threeMonthsLater = new Date(
+    //   today.getTime() + 90 * 24 * 60 * 60 * 1000
+    // );
 
     setCheckIn(today);
-    setCheckOut(today);
+    setCheckOut(tomorrow);
   }, []);
 
   const handleCheckInChange = (date) => {
@@ -47,6 +52,70 @@ export default function BookingWidget(props) {
     }
   };
 
+  const handleBook = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post("/book", {
+        // checkIn: checkIn.toISOString(),
+        // checkOut: checkOut.toISOString(),
+        // numGuests: numGuests,
+        // propertyId: props.propertyId,
+        totalAmount: totalAmount,
+      });
+      setOrderId(response.data.orderId);
+      // console.log(response);
+
+      var options = {
+        key: response.data.key,
+        amount: response.data.amount,
+        currency: "INR",
+        name: "Air Corp",
+        description:
+          "Stay like a local, anywhere you go - Air Corp, where every stay is a new adventure.",
+        image: "/logo2.svg",
+        order_id: orderId,
+        handler: function (response) {
+          console.log(response.razorpay_payment_id);
+          console.log(response.razorpay_order_id);
+          console.log(response.razorpay_signature);
+
+          axios.post("/verify", { response: response }).then((res) => {
+            if (res.data) {
+              alert("ready to navigate");
+            }
+          });
+        },
+
+        prefill: {
+          name: "Gaurav Kumar",
+          email: "gaurav.kumar@example.com",
+          contact: "9999999999",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#EF4444",
+        },
+        modal: {
+          width: "1000px",
+          height: "600px",
+        },
+      };
+
+      var rzp1 = new window.Razorpay(options);
+      rzp1.on("payment.failed", function (response) {
+        alert(response.error.code);
+        console.log(response.error.code);
+      });
+
+      rzp1.open();
+    } catch (error) {
+      console.error("Error booking:", error);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
     // Calculate total amount based on check-in, check-out, number of guests, and price
     if (checkIn && checkOut && numGuests && props.price) {
@@ -70,7 +139,7 @@ export default function BookingWidget(props) {
         </span>{" "}
       </h1>
       <div className="mb-4 w-full">
-        <div className="flex flex-col my-4">
+        <div className="flex flex-col my-4 items-center">
           <label
             htmlFor="check-in"
             className="text-lg font-semibold text-gray-700 my-1"
@@ -87,7 +156,7 @@ export default function BookingWidget(props) {
             maxDate={new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)}
           />
         </div>
-        <div className="flex flex-col my-4">
+        <div className="flex flex-col my-4 items-center">
           <label
             htmlFor="check-out"
             className="text-lg font-semibold text-gray-700 my-1"
@@ -104,7 +173,7 @@ export default function BookingWidget(props) {
             maxDate={new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)}
           />
         </div>
-        <div className="flex flex-col my-4">
+        <div className="flex flex-col my-4 items-center">
           <label
             htmlFor="num-guests"
             className="text-lg font-semibold text-gray-700 my-1"
@@ -112,7 +181,7 @@ export default function BookingWidget(props) {
             Number of Guests
           </label>
           <input
-            className="border border-gray-300 rounded-md p-2 cursor-pointer "
+            className="border border-gray-300 rounded-md p-2 cursor-pointer w-[14rem] "
             min={1}
             max={props.numberOfGuests}
             type="number"
@@ -122,12 +191,19 @@ export default function BookingWidget(props) {
             placeholder="Number of Guests"
           />
         </div>
-        <div className="flex gap-2 text-2xl font-semibold text-gray-700 pl-3 m-1">
-          <h1 className="">Total Amount: </h1>
-          <h2>$ {totalAmount}</h2>
-        </div>
+
+        <h1 className="flex justify-center text-2xl font-semibold text-gray-700 pl-3 m-1">
+          Total Amount: $ {totalAmount}
+        </h1>
       </div>
-      <button className="basicButton bg-red-500">Book</button>
+      <button
+        className="basicButton bg-red-500"
+        onClick={handleBook}
+        disabled={loading || !checkIn || !checkOut || numGuests < 1}
+      >
+        {loading ? "Booking..." : "Book Now"}
+      </button>
+
     </div>
   );
 }
