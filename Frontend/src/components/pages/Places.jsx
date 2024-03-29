@@ -43,7 +43,7 @@ export default function Places() {
       {selectedProperty ? (
         <>
           <div>
-            <h1 className="md:text-[1.8rem] pl-2 font-semibold font-sans text-black cursor-text">
+            <h1 className="text-[1.2rem] sm:text-[1.8rem] pl-2 font-semibold font-sans text-black cursor-text">
               {selectedProperty.title}
             </h1>
           </div>
@@ -67,7 +67,7 @@ export default function Places() {
           </div>
           <div className="flex flex-col lg:grid grid-cols-2 gap-2">
             <div>
-              <div className="md:text-[1.4rem] font-semibold font-sans text-black">
+              <div className="sm:text-[1.4rem] font-semibold font-sans text-black">
                 <a
                   href={`https://www.google.com/maps/search/${selectedProperty.location}`}
                   target="_blank"
@@ -77,7 +77,7 @@ export default function Places() {
                     src="/LocationPin.svg"
                     alt="Location"
                   />
-                  <p className="inline">{selectedProperty.location}</p>
+                  <p className="inline">{selectedProperty.location} <span className="text-gray-500 text-md">(Click here to see the location)</span></p>
                 </a>
               </div>
               <div className="md:text-[1.1rem] text-gray-500 px-2 py-4">
@@ -90,7 +90,7 @@ export default function Places() {
                   <img
                     src="/pet.svg"
                     alt="pet"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg  ">Pets allowed</h1>
                 </div>
@@ -100,7 +100,7 @@ export default function Places() {
                   <img
                     src="/parking.svg"
                     alt="parking"
-                    className="  size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="  size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg  ">
                     Parking available
@@ -112,7 +112,7 @@ export default function Places() {
                   <img
                     src="/wifi.svg"
                     alt="wifi"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg ">
                     WiFi available
@@ -124,7 +124,7 @@ export default function Places() {
                   <img
                     src="/tv.svg"
                     alt="tv"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg ">TV available</h1>
                 </div>
@@ -134,7 +134,7 @@ export default function Places() {
                   <img
                     src="/entrance.svg"
                     alt="entrance"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg ">
                     Private entrance{" "}
@@ -146,7 +146,7 @@ export default function Places() {
                   <img
                     src="/radio.svg"
                     alt="radio"
-                    className="size-12 transition-transform duration-300 transform hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
+                    className="size-12 transition-transform duration-300 transform md:hover:scale-125 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
                   />
                   <h1 className="text-gray-700 mb-8 text-lg ">
                     Electricity available

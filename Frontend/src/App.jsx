@@ -13,6 +13,7 @@ import { UserAtom } from "./components/atoms/UserAtom";
 import axios from "axios";
 import { Property } from "./components/pages/Property";
 import Places from "./components/pages/Places";
+import Terms from "./components/pages/Terms";
 
 // axios.defaults.baseURL = "https://airbnd-airbnd.koyeb.app/";
 // axios.defaults.baseURL = "https://airbnd-qs5d.onrender.com";
@@ -69,7 +70,7 @@ export default function App() {
               element={
                 <motion.div
                   key="home"
-                  initial={{ sca: 0, scale: 1}}
+                  initial={{ opacity: 0, scale: 1 }}
                   animate={{
                     opacity: 1,
                     scale: 1,
@@ -169,10 +170,24 @@ export default function App() {
                 </motion.div>
               }
             />
+            <Route
+              path="/terms"
+              element={
+                <motion.div
+                  key="terms"
+                  variants={pageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                >
+                  <Terms />
+                </motion.div>
+              }
+            />
           </Routes>
         </AnimatePresence>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }
