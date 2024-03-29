@@ -3,7 +3,7 @@ import React from 'react';
 export default function Terms() {
   return (
     <div className='h-auto my-4 px-4 font-serif text-lg'>
-      <pre>{`
+      <pre className='whitespace-nowrap'>{`
 Terms and Conditions:
 
 Last updated on Mar 29 2024
