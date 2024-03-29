@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
   var currentYear = new Date().getFullYear();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className="bg-gray-100 h-auto rounded-md flex flex-col items-center justify-end pb-4 pl-4 z-0">
       <h1 className="m-4 text-xl font-bold">- Contact Me -</h1>
@@ -59,14 +59,14 @@ export default function Footer() {
       </div>
       <div className="flex flex-col items-center">
         <h1>&copy; {currentYear} Airbnd, Inc.</h1>
-        {/* <h1
+        <h1
           onClick={() => {
             navigate("/terms");
           }}
           className="text-blue-500"
         >
           Terms and conditions
-        </h1> */}
+        </h1>
         <h1 className="text-gray-500 text-sm pt-3">
           {" "}
           *This is a project for studying MERN Stack
