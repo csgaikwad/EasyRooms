@@ -179,7 +179,7 @@ export default function CreateProperties() {
           <label className=" lg:w-96 bg-transparent border-2 shadow-md text-black p-4 lg:p-10 rounded-xl cursor-pointer hover:bg-gray-100 flex items-center justify-center gap-4 my-10">
             Choose Photos
             <img
-              className="bg-purple-400 rounded-full size-10"
+              className="bg-purple-400 rounded-full size-10 "
               src="/plus.svg"
             />
             <input

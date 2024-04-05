@@ -54,7 +54,7 @@ export default function Searchbar() {
             Check-Out
           </div>
           <div className="flex w-[25%] items-center justify-between ">
-            <h1 className="cursor-pointer searching text-md hoverable-item w-14 grow p-1 text-center font-serif">
+            <h1 className="cursor-pointer searching text-md hoverable-item w-14 grow p-1 text-center font-serif ">
               Who
             </h1>
             <div className={`${user.isOwner ? "bg-purple-500" : "bg-red-500"} rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer z-10 ` } >
