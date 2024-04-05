@@ -45,7 +45,7 @@ export default function App() {
       transition: {
         type: "spring",
         stiffness: 150,
-        damping: 11,
+        damping: 13,
       },
     },
     exit: {
@@ -70,7 +70,7 @@ export default function App() {
               element={
                 <motion.div
                   key="home"
-                  initial={{ opacity: 0, scale: 1 }}
+                  initial={{ opacity: 1, scale: 1 }}
                   animate={{
                     opacity: 1,
                     scale: 1,
