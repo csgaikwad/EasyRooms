@@ -5,8 +5,8 @@ export default function Terms() {
         window.scrollTo(0,0)
     },[]);
   return (
-    <div className='h-auto  font-mono text-md flex justify-center'>
-      <pre className='whitespace-pre-wrap w-[50rem] my-8 mb-14 border-2 p-8 rounded-xl'>{`
+    <div className='h-auto my-4 px-4 font-serif text-lg'>
+      <pre className='whitespace-nowrap'>{`
 Terms and Conditions:
 
 Last updated on Mar 29 2024
