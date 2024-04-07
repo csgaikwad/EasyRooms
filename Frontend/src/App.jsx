@@ -72,11 +72,11 @@ export default function App() {
                 animate={{
                   opacity: 1,
                   scale: 1,
-                  transition: { duration: 1 },
+                  transition: { duration: 0.5 },
                 }}
                 exit={{
                   x: "50vw",
-                  transition: { duration: 1 },
+                  transition: { duration: 0.5 },
                 }}
               >
                 <Home />
