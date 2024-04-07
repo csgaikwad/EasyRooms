@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { UserAtom } from "../atoms/UserAtom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const user = useRecoilValue(UserAtom);
@@ -39,13 +40,36 @@ export default function Home() {
     setShuffledProperties(shuffled);
   };
 
+  const variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const item = {
+    hidden: {
+      opacity: 0,
+      x: -50,
+    },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen h-auto  xl:px-5 mb-20">
       {properties.length === 0 ? (
         <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-7  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-11">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div className="hidden lg:block"
-            key={`skeleton-lg-${index}`}>
+            <div className="hidden lg:block" key={`skeleton-lg-${index}`}>
               <Skeleton
                 baseColor="#c8cddb"
                 highlightColor="white"
@@ -57,8 +81,7 @@ export default function Home() {
             </div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <div className="hidden md:block"
-            key={`skeleton-md-${index}`}>
+            <div className="hidden md:block" key={`skeleton-md-${index}`}>
               <Skeleton
                 baseColor="#c8cddb"
                 highlightColor="white"
@@ -70,8 +93,7 @@ export default function Home() {
             </div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <div className="block md:hidden"
-            key={`skeleton-sm-${index}`}>
+            <div className="block md:hidden" key={`skeleton-sm-${index}`}>
               <Skeleton
                 baseColor="#c8cddb"
                 highlightColor="white"
@@ -84,11 +106,17 @@ export default function Home() {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-4 m-4 sm:m-8 justify-items-center">
-          {shuffledProperties.map((property,index) => (
-            <div
-            key={property._id + index}
-            className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
+        <motion.div
+          variants={variants}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-4 m-4 sm:m-8 justify-items-center"
+        >
+          {shuffledProperties.map((property, index) => (
+            <motion.div
+              variants={item}
+              key={property._id + index}
+              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-300 transform hover:scale-105 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
@@ -128,9 +156,9 @@ export default function Home() {
                   /night
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );
