@@ -70,14 +70,14 @@ export default function Home() {
       style={{ overflowX: "hidden" }}
     >
       {properties.length === 0 ? (
-        <motion.div
+        <div
           variants={variants}
           initial="before"
           animate="after"
           className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-7  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-11"
         >
           {Array.from({ length: 3 }).map((_, index) => (
-            <motion.div
+            <div
               variants={item}
               className="hidden lg:block"
               key={`skeleton-lg-${index}`}
@@ -90,10 +90,10 @@ export default function Home() {
                 width={415}
                 borderRadius={15}
               />
-            </motion.div>
+            </div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <motion.div
+            <div
               variants={item}
               className="hidden md:block"
               key={`skeleton-md-${index}`}
@@ -106,10 +106,10 @@ export default function Home() {
                 width={415}
                 borderRadius={15}
               />
-            </motion.div>
+            </div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <motion.div
+            <div
               variants={item}
               className="block md:hidden"
               key={`skeleton-sm-${index}`}
@@ -122,9 +122,9 @@ export default function Home() {
                 width={300}
                 borderRadius={15}
               />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       ) : (
         <motion.div
           variants={variants}
