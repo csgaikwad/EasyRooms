@@ -15,9 +15,7 @@ export default function BookingWidget(props) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    // const threeMonthsLater = new Date(
-    //   today.getTime() + 90 * 24 * 60 * 60 * 1000
-    // );
+
 
     setCheckIn(today);
     setCheckOut(tomorrow);
@@ -130,15 +128,15 @@ export default function BookingWidget(props) {
   return (
     <div className="flex flex-col justify-center items-center py-10">
       <h1 className=" text-xl lg:text-[2rem] font-sans font-semibold mb-4 ">
-        <span className=" text-yellow-500">🎉 10% off 🎉 </span> <br />
+        <span className=" text-yellow-500">🎉10% off🎉 </span> <br />
         <br />
-        <div className="font-mono inline-block">
-          ${" "}
-          <span className="line-through text-gray-800">
-            {parseInt(props.price)}
-          </span>
-          <span className="">{parseInt(props.price - props.price * 0.1)}</span>
-        </div>
+        <br />
+        <span className="font-mono inline-block">$ </span>
+        <span className="line-through text-gray-800">
+          {"  "}
+          {parseInt(props.price)}
+        </span>
+        <span className="">{parseInt(props.price - props.price * 0.1)}</span>
         <span className="text-gray-700 lg:text-2xl font-normal font-serif">
           per night
         </span>
