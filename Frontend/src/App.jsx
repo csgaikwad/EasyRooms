@@ -46,7 +46,6 @@ export default function App() {
       },
     },
     exit: {
-      // scale: 0.5,
       x: "-100vw",
       transition: {
         duration: 0.4,
@@ -65,8 +64,8 @@ export default function App() {
               <motion.div
                 key="home"
                 variants={pageVariants}
-                // initial="initial"
-                // animate="animate"
+                initial="initial"
+                animate="animate"
                 exit="exit"
               >
                 <Home />
