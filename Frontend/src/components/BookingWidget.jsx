@@ -16,7 +16,6 @@ export default function BookingWidget(props) {
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-
     setCheckIn(today);
     setCheckOut(tomorrow);
   }, []);
@@ -128,18 +127,22 @@ export default function BookingWidget(props) {
   return (
     <div className="flex flex-col justify-center items-center py-10">
       <h1 className=" text-xl lg:text-[2rem] font-sans font-semibold mb-4 ">
-        <span className=" text-yellow-500">🎉10% off🎉 </span> <br />
+        <span className=" text-yellow-500 font-serif">🎉10% off🎉 </span> <br />
         <br />
         <br />
-        <span className="font-mono inline-block">$ </span>
-        <span className="line-through text-gray-800">
-          {"  "}
-          {parseInt(props.price)}
-        </span>
-        <span className="">{parseInt(props.price - props.price * 0.1)}</span>
-        <span className="text-gray-700 lg:text-2xl font-normal font-serif">
-          per night
-        </span>
+        <p className="line-through text-gray-800">
+          $ {parseInt(props.price)}{" "}
+          <span className="text-gray-700 lg:text-2xl font-normal font-serif">
+            per night
+          </span>
+        </p>
+        <br />
+        <p className="">
+          $ {parseInt(props.price - props.price * 0.1)}
+          <span className="text-gray-700 lg:text-2xl font-normal font-serif">
+            per night
+          </span>
+        </p>
       </h1>
       <div className="mb-4 w-full">
         <div className="flex flex-col my-4 items-center">
