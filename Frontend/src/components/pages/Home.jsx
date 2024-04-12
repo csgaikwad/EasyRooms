@@ -138,7 +138,7 @@ export default function Home() {
               variants={item}
               whileHover="hover"
               key={property._id + index}
-              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-300 transform hover:border-white hover:border-4 cursor-pointer"
+              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
