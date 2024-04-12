@@ -59,6 +59,12 @@ export default function Home() {
         duration: 0.1,
       },
     },
+    hover: {
+      scale: 1.1,
+      transition: {
+        duration: 0.1,
+      },
+    }
   };
 
   return (
@@ -129,8 +135,9 @@ export default function Home() {
           {shuffledProperties.map((property, index) => (
             <motion.div
               variants={item}
+              whileHover="hover"
               key={property._id + index}
-              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-300 transform hover:scale-110 hover:z-0  hover:border-white hover:border-4 cursor-pointer"
+              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-300 transform  hover:z-0  hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
