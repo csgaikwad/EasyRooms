@@ -41,9 +41,7 @@ export default function Home() {
   };
 
   const variants = {
-    hidden: { opacity: 0,
-      x: -100,
-     },
+    hidden: { opacity: 0, x: "-100vw" },
     show: {
       x: 0,
       opacity: 1,

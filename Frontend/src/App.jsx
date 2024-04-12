@@ -22,7 +22,7 @@ axios.defaults.withCredentials = true;
 
 export default function App() {
   const [user, setUser] = useRecoilState(UserAtom);
-  const location=useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     async function fetchDataOnLoad() {
@@ -38,20 +38,18 @@ export default function App() {
   const pageVariants = {
     initial: {
       x: "100vw",
-      scale: 0.5,
     },
     animate: {
-      scale: 1,
       x: 0,
       transition: {
-        duration: 0.5
+        duration: 0.5,
       },
     },
     exit: {
       scale: 0.5,
       x: "-100vw",
       transition: {
-        duration: 0.5
+        duration: 0.5,
       },
     },
   };
