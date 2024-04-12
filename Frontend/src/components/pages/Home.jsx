@@ -64,11 +64,20 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen h-auto  xl:px-5 mb-20">
+    <div className="min-h-screen h-auto  xl:px-5 mb-20 overflow-x-hidden">
       {properties.length === 0 ? (
-        <div className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-7  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-11">
+        <motion.div
+          variants={variants}
+          initial="hidden"
+          animate="show"
+          className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-7  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-11"
+        >
           {Array.from({ length: 3 }).map((_, index) => (
-            <div className="hidden lg:block" key={`skeleton-lg-${index}`}>
+            <motion.div
+              variants={item}
+              className="hidden lg:block"
+              key={`skeleton-lg-${index}`}
+            >
               <Skeleton
                 baseColor="#c8cddb"
                 highlightColor="white"
@@ -77,10 +86,14 @@ export default function Home() {
                 width={415}
                 borderRadius={15}
               />
-            </div>
+            </motion.div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <div className="hidden md:block" key={`skeleton-md-${index}`}>
+            <motion.div
+              variants={item}
+              className="hidden md:block"
+              key={`skeleton-md-${index}`}
+            >
               <Skeleton
                 baseColor="#c8cddb"
                 highlightColor="white"
@@ -89,10 +102,14 @@ export default function Home() {
                 width={415}
                 borderRadius={15}
               />
-            </div>
+            </motion.div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <div className="block md:hidden" key={`skeleton-sm-${index}`}>
+            <motion.div
+              variants={item}
+              className="block md:hidden"
+              key={`skeleton-sm-${index}`}
+            >
               <Skeleton
                 baseColor="#c8cddb"
                 highlightColor="white"
@@ -101,9 +118,9 @@ export default function Home() {
                 width={300}
                 borderRadius={15}
               />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : (
         <motion.div
           variants={variants}
