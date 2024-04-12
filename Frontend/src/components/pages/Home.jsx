@@ -44,14 +44,14 @@ export default function Home() {
     before: {},
     after: {
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.3,
       },
     },
   };
 
   const item = {
-    before: { opacity: 0},
-    after: { opacity: 1 },
+    before: { opacity: 0 ,x:"-10vw"},
+    after: { opacity: 1 ,x:0 },
   };
 
   return (
