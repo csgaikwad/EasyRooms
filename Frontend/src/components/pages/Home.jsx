@@ -44,7 +44,7 @@ export default function Home() {
     before: {},
     after: {
       transition: {
-        staggerChildren: 0.3,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -62,10 +62,7 @@ export default function Home() {
   };
 
   return (
-    <div
-      className="min-h-screen  h-auto  xl:px-5 mb-20 "
-      style={{ overflowX: "hidden" }}
-    >
+    <div className="min-h-screen  h-auto  xl:px-5 mb-20 ">
       {properties.length === 0 ? (
         <div
           variants={variants}
