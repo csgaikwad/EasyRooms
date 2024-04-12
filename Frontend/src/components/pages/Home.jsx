@@ -52,7 +52,7 @@ export default function Home() {
 
   const item = {
     before: {
-      x: "-50vw",
+      x: "-100vw",
     },
     after: {
       x: 0,
