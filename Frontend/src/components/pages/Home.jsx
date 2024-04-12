@@ -50,8 +50,8 @@ export default function Home() {
   };
 
   const item = {
-    before: { scale: 0.5 },
-    after: { scale: 1 },
+    before: { opacity: 0},
+    after: { opacity: 1 },
   };
 
   return (
@@ -110,15 +110,8 @@ export default function Home() {
           {shuffledProperties.map((property, index) => (
             <motion.div
               variants={item}
-              initial="before"
-              animate="after"
-              // whileHover={{ scale: 1.05 }}
               key={property._id + index}
-              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-125 hover:border-red-500 hover:border-4 cursor-pointer"
-              style={{
-                zIndex: 10,
-                transition: { duration: 0.1 },
-              }}
+              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-105 hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
