@@ -50,15 +50,8 @@ export default function Home() {
   };
 
   const item = {
-    before: {
-      scale: 0.5,
-    },
-    after: {
-      scale: 1,
-      transition: {
-        duration: 0.07,
-      },
-    },
+    before: { scale: 0.5 },
+    after: { scale: 1 },
   };
 
   return (
@@ -123,13 +116,8 @@ export default function Home() {
               key={property._id + index}
               className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-125 hover:border-red-500 hover:border-4 cursor-pointer"
               style={{
-                hover: {
-                  scale: 1.05,
-                  zIndex: 10,
-                  transition: {
-                    duration: 0.1,
-                  },
-                },
+                zIndex: 10,
+                transition: { duration: 0.1 },
               }}
             >
               <Carousel
