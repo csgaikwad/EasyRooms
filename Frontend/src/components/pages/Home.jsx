@@ -44,7 +44,7 @@ export default function Home() {
     before: {},
     after: {
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.2,
       },
     },
   };
@@ -118,7 +118,7 @@ export default function Home() {
             <motion.div
               variants={item}
               initial="before"
-              animate={"after"}
+              animate="after"
               whileHover={{ scale: 1.05 }}
               key={property._id + index}
               className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-125 hover:border-red-500 hover:border-4 cursor-pointer"
