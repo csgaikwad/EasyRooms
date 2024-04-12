@@ -50,8 +50,8 @@ export default function Home() {
   };
 
   const item = {
-    before: { opacity: 0 ,x:"-10vw"},
-    after: { opacity: 1 ,x:0 },
+    before: { opacity: 0, x: "-10vw" },
+    after: { opacity: 1, x: 0 },
   };
 
   return (
@@ -111,6 +111,7 @@ export default function Home() {
             <motion.div
               variants={item}
               key={property._id + index}
+              whileHover={{scale:1.05}}
               className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-105 hover:border-white hover:border-4 cursor-pointer"
             >
               <Carousel
