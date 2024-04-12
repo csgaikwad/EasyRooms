@@ -65,7 +65,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen w-screen h-auto  xl:px-5 mb-20 overflow-x-hidden">
+    <div className="min-h-screen  h-auto  xl:px-5 mb-20 overflow-x-hidden">
       {properties.length === 0 ? (
         <motion.div
           variants={variants}
@@ -127,7 +127,7 @@ export default function Home() {
           variants={variants}
           initial="before"
           animate="after"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-4 m-4 sm:m-8 justify-items-center"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4 m-4 sm:m-8 justify-items-center"
         >
           {shuffledProperties.map((property, index) => (
             <motion.div
