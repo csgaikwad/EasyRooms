@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/pages/navbar/Navbar";
 import Footer from "./components/pages/Footer";
@@ -22,6 +22,7 @@ axios.defaults.withCredentials = true;
 
 export default function App() {
   const [user, setUser] = useRecoilState(UserAtom);
+  const location=useLocation();
 
   useEffect(() => {
     async function fetchDataOnLoad() {
@@ -43,18 +44,14 @@ export default function App() {
       scale: 1,
       x: 0,
       transition: {
-        type: "spring",
-        stiffness: 150,
-        damping: 13,
+        duration: 0.5
       },
     },
     exit: {
       scale: 0.5,
       x: "-100vw",
       transition: {
-        type: "spring",
-        stiffness: 150,
-        damping: 10,
+        duration: 0.5
       },
     },
   };
@@ -63,7 +60,7 @@ export default function App() {
     <>
       <Navbar />
       <AnimatePresence mode="wait">
-        <Routes>
+        <Routes location={location} key={location.pathname}>
           <Route
             path="/"
             element={
