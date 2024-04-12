@@ -46,7 +46,7 @@ export default function App() {
       },
     },
     exit: {
-      scale: 0.5,
+      // scale: 0.5,
       x: "-100vw",
       transition: {
         duration: 0.5,
