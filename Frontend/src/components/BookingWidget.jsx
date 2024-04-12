@@ -129,11 +129,15 @@ export default function BookingWidget(props) {
 
   return (
     <div className="flex flex-col justify-center items-center py-10">
-      <h1 className=" text-xl lg:text-[2rem] font-sans font-semibold mb-4">
-        <span className="line-through text-gray-800">
-          ${parseInt(props.price + props.price * 0.1)}
-        </span>{" "}
-        <span className=""> ${parseInt(props.price)} </span>
+      <h1 className=" text-xl lg:text-[2rem] font-sans font-semibold mb-4 ">
+        <div className="font-serif">
+          <span className="line-through text-gray-800">
+            ${parseInt(props.price)}
+          </span>{" "}
+          <span className="">
+            ${parseInt(props.price - props.price * 0.1)}{" "}
+          </span>
+        </div>
         <span className="text-gray-700 lg:text-2xl font-normal font-serif">
           night
         </span>{" "}
@@ -203,7 +207,6 @@ export default function BookingWidget(props) {
       >
         {loading ? "Booking..." : "Book Now"}
       </button>
-
     </div>
   );
 }
