@@ -50,7 +50,7 @@ export default function Home() {
   };
 
   const item = {
-    before: { opacity: 0, x: "-10vw" },
+    before: { opacity: 0, x: "-100vw" },
     after: { opacity: 1, x: 0 },
   };
 
