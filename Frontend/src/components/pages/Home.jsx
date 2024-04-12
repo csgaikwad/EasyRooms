@@ -60,10 +60,10 @@ export default function Home() {
       },
     },
     hover: {
-      scale: 1.1,
+      scale: 1.05,
       zIndex: 10,
       transition: {
-        duration: 0.3,
+        duration: 0.2,
       },
     }
   };
