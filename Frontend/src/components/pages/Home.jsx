@@ -65,7 +65,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen w-min h-auto  xl:px-5 mb-20 overflow-x-hidden">
+    <div className="min-h-screen w-screen h-auto  xl:px-5 mb-20 overflow-x-hidden">
       {properties.length === 0 ? (
         <motion.div
           variants={variants}
