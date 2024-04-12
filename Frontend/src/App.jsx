@@ -65,8 +65,8 @@ export default function App() {
               <motion.div
                 key="home"
                 variants={pageVariants}
-                initial="initial"
-                animate="animate"
+                // initial="initial"
+                // animate="animate"
                 exit="exit"
               >
                 <Home />
