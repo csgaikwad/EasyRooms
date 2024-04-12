@@ -41,10 +41,9 @@ export default function Home() {
   };
 
   const variants = {
-    hidden: { opacity: 0, x: "-100vw" },
-    show: {
-      x: 0,
-      opacity: 1,
+    before: { scale:0.5 },
+    after: {
+      scale: 1,
       transition: {
         staggerChildren: 0.2,
       },
@@ -53,9 +52,11 @@ export default function Home() {
 
   const item = {
     hidden: {
+      x: "-100vw",
       opacity: 0,
     },
     show: {
+      x: 0,
       opacity: 1,
       transition: {
         duration: 1,
@@ -68,8 +69,8 @@ export default function Home() {
       {properties.length === 0 ? (
         <motion.div
           variants={variants}
-          initial="hidden"
-          animate="show"
+          initial="before"
+          animate="after"
           className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-7  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-11"
         >
           {Array.from({ length: 3 }).map((_, index) => (
@@ -124,8 +125,8 @@ export default function Home() {
       ) : (
         <motion.div
           variants={variants}
-          initial="hidden"
-          animate="show"
+          initial="before"
+          animate="after"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3   gap-4 m-4 sm:m-8 justify-items-center"
         >
           {shuffledProperties.map((property, index) => (
