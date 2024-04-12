@@ -41,9 +41,8 @@ export default function Home() {
   };
 
   const variants = {
-    before: { scale: 0.5 },
+    before: {},
     after: {
-      scale: 1,
       transition: {
         staggerChildren: 0.3,
       },
@@ -52,12 +51,10 @@ export default function Home() {
 
   const item = {
     before: {
-      opacity:0,
-      y: "-10vw",
+      scale: 0.5,
     },
     after: {
-      opacity:1,
-      y: 0,
+      scale: 1,
       transition: {
         duration: 0.1,
       },
