@@ -60,7 +60,7 @@ export default function Home() {
       },
     },
     hover: {
-      scale: 1.2,
+      scale: 1.1,
       zIndex: 10,
       transition: {
         duration: 0.3,
