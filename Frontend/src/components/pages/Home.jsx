@@ -59,13 +59,6 @@ export default function Home() {
         duration: 0.07,
       },
     },
-    // hover: {
-    //   scale: 1.05,
-    //   zIndex: 10,
-    //   transition: {
-    //     duration: 0.1,
-    //   },
-    // }
   };
 
   return (
@@ -78,10 +71,7 @@ export default function Home() {
           className=" flex flex-col items-center justify-center lg:grid grid-cols-1 gap-7  lg:grid-cols-2 xl:grid-cols-3 sm:px-10 lg:place-content-center my-11"
         >
           {Array.from({ length: 3 }).map((_, index) => (
-            <div
-              className="hidden lg:block"
-              key={`skeleton-lg-${index}`}
-            >
+            <div className="hidden lg:block" key={`skeleton-lg-${index}`}>
               <Skeleton
                 baseColor="#c8cddb"
                 highlightColor="white"
@@ -93,10 +83,7 @@ export default function Home() {
             </div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <div
-              className="hidden md:block"
-              key={`skeleton-md-${index}`}
-            >
+            <div className="hidden md:block" key={`skeleton-md-${index}`}>
               <Skeleton
                 baseColor="#c8cddb"
                 highlightColor="white"
@@ -108,10 +95,7 @@ export default function Home() {
             </div>
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
-            <div
-              className="block md:hidden"
-              key={`skeleton-sm-${index}`}
-            >
+            <div className="block md:hidden" key={`skeleton-sm-${index}`}>
               <Skeleton
                 baseColor="#c8cddb"
                 highlightColor="white"
@@ -136,6 +120,15 @@ export default function Home() {
               // whileHover="hover"
               key={property._id + index}
               className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-105 hover:border-red-500 hover:border-4 cursor-pointer"
+              style={{
+                hover: {
+                  scale: 1.05,
+                  zIndex: 10,
+                  transition: {
+                    duration: 0.1,
+                  },
+                },
+              }}
             >
               <Carousel
                 showThumbs={false}
