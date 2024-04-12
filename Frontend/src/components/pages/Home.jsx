@@ -59,13 +59,13 @@ export default function Home() {
         duration: 0.07,
       },
     },
-    hover: {
-      scale: 1.05,
-      zIndex: 10,
-      transition: {
-        duration: 0.1,
-      },
-    }
+    // hover: {
+    //   scale: 1.05,
+    //   zIndex: 10,
+    //   transition: {
+    //     duration: 0.1,
+    //   },
+    // }
   };
 
   return (
