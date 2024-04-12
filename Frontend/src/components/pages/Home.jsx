@@ -52,12 +52,14 @@ export default function Home() {
 
   const item = {
     before: {
-      x: "-100vw",
+      opacity:0,
+      y: "-10vw",
     },
     after: {
-      x: 0,
+      opacity:1,
+      y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.1,
       },
     },
   };
