@@ -44,7 +44,7 @@ export default function Home() {
     before: {},
     after: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
       },
     },
   };
@@ -56,7 +56,7 @@ export default function Home() {
     after: {
       scale: 1,
       transition: {
-        duration: 0.1,
+        duration: 0.07,
       },
     },
     hover: {
