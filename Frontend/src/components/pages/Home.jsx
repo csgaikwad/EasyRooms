@@ -51,9 +51,11 @@ export default function Home() {
 
   const item = {
     before: {
+      x:"10vw",
       scale: 0.5,
     },
     after: {
+      x:0,
       scale: 1,
       transition: {
         duration: 0.1,
@@ -63,7 +65,7 @@ export default function Home() {
       scale: 1.05,
       zIndex: 10,
       transition: {
-        duration: 0.2,
+        duration: 0.1,
       },
     }
   };
@@ -79,7 +81,6 @@ export default function Home() {
         >
           {Array.from({ length: 3 }).map((_, index) => (
             <div
-              variants={item}
               className="hidden lg:block"
               key={`skeleton-lg-${index}`}
             >
@@ -95,7 +96,6 @@ export default function Home() {
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
             <div
-              variants={item}
               className="hidden md:block"
               key={`skeleton-md-${index}`}
             >
@@ -111,7 +111,6 @@ export default function Home() {
           ))}
           {Array.from({ length: 3 }).map((_, index) => (
             <div
-              variants={item}
               className="block md:hidden"
               key={`skeleton-sm-${index}`}
             >
