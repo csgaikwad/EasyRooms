@@ -36,11 +36,11 @@ export default function App() {
 
   const pageVariants = {
     initial: {
-      opacity: 1,
-      x: "-10vw",
+      x: "100vw",
+      scale: 0.5,
     },
     animate: {
-      opacity: 1,
+      scale: 1,
       x: 0,
       transition: {
         type: "spring",
@@ -49,7 +49,8 @@ export default function App() {
       },
     },
     exit: {
-      x: "50vw",
+      scale: 0.5,
+      x: "-100vw",
       transition: {
         type: "spring",
         stiffness: 150,
@@ -68,16 +69,10 @@ export default function App() {
             element={
               <motion.div
                 key="home"
-                initial={{ opacity: 1, scale: 1 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  transition: { duration: 0.5 },
-                }}
-                exit={{
-                  x: "50vw",
-                  transition: { duration: 0.5 },
-                }}
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
               >
                 <Home />
               </motion.div>
