@@ -112,6 +112,7 @@ export default function Home() {
           variants={variants}
           initial="before"
           animate="after"
+          whileHover={{ scale: 1.05 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4 m-4 sm:m-8 justify-items-center"
         >
           {shuffledProperties.map((property, index) => (
