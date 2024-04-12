@@ -41,7 +41,7 @@ export default function Home() {
   };
 
   const variants = {
-    before: { scale:0.5 },
+    before: { scale: 0.5 },
     after: {
       scale: 1,
       transition: {
@@ -51,11 +51,11 @@ export default function Home() {
   };
 
   const item = {
-    hidden: {
+    before: {
       x: "-100vw",
       opacity: 0,
     },
-    show: {
+    after: {
       x: 0,
       opacity: 1,
       transition: {
@@ -65,7 +65,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen  h-auto  xl:px-5 mb-20 overflow-x-hidden">
+    <div
+      className="min-h-screen  h-auto  xl:px-5 mb-20 "
+      style={{ overflowX: "hidden" }}
+    >
       {properties.length === 0 ? (
         <motion.div
           variants={variants}
