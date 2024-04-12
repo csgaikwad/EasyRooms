@@ -44,7 +44,7 @@ export default function Home() {
     before: {},
     after: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.2,
       },
     },
   };
