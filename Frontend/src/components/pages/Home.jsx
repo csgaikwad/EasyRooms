@@ -125,8 +125,8 @@ export default function Home() {
       ) : (
         <motion.div
           variants={variants}
-          // initial="before"
-          // animate="after"
+          initial="before"
+          animate="after"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4 m-4 sm:m-8 justify-items-center"
         >
           {shuffledProperties.map((property, index) => (
