@@ -45,21 +45,19 @@ export default function Home() {
     after: {
       scale: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.5,
       },
     },
   };
 
   const item = {
     before: {
-      x: "-100vw",
-      opacity: 0,
+      x: "-50vw",
     },
     after: {
       x: 0,
-      opacity: 1,
       transition: {
-        duration: 1,
+        duration: 0.5,
       },
     },
   };
