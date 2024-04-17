@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/pages/navbar/Navbar";
 import Footer from "./components/pages/Footer";
@@ -22,6 +22,7 @@ axios.defaults.withCredentials = true;
 
 export default function App() {
   const [user, setUser] = useRecoilState(UserAtom);
+  const location = useLocation();
 
   useEffect(() => {
     async function fetchDataOnLoad() {
@@ -36,158 +37,142 @@ export default function App() {
 
   const pageVariants = {
     initial: {
-      opacity: 1,
-      x: "-10vw",
+      x: "100vw",
     },
     animate: {
-      opacity: 1,
       x: 0,
       transition: {
-        type: "spring",
-        stiffness: 150,
-        damping: 11,
+        duration: 0.4,
       },
     },
     exit: {
-      opacity: 0,
-      x: "50vw",
+      x: "-100vw",
       transition: {
-        type: "spring",
-        stiffness: 150,
-        damping: 10,
+        duration: 0.4,
       },
     },
   };
 
   return (
-    <div>
-      <BrowserRouter>
-        <Navbar />
-        <AnimatePresence>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <motion.div
-                  key="home"
-                  initial={{ opacity: 0, scale: 1 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    transition: { duration: 2 },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    x: "50vw",
-                    transition: { duration: 2 },
-                  }}
-                >
-                  <Home />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <motion.div
-                  key="login"
-                  variants={pageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  <Login />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <motion.div
-                  key="register"
-                  variants={pageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  <Register />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <motion.div
-                  key="profile"
-                  variants={pageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  <Profile />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/property"
-              element={
-                <motion.div
-                  key="property"
-                  variants={pageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  <Property />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/property/:id"
-              element={
-                <motion.div
-                  key="property"
-                  variants={pageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  <Property />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/places/:id"
-              element={
-                <motion.div
-                  key="places"
-                  variants={pageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  <Places />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/terms"
-              element={
-                <motion.div
-                  key="terms"
-                  variants={pageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  <Terms />
-                </motion.div>
-              }
-            />
-          </Routes>
-        </AnimatePresence>
-        <Footer />
-      </BrowserRouter>
-    </div>
+    <>
+      <Navbar />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <motion.div
+                key="home"
+                variants={pageVariants}
+                // initial="initial"
+                // animate="animate"
+                exit="exit"
+              >
+                <Home />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <motion.div
+                key="login"
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <Login />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <motion.div
+                key="register"
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <Register />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <motion.div
+                key="profile"
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <Profile />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/property"
+            element={
+              <motion.div
+                key="property"
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <Property />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/property/:id"
+            element={
+              <motion.div
+                key="property"
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <Property />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/places/:id"
+            element={
+              <motion.div
+                key="places"
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <Places />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/terms"
+            element={
+              <motion.div
+                key="terms"
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <Terms />
+              </motion.div>
+            }
+          />
+        </Routes>
+      </AnimatePresence>
+      <Footer />
+    </>
   );
 }

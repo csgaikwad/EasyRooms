@@ -15,9 +15,6 @@ export default function BookingWidget(props) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    // const threeMonthsLater = new Date(
-    //   today.getTime() + 90 * 24 * 60 * 60 * 1000
-    // );
 
     setCheckIn(today);
     setCheckOut(tomorrow);
@@ -129,14 +126,23 @@ export default function BookingWidget(props) {
 
   return (
     <div className="flex flex-col justify-center items-center py-10">
-      <h1 className=" text-xl lg:text-[2rem] font-sans font-semibold mb-4">
-        <span className="line-through text-gray-800">
-          ${parseInt(props.price + props.price * 0.1)}
-        </span>{" "}
-        <span className=""> ${parseInt(props.price)} </span>
-        <span className="text-gray-700 lg:text-2xl font-normal font-serif">
-          night
-        </span>{" "}
+      <h1 className=" text-xl lg:text-[2rem] font-sans font-semibold mb-4 text-center">
+        <span className=" text-yellow-500 font-serif">🎉10% off🎉 </span> <br />
+        <br />
+        <p className="line-through text-gray-800 text-[1.5rem] mb-0">
+          $ {parseInt(props.price)}{" "}
+          <span className="text-gray-700 ">per night</span>
+        </p>
+        <br />
+        <p className="">
+          $
+          {parseInt(props.price - props.price * 0.1) === 0
+            ? 1
+            : parseInt(props.price - props.price * 0.1)}
+          <span className="text-gray-700 lg:text-2xl  font-serif">
+            per night
+          </span>
+        </p>
       </h1>
       <div className="mb-4 w-full">
         <div className="flex flex-col my-4 items-center">
@@ -203,7 +209,6 @@ export default function BookingWidget(props) {
       >
         {loading ? "Booking..." : "Book Now"}
       </button>
-
     </div>
   );
 }

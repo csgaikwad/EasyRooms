@@ -36,7 +36,7 @@ export default function Searchbar() {
             onMouseLeave={() => {
               sethideBar(false);
             }}
-            className={` cursor-pointer searching text-md hoverable-item w-[25%] border-l-2 p-1 text-center font-serif ${
+            className={` cursor-pointer searching text-md hoverable-item w-[25%] border-l-2 p-1 text-center font-serif overflow-hidden ${
               hideBar ? "border-r-0" : "border-r-2"
             }`}
           >
@@ -49,12 +49,12 @@ export default function Searchbar() {
             onMouseLeave={() => {
               sethideBar(false);
             }}
-            className=" cursor-pointer searching text-md hoverable-item w-[25%] text-nowrap border-r-2 p-1 pr-4 text-center font-serif"
+            className=" cursor-pointer searching text-md hoverable-item w-[25%] text-nowrap border-r-2 p-1 pr-4 text-center font-serif overflow-hidden"
           >
             Check-Out
           </div>
           <div className="flex w-[25%] items-center justify-between ">
-            <h1 className="cursor-pointer searching text-md hoverable-item w-14 grow p-1 text-center font-serif ">
+            <h1 className="cursor-pointer searching text-md hoverable-item w-14 grow p-1 text-center font-serif overflow-hidden ">
               Who
             </h1>
             <div className={`${user.isOwner ? "bg-purple-500" : "bg-red-500"} rounded-full border p-2 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer z-10 ` } >
