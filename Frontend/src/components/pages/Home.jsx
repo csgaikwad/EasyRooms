@@ -122,7 +122,7 @@ export default function Home() {
                 className="lg:carousel-mobile"
               >
                 {property.propertyPhotos.map((photoUrl, index) => (
-                  <div className=" object-cover " key={index}>
+                  <div className="" key={index}>
                     <img
                       className="rounded-xl size-60 lg:size-72  shadow-sm"
                       src={photoUrl}

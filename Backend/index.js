@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 import User from "./models/User.js";
 import PropertyDetails from "./models/Property.js";
+import Booking from "./models/Booking.js";
 import { v2 as cloudinary } from 'cloudinary';
 import fileUpload from "express-fileupload";
 import Razorpay from "razorpay";
