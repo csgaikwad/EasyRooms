@@ -14,6 +14,7 @@ import axios from "axios";
 import { Property } from "./components/pages/Property";
 import Places from "./components/pages/Places";
 import Terms from "./components/pages/Terms";
+import Booking from "./components/pages/Booking";
 
 // axios.defaults.baseURL = "https://airbnd-airbnd.koyeb.app/";
 // axios.defaults.baseURL = "https://airbnd-qs5d.onrender.com";
@@ -153,6 +154,20 @@ export default function App() {
                 exit="exit"
               >
                 <Places />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/booking/:id"
+            element={
+              <motion.div
+                key="booking"
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <Booking />
               </motion.div>
             }
           />

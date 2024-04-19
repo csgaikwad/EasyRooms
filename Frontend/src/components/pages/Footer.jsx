@@ -65,7 +65,7 @@ export default function Footer() {
           }}
           className="text-blue-500 cursor-pointer mt-2"
         >
-          Terms and conditions
+          Terms and Conditions
         </h1>
         <h1 className="text-gray-500 text-sm pt-3">
           {" "}

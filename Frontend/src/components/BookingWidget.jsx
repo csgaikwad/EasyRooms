@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function BookingWidget(props) {
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
   const [numGuests, setNumGuests] = useState(1);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [orderId, setOrderId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const today = new Date();
@@ -41,26 +42,14 @@ export default function BookingWidget(props) {
     }
   };
 
-  const handleNumGuestsChange = (e) => {
-    const value = parseInt(e.target.value);
-    if (!isNaN(value) && value <= props.numberOfGuests) {
-      setNumGuests(value);
-      calculateTotalAmount(checkIn, checkOut, value);
-    }
-  };
+
 
   const handleBook = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("/book", {
-        // checkIn: checkIn.toISOString(),
-        // checkOut: checkOut.toISOString(),
-        // numGuests: numGuests,
-        // propertyId: props.propertyId,
+      const response = await axios.post("/processPayment", {
         totalAmount: totalAmount,
       });
-      setOrderId(response.data.orderId);
-      // console.log(response);
 
       var options = {
         key: response.data.key,
@@ -70,15 +59,27 @@ export default function BookingWidget(props) {
         description:
           "Stay like a local, anywhere you go - Air Corp, where every stay is a new adventure.",
         image: "/logo2.svg",
-        order_id: orderId,
+        order_id: response.data.order.id,
         handler: function (response) {
-          console.log(response.razorpay_payment_id);
-          console.log(response.razorpay_order_id);
-          console.log(response.razorpay_signature);
-
           axios.post("/verify", { response: response }).then((res) => {
             if (res.data) {
-              alert("ready to navigate");
+              axios
+                .post("/booking", {
+                  checkIn: checkIn.toISOString(),
+                  checkOut: checkOut.toISOString(),
+                  numGuests: numGuests,
+                  totalAmount: totalAmount,
+                  propertyId: props.propertyId,
+                  userId: props.userId,
+                })
+                .then((res) => {
+                  console.log(res);
+                  alert("ready to navigate");
+                  navigate("/booking/" + props.userId);
+                })
+                .catch((err) => {
+                  alert(err);
+                });
             }
           });
         },
@@ -130,21 +131,18 @@ export default function BookingWidget(props) {
         <span className=" text-yellow-500 font-serif">🎉10% off🎉 </span> <br />
         <br />
         <p className="line-through text-gray-800 text-[1.5rem] mb-0">
-          $ {parseInt(props.price)}{" "}
+          ${parseInt(props.price + props.price * 0.1)}{" "}
           <span className="text-gray-700 ">per night</span>
         </p>
         <br />
         <p className="">
-          $
-          {parseInt(props.price - props.price * 0.1) === 0
-            ? 1
-            : parseInt(props.price - props.price * 0.1)}
+          $ {parseInt(props.price)}{" "}
           <span className="text-gray-700 lg:text-2xl  font-serif">
             per night
           </span>
         </p>
       </h1>
-      <div className="mb-4 w-full">
+      <div className="mb-4 w-full flex flex-col items-center justify-center ">
         <div className="flex flex-col my-4 items-center">
           <label
             htmlFor="check-in"
@@ -165,7 +163,7 @@ export default function BookingWidget(props) {
         <div className="flex flex-col my-4 items-center">
           <label
             htmlFor="check-out"
-            className="text-lg font-semibold text-gray-700 my-1"
+            className="text-lg font-semibold text-gray-700 my-1 "
           >
             Check Out
           </label>
@@ -179,24 +177,37 @@ export default function BookingWidget(props) {
             maxDate={new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)}
           />
         </div>
-        <div className="flex flex-col my-4 items-center">
-          <label
-            htmlFor="num-guests"
-            className="text-lg font-semibold text-gray-700 my-1"
-          >
-            Number of Guests
+        <div className="flex flex-col my-4 items-center justify-center md:min-w-96">
+          <label className="text-lg font-semibold text-gray-700 my-1">
+            Number Of Guests
           </label>
-          <input
-            className="border border-gray-300 rounded-md p-2 cursor-pointer w-[14rem] "
-            min={1}
-            max={props.numberOfGuests}
-            type="number"
-            id="num-guests"
-            value={numGuests}
-            onChange={handleNumGuestsChange}
-            placeholder="Number of Guests"
-          />
+          <div className="flex justify-center w-full gap-2 mt-2 ">
+            <button
+              className=" rounded-full p-2 cursor-pointer bg-gray-400 shadow-sm outline-none  size-10  hover:scale-105 duration-300 "
+              onClick={() =>
+                setNumGuests((prevNumGuests) => Math.max(1, prevNumGuests - 1))
+              }
+            >
+              <img className="" src="/minus.svg" alt="-" />
+            </button>
+            <div
+              className="border-2 border-gray-300 rounded-full  cursor-default w-11 bg-gray-50 text-center p-2  shadow-sm   "
+            >
+              {numGuests}
+            </div>
+            <button
+              className=" rounded-full p-2 cursor-pointer bg-gray-400 shadow-sm outline-none size-10  hover:scale-105 duration-300 "
+              onClick={() =>
+                setNumGuests((prevNumGuests) =>
+                  Math.min(props.numberOfGuests, prevNumGuests + 1)
+                )
+              }
+            >
+             <img  src="/plus.svg" alt="+" />
+            </button>
+          </div>
         </div>
+        <h4 className="mb-2 text-sm font-semibold text-red-400">* Max Guests : {props.numberOfGuests} *</h4>
 
         <h1 className="flex justify-center text-2xl font-semibold text-gray-700 pl-3 m-1">
           Total Amount: $ {totalAmount}

@@ -7,6 +7,7 @@ import UserProperties from "../UserProperties";
 
 export default function Profile() {
   const user = useRecoilValue(UserAtom);
+  console.log(user);
   const navigate = useNavigate();
 
 
@@ -32,6 +33,9 @@ export default function Profile() {
               ? "bg-purple-500 hover:bg-purple-700"
               : "bg-red-500 hover:bg-red-700"
           } rounded-full h-14 flex items-center justify-around text-white text-xl max-w-72`}
+          onClick={() => {
+            navigate(`/booking/${user.id}`)
+          }}
         >
           <p>My Bookings</p>
         </div>

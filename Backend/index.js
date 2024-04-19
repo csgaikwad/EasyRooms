@@ -45,7 +45,7 @@ app.use(
 
 
 
-const razorpay = new Razorpay({
+let instance = new Razorpay({
   key_id: process.env.RazorpayId,
   key_secret: process.env.RazorpaySecret,
 });
@@ -120,7 +120,7 @@ async function verifyPassword(password, hashedPassword) {
 
 // Routes
 
-// Home route
+// Testing route
 app.get("/", (req, res) => {
   res.send("Hello");
 });
@@ -239,6 +239,100 @@ app.post("/preview", async (req, res) => {
 //     res.status(500).json({ error: "An internal server error occurred" });
 //   }
 // });
+
+
+
+
+
+
+
+
+
+// Route to register a new user
+app.post("/register", async (req, res) => {
+  const { username, userEmail, password, isOwner } = req.body;
+  try {
+    const hashedPassword = await hashPassword(password);
+    const userDoc = await User.create({
+      userEmail,
+      password: hashedPassword,
+      username,
+      isOwner,
+    });
+    const ResUserDoc = {
+      id: userDoc._id,
+      userEmail: userDoc.userEmail,
+      username: userDoc.username,
+      isOwner: userDoc.isOwner,
+    };
+    const token = jwt.sign({ userId: userDoc._id ,userEmail: userDoc.userEmail }, secretKey);
+
+    res
+      .cookie("jwt", token, {
+        httpOnly: true,
+        sameSite:"none",
+        secure:true,
+        maxAge: 24 * 60 * 60 * 1000,
+      })
+      .status(201)
+      .json({ ResUserDoc, message: "User registered successfully" });
+  } catch (error) {
+    console.error("Error registering user:", error.message);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
+
+
+
+
+
+
+
+// Route to log in a user
+app.post("/login", async (req, res) => {
+  try {
+    const { userEmail, password } = req.body;
+    if (!password) {
+      return res.status(400).json({ error: "Password is required" });
+    }
+
+    const user = await User.findOne({ userEmail });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const passwordVerified = await verifyPassword(password, user.password);
+    if (!passwordVerified) {
+      return res.status(401).json({ error: "Incorrect password" });
+    }
+
+    const userDoc = {
+      id: user._id,
+      userEmail: user.userEmail,
+      username: user.username,
+      isOwner: user.isOwner,
+    };
+
+    const token = jwt.sign({ userId: user._id ,userEmail: user.userEmail }, secretKey);
+    res
+      .cookie("jwt", token, {
+        httpOnly: true,
+        sameSite:"none",
+        secure:true,
+        maxAge: 24 * 60 * 60 * 1000,
+      })
+      .json({ userDoc, message: "User logged in successfully" });
+  } catch (error) {
+    console.error("Error logging in user:", error.message);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
+
+
+
+
 
 
 
@@ -369,21 +463,31 @@ app.put("/property/:propertyId", async (req, res) => {
 
 
 
-// Route to book a property and process payment
-app.post("/book", async (req, res) => {
-  try {
-    // const { userId, propertyId, startDate, endDate, totalAmount } = req.body;
-    const { totalAmount } = req.body;
 
-    const order = await razorpay.orders.create({
+
+
+// Route to process payment
+app.post("/processPayment", async (req, res) => {
+  try {
+    const { totalAmount } = req.body;
+    const key=process.env.RazorpayId;
+
+     instance.orders.create({
       amount: totalAmount * 100,
       currency: "INR",
       receipt: uuidv4(),
       payment_capture: 1,
-    });
+    },(err, order) => {
 
-    // Return the Razorpay order ID to the client
-    res.json({ orderId: order.id, key: razorpay.key_id, amount:totalAmount*100 });
+      if (err) {
+
+          res.status(500).json(" Internal Server Error While Creating Booking ")
+      }
+      else {
+        // console.log(order);
+        return res.status(200).json({ order, key,amount: totalAmount * 100 });
+      }
+  });
   } catch (error) {
     console.error("Error processing payment:", error);
     res.status(500).json({ error: "An internal server error occurred" });
@@ -399,70 +503,93 @@ app.post("/book", async (req, res) => {
 
 
 
+
 // Route to handle payment verification
-app.use("/verify", (req, res) => {
-
-
-  let body = req.body.response.razorpay_order_id + "|" + req.body.response.razorpay_payment_id;
-
-  var expectedSignature = crypto.createHmac("sha256", process.env.RazorpaySecret).update(body.toString()).digest('hex');
-
-
-  if (expectedSignature === req.body.response.razorpay_signature) {
-
-      res.status(200).json("Signature Valid ")
-  } else {
-
-      res.status(500).json("Signature Invalid ")
-  }
-
-
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Route to register a new user
-app.post("/register", async (req, res) => {
-  const { username, userEmail, password, isOwner } = req.body;
+app.post("/verify", (req, res) => {
   try {
-    const hashedPassword = await hashPassword(password);
-    const userDoc = await User.create({
-      userEmail,
-      password: hashedPassword,
-      username,
-      isOwner,
-    });
-    const ResUserDoc = {
-      id: userDoc._id,
-      userEmail: userDoc.userEmail,
-      username: userDoc.username,
-      isOwner: userDoc.isOwner,
-    };
-    const token = jwt.sign({ userId: userDoc._id ,userEmail: userDoc.userEmail }, secretKey);
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body.response;
 
-    res
-      .cookie("jwt", token, {
-        httpOnly: true,
-        sameSite:"none",
-        secure:true,
-        maxAge: 24 * 60 * 60 * 1000,
-      })
-      .status(201)
-      .json({ ResUserDoc, message: "User registered successfully" });
+    const sign = razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSignature = crypto.createHmac("sha256", process.env.RazorpaySecret).update(sign.toString()).digest('hex');
+
+    if (expectedSignature === razorpay_signature) {
+      return res.status(200).json({ message: "Payment verified successfully" });
+		} else {
+			return res.status(400).json({ message: "Invalid signature sent!" });
+    }
   } catch (error) {
-    console.error("Error registering user:", error.message);
+    console.error("Error verifying payment:", error);
     res.status(500).json({ error: "An internal server error occurred" });
+  }
+});
+
+
+
+
+app.post("/booking", async (req, res) => {
+  try {
+    let { userId, propertyId, checkIn, checkOut, totalAmount, numGuests } = req.body;
+
+    // If userId is not provided, extract it from the JWT
+    if (!userId) {
+      const token = req.cookies.jwt;
+      if (!token) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+
+      const decoded = jwt.verify(token, secretKey);
+      userId = decoded.userId;
+
+      const foundUser = await User.findById(userId);
+      if (!foundUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+    }
+
+    const booking = await Booking.create({ userId, propertyId, checkIn, checkOut, totalAmount, numGuests });
+
+    res.status(200).json({message: "Booking created successfully",booking});
+  } catch (error) {
+    console.error("Error creating booking:", error);
+    res.status(500).json({ message: "An internal server error occurred" });
+  }
+});
+
+
+
+
+
+app.get("/booking/:id", async (req, res) => {
+  try {
+    let { id } = req.params;
+    if (!id) {
+      return res.status(404).json({ message: "User not found try loggin in again" });
+    }
+    const bookingDoc = await Booking.findOne({ userId: id }).populate('userId')
+      .populate('propertyId');
+    const sanitizedBookingDoc = {
+      ...bookingDoc.toObject(),
+      propertyId:{
+        title: bookingDoc.propertyId.title,
+        location: bookingDoc.propertyId.location,
+        propertyPhoto: bookingDoc.propertyId.propertyPhotos[0],
+      },
+      userId: {
+        // Now password are not being sent
+        id: bookingDoc.userId._id,
+        userEmail: bookingDoc.userId.userEmail,
+        username: bookingDoc.userId.username,
+        isOwner: bookingDoc.userId.isOwner,
+      }
+    };
+    if (!bookingDoc) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    res.status(200).json({doc: sanitizedBookingDoc });
+  } catch (error) {
+    console.error("Error retrieving booking:", error);
+    res.status(500).json({ message: "An internal server error occurred" });
   }
 });
 
@@ -473,45 +600,9 @@ app.post("/register", async (req, res) => {
 
 
 
-// Route to log in a user
-app.post("/login", async (req, res) => {
-  try {
-    const { userEmail, password } = req.body;
-    if (!password) {
-      return res.status(400).json({ error: "Password is required" });
-    }
 
-    const user = await User.findOne({ userEmail });
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
 
-    const passwordVerified = await verifyPassword(password, user.password);
-    if (!passwordVerified) {
-      return res.status(401).json({ error: "Incorrect password" });
-    }
 
-    const userDoc = {
-      id: user._id,
-      userEmail: user.userEmail,
-      username: user.username,
-      isOwner: user.isOwner,
-    };
-
-    const token = jwt.sign({ userId: user._id ,userEmail: user.userEmail }, secretKey);
-    res
-      .cookie("jwt", token, {
-        httpOnly: true,
-        sameSite:"none",
-        secure:true,
-        maxAge: 24 * 60 * 60 * 1000,
-      })
-      .json({ userDoc, message: "User logged in successfully" });
-  } catch (error) {
-    console.error("Error logging in user:", error.message);
-    res.status(500).json({ error: "An internal server error occurred" });
-  }
-});
 
 // Start the server
 app.listen(port, () => {

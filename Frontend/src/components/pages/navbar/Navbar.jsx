@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Searchbar from "./Searchbar";
-import UserProfile from "./UserProfile";
+import UserProfile from "./Menu";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";

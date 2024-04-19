@@ -4,11 +4,13 @@ import { useRecoilValue } from "recoil";
 import { PropertyAtom } from "../atoms/PropertyAtom";
 import axios from "axios";
 import BookingWidget from "../BookingWidget";
+import { UserAtom } from "../atoms/UserAtom";
 
 export default function Places() {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const { id: reqId } = useParams();
   const properties = useRecoilValue(PropertyAtom);
+  const user=useRecoilValue(UserAtom)
   const photosRef = useRef(null);
 
   useEffect(() => {
@@ -158,6 +160,8 @@ export default function Places() {
               <BookingWidget
                 price={selectedProperty.price}
                 numberOfGuests={selectedProperty.numberOfGuests}
+                propertyId={reqId}
+                userId={user.id}
               />
             </div>
           </div>
