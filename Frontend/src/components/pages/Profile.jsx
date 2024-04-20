@@ -7,7 +7,6 @@ import UserProperties from "../UserProperties";
 
 export default function Profile() {
   const user = useRecoilValue(UserAtom);
-  console.log(user);
   const navigate = useNavigate();
 
 

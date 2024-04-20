@@ -565,23 +565,23 @@ app.get("/booking/:id", async (req, res) => {
     if (!id) {
       return res.status(404).json({ message: "User not found try loggin in again" });
     }
-    const bookingDoc = await Booking.findOne({ userId: id }).populate('userId')
-      .populate('propertyId');
-    const sanitizedBookingDoc = {
-      ...bookingDoc.toObject(),
-      propertyId:{
-        title: bookingDoc.propertyId.title,
-        location: bookingDoc.propertyId.location,
-        propertyPhoto: bookingDoc.propertyId.propertyPhotos[0],
+    const bookingDoc = await Booking.find({ userId: id }).populate('propertyId');
+    console.log(bookingDoc)
+
+    if (!bookingDoc || bookingDoc.length === 0) {
+      return res.status(404).json({ message: "No bookings found for this user" });
+    }
+
+    const sanitizedBookingDoc = bookingDoc.map(booking => ({
+      ...booking._doc,
+      propertyId: {
+        id: booking.propertyId._id,
+        title: booking.propertyId && booking.propertyId.title,
+        location: booking.propertyId && booking.propertyId.location,
+        propertyPhoto: booking.propertyId && booking.propertyId.propertyPhotos && booking.propertyId.propertyPhotos[0],
       },
-      userId: {
-        // Now password are not being sent
-        id: bookingDoc.userId._id,
-        userEmail: bookingDoc.userId.userEmail,
-        username: bookingDoc.userId.username,
-        isOwner: bookingDoc.userId.isOwner,
-      }
-    };
+    }));
+
     if (!bookingDoc) {
       return res.status(404).json({ message: "Booking not found" });
     }

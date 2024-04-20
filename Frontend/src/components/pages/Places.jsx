@@ -13,6 +13,7 @@ export default function Places() {
   const user=useRecoilValue(UserAtom)
   const photosRef = useRef(null);
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
 

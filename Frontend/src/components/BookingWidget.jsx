@@ -12,6 +12,7 @@ export default function BookingWidget(props) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -73,8 +74,6 @@ export default function BookingWidget(props) {
                   userId: props.userId,
                 })
                 .then((res) => {
-                  console.log(res);
-                  alert("ready to navigate");
                   navigate("/booking/" + props.userId);
                 })
                 .catch((err) => {

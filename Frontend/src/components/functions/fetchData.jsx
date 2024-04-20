@@ -9,6 +9,7 @@ export async function fetchData(setUserAtom) {
         userEmail: response.data.userEmail,
         username: response.data.username,
         isOwner: response.data.isOwner,
+        id:response.data.id,
       };
       setUserAtom(user);
     }

@@ -20,13 +20,11 @@ export default function CreateProperties() {
   const [entrance, setEntrance] = useState(false);
 
   const { id } = useParams();
-  // console.log(id);
   const propertyAtom = useRecoilValue(PropertyAtom);
   const [selectedProperty, setSelectedProperty] = useState();
 
   const navigate = useNavigate();
 
-  // console.log(propertyAtom);
 
   useEffect(() => {
     const fetchPropertyData = async () => {
@@ -147,7 +145,6 @@ export default function CreateProperties() {
     if (id) {
       try {
         const res = await axios.put(`/property/${id}`, propertyData);
-        console.log(res.data.message);
         alert(res.data.message);
         navigate("/profile");
       } catch (error) {
@@ -159,7 +156,6 @@ export default function CreateProperties() {
     } else {
       try {
         const res = await axios.post("/property", propertyData);
-        console.log(res.data.message);
         alert(res.data.message);
         navigate("/profile");
       } catch (error) {
