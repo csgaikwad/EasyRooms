@@ -65,30 +65,35 @@ export default function UserProperties() {
               navigate("/places/" + property._id);
             }}
           >
-            <h2 className="md:text-xl font-semibold whitespace-nowrap truncate max-w-80 ">{property.title}</h2>
-            <p className="text-gray-600 whitespace-nowrap truncate max-w-80">{property.location}</p>
+            <h2 className="md:text-xl font-semibold whitespace-nowrap truncate max-w-80 ">
+              {property.title}
+            </h2>
+            <p className="text-gray-600 whitespace-nowrap truncate max-w-80">
+              {property.location}
+            </p>
             <p className="text-gray-600 text-lg ">
               <span className="text-black font-semibold font-serif">
-                $ {property.price}
+                ₹ {property.price}
               </span>
               /night {/*₹ */}
             </p>
             {/* <p className="text-sm text-gray-500 truncate pb-4">{property.details}</p> */}
           </div>
           <div className=" w-full mt-8 absolute bottom-0 flex items-end justify-center">
-          <div
-            className="hidden sm:flex  w-full  items-center justify-center font-serif font-semibold text-xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
-            onClick={() => {
-              navigate("/property/" + property._id);
-            }}
-          ><span className="opacity-100">Edit </span>
-            <img
-              className=" border-2 border-white m-2 size-8   transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1"
-              src="/pencil.svg"
-              alt="edit"
-            />
+            <div
+              className="hidden sm:flex  w-full  items-center justify-center font-serif font-semibold text-xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
+              onClick={() => {
+                navigate("/property/" + property._id);
+              }}
+            >
+              <span className="opacity-100">Edit </span>
+              <img
+                className=" border-2 border-white m-2 size-8   transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1"
+                src="/pencil.svg"
+                alt="edit"
+              />
+            </div>
           </div>
-        </div>
         </div>
       ))}
     </div>

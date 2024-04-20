@@ -12,7 +12,6 @@ export default function BookingWidget(props) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -42,8 +41,6 @@ export default function BookingWidget(props) {
       alert("Please select a date within the next 3 months.");
     }
   };
-
-
 
   const handleBook = async () => {
     setLoading(true);
@@ -130,12 +127,12 @@ export default function BookingWidget(props) {
         <span className=" text-yellow-500 font-serif">🎉10% off🎉 </span> <br />
         <br />
         <p className="line-through text-gray-800 text-[1.5rem] mb-0">
-          ${parseInt(props.price + props.price * 0.1)}{" "}
+          ₹{parseInt(props.price + props.price * 0.1)}{" "}
           <span className="text-gray-700 ">per night</span>
         </p>
         <br />
         <p className="">
-          $ {parseInt(props.price)}{" "}
+          ₹{parseInt(props.price)}{" "}
           <span className="text-gray-700 lg:text-2xl  font-serif">
             per night
           </span>
@@ -189,9 +186,7 @@ export default function BookingWidget(props) {
             >
               <img className="" src="/minus.svg" alt="-" />
             </button>
-            <div
-              className="border-2 border-gray-300 rounded-full  cursor-default w-11 bg-gray-50 text-center p-2  shadow-sm   "
-            >
+            <div className="border-2 border-gray-300 rounded-full  cursor-default w-11 bg-gray-50 text-center p-2  shadow-sm   ">
               {numGuests}
             </div>
             <button
@@ -202,14 +197,16 @@ export default function BookingWidget(props) {
                 )
               }
             >
-             <img  src="/plus.svg" alt="+" />
+              <img src="/plus.svg" alt="+" />
             </button>
           </div>
         </div>
-        <h4 className="mb-2 text-sm font-semibold text-red-400">* Max Guests : {props.numberOfGuests} *</h4>
+        <h4 className="mb-2 text-sm font-semibold text-red-400">
+          * Max Guests : {props.numberOfGuests} *
+        </h4>
 
         <h1 className="flex justify-center text-2xl font-semibold text-gray-700 pl-3 m-1">
-          Total Amount: $ {totalAmount}
+          Total Amount: ₹ {totalAmount}
         </h1>
       </div>
       <button
