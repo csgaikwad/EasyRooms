@@ -124,7 +124,7 @@ export default function Home() {
                 {property.propertyPhotos.map((photoUrl, index) => (
                   <div className="" key={index}>
                     <img
-                      className="rounded-xl size-60 lg:size-72  shadow-sm "
+                      className="rounded-xl size-60 lg:w-72  shadow-sm "
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />
