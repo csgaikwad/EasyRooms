@@ -67,10 +67,10 @@ export default function Footer() {
         >
           Terms and Conditions
         </h1>
-        <h1 className="text-gray-500 text-sm pt-3">
+        {/* <h1 className="text-gray-500 text-sm pt-3">
           {" "}
           *This is a project for studying MERN Stack
-        </h1>
+        </h1> */}
       </div>
     </div>
   );
