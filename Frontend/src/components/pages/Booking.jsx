@@ -66,7 +66,7 @@ export default function Booking() {
                   </p>
                   <p className="text-xl font-serif text-gray-600 font-semibold">
                     {" "}
-                    {booking.totalAmount}
+                    ₹{booking.totalAmount} Paid
                   </p>
                 </div>
               </div>
