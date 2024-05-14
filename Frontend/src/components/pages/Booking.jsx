@@ -36,13 +36,13 @@ export default function Booking() {
             {bookingRes.map((booking, index) => (
               <div
                 key={index}
-                className="flex flex-col md:flex-row gap-6 bg-gray-100 rounded-lg hover:scale-[101%] cursor-pointer duration-200"
+                className="flex gap-6 bg-gray-100 rounded-lg hover:scale-[101%] cursor-pointer duration-200"
                 onClick={() => {
                   navigate(`/places/${booking.propertyId.id}`);
                 }}
               >
                 <img
-                  className="size-32 md:size-64 rounded-lg"
+                  className="size-36 md:size-64 rounded-lg"
                   src={`${booking.propertyId.propertyPhoto}`}
                   alt="image"
                 />
