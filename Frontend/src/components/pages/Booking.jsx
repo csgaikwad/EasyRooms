@@ -32,11 +32,11 @@ export default function Booking() {
             <img className="size-20" src="/loader.svg" alt="Loading..." />
           </div>
         ) : bookingRes.length ? (
-          <div className="flex flex-col gap-4 ">
+          <div className="flex flex-col gap-6 ">
             {bookingRes.map((booking, index) => (
               <div
                 key={index}
-                className="flex gap-6 bg-gray-100 rounded-lg hover:scale-[101%] cursor-pointer duration-200"
+                className="flex flex-col md:flex-row gap-6 bg-gray-100 rounded-lg hover:scale-[101%] cursor-pointer duration-200"
                 onClick={() => {
                   navigate(`/places/${booking.propertyId.id}`);
                 }}
