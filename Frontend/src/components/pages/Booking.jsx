@@ -36,7 +36,7 @@ export default function Booking() {
             {bookingRes.map((booking, index) => (
               <div
                 key={index}
-                className="flex md:flex-col gap-6 bg-gray-100 rounded-lg hover:scale-[101%] cursor-pointer duration-200"
+                className="flex flex-col md:flex-row gap-6 bg-gray-100 rounded-lg hover:scale-[101%] cursor-pointer duration-200"
                 onClick={() => {
                   navigate(`/places/${booking.propertyId.id}`);
                 }}
