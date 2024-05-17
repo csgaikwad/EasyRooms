@@ -42,11 +42,11 @@ export default function Booking() {
                 }}
               >
                 <img
-                  className="size-64 rounded-lg"
+                  className="size-full md:size-64 rounded-lg"
                   src={`${booking.propertyId.propertyPhoto}`}
                   alt="image"
                 />
-                <div className="px-1 py-4 flex flex-col gap-2 text-center">
+                <div className="px-1 py-4 flex flex-col gap-2 text-left">
                   <p className="text-xl md:text-2xl font-serif text-gray-600 font-semibold">
                     {" "}
                     {booking.propertyId.title}
