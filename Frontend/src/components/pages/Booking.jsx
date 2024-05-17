@@ -36,17 +36,17 @@ export default function Booking() {
             {bookingRes.map((booking, index) => (
               <div
                 key={index}
-                className="flex gap-6 bg-gray-100 rounded-lg hover:scale-[101%] cursor-pointer duration-200"
+                className="flex md:flex-col gap-6 bg-gray-100 rounded-lg hover:scale-[101%] cursor-pointer duration-200"
                 onClick={() => {
                   navigate(`/places/${booking.propertyId.id}`);
                 }}
               >
                 <img
-                  className="size-36 md:size-64 rounded-lg"
+                  className="size-64 rounded-lg"
                   src={`${booking.propertyId.propertyPhoto}`}
                   alt="image"
                 />
-                <div className="px-4 md:px-0 py-4 flex flex-col gap-2">
+                <div className="px-1 py-4 flex flex-col gap-2 text-center">
                   <p className="text-xl md:text-2xl font-serif text-gray-600 font-semibold">
                     {" "}
                     {booking.propertyId.title}
@@ -66,7 +66,7 @@ export default function Booking() {
                   </p>
                   <p className="text-xl font-serif text-gray-600 font-semibold">
                     {" "}
-                    ₹{booking.totalAmount} Paid
+                   Total ₹{booking.totalAmount} Paid
                   </p>
                 </div>
               </div>
