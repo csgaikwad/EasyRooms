@@ -72,7 +72,7 @@ export default function Places() {
             <div>
               <div className="sm:text-[1.4rem] font-semibold font-sans text-black">
                 <a
-                  href={`https://www.google.com/maps/search/${selectedProperty.location.split("in")[1]}`}
+                  href={`https://www.google.com/maps/search/${/\bin\b/.test(selectedProperty.location) ? selectedProperty.location.split(/\bin\b/)[1].trim() : selectedProperty.location}`}
                   target="_blank"
                 >
                   <img
