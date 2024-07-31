@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://airbndweb.vercel.app","http://localhost:5173","https://easyrooms-ssg.vercel.app/"],
+    origin: ["https://easyrooms-ssg.vercel.app/","https://airbndweb.vercel.app","http://localhost:5173"],
     credentials: true,
   })
 );
