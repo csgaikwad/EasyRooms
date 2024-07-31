@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
@@ -9,6 +9,7 @@ export default function UserProfile() {
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserAtom);
   const [showDiv, setShowDiv] = useState(false);
+  const divRef = useRef(null);
 
   function showDivOnEvent() {
     setShowDiv((prev) => !prev);
@@ -25,6 +26,20 @@ export default function UserProfile() {
 
     fetchDataOnLogin();
   }, [setUser]);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (divRef.current && !divRef.current.contains(event.target)) {
+        setShowDiv(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [divRef]);
+
   return (
     <div className="flex items-center w-auto md:w-24 lg:w-auto h-10 border-2 rounded-full py-6 px-2 pl-2 gap-1 shadow-md">
       <div
@@ -45,40 +60,41 @@ export default function UserProfile() {
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
           />
         </svg>
-        <div
-          onMouseLeave={showDivOnEvent}
-          className={`block py-2 border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-20px] ${showDiv ? "" : "hidden"}`}
-          // onBlur={showDivOnEvent}
-          // tabIndex="0"
-        >
+        {showDiv && (
           <div
-            className="border-b-2 text-xl font-serif"
-            onClick={() => {
-              navigate("/");
-              setShowDiv(false);
-            }}
+            ref={divRef}
+            onMouseLeave={showDivOnEvent}
+            className={`block py-2 border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-20px]`}
           >
-            Home
+            <div
+              className="border-b-2 text-xl font-serif"
+              onClick={() => {
+                setShowDiv(false);
+                navigate("/");
+              }}
+            >
+              Home
+            </div>
+            <div
+              className="border-b-2 text-xl font-serif"
+              onClick={() => {
+                setShowDiv(false);
+                navigate("/login");
+              }}
+            >
+              Login
+            </div>
+            <div
+              className="text-xl font-serif"
+              onClick={() => {
+                setShowDiv(false);
+                navigate("/profile");
+              }}
+            >
+              Profile
+            </div>
           </div>
-          <div
-            className="border-b-2 text-xl font-serif"
-            onClick={() => {
-              navigate("/login");
-              setShowDiv(false);
-            }}
-          >
-            Login
-          </div>
-          <div
-            className=" text-xl font-serif"
-            onClick={() => {
-              navigate("/profile");
-              setShowDiv(false);
-            }}
-          >
-            Profile
-          </div>
-        </div>
+        )}
       </div>
       <div
         onClick={() =>
@@ -93,7 +109,7 @@ export default function UserProfile() {
               round={true}
               color={`${user.isOwner ? "#8B5CF6" : "#EF4444"}`}
               fgColor="#fff"
-              className="avatar-class "
+              className="avatar-class"
             />
           </div>
         ) : (
