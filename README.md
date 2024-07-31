@@ -1,6 +1,6 @@
-# Airbnd
+# EasyRooms
 
-Welcome to Airbnd! 🏡🍽️ This project is a clone of Airbnb, focusing on "air bed and dinner" accommodations. It is created using the MERN stack with authentication using JWT, session management, state management with Recoil, and Material-UI for UI components. 🚀
+Welcome to EasyRooms! 🏡🍽️ This project is a clone of Airbnb, focusing on "air bed and dinner" accommodations. It is created using the MERN stack with authentication using JWT, session management, state management with Recoil, and Material-UI for UI components. 🚀
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ Welcome to Airbnd! 🏡🍽️ This project is a clone of Airbnb, focusing on "a
 
 ## Description
 
-Airbnd is a clone of Airbnb with a twist - it focuses on providing "air bed and dinner" accommodations. Hosts can offer guests a cozy place to sleep and enjoy a home-cooked dinner. This project aims to replicate the core functionality and user experience of Airbnb while adding a unique dining experience for guests. 🍽️
+EasyRooms is a clone of Airbnb with a twist - it focuses on providing "air bed and dinner" accommodations. Hosts can offer guests a cozy place to sleep and enjoy a home-cooked dinner. This project aims to replicate the core functionality and user experience of Airbnb while adding a unique dining experience for guests. 🍽️
 
 ## Features
 
@@ -33,7 +33,7 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
    ```
-   git clone https://github.com/csgaikwad/Airbnd.git
+   git clone https://github.com/csgaikwad/EasyRooms.git
    ```
 
 2. Install dependencies:
@@ -58,9 +58,6 @@ To run this project locally, follow these steps:
    cd server && npm start
    ```
 
-## Usage
-
-[Provide instructions or examples for how to use your Airbnd clone]
 
 ## Technologies Used
 

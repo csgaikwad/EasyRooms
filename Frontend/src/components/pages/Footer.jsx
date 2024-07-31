@@ -58,7 +58,7 @@ export default function Footer() {
         </a>
       </div>
       <div className="flex flex-col items-center">
-        <h1>&copy; {currentYear} Airbnd, Inc.</h1>
+        <h1>&copy; {currentYear} EasyRooms, Inc.</h1>
         <h1
           onClick={() => {
             navigate("/terms");

@@ -6,7 +6,7 @@ import { UserAtom } from "../atoms/UserAtom";
 import Swal from 'sweetalert2';
 
 export default function Login() {
-  const [userEmail, setEmail] = useState("user1@gm.com");
+  const [userEmail, setEmail] = useState("owner1@gm.com");
   const [password, setPassword] = useState("123");
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserAtom);
