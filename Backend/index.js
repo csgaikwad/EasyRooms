@@ -19,28 +19,25 @@ import crypto from 'crypto';
 
 
 
-
 dotenv.config();
 
 const app = express();
 const port = 8000;
 
-app.use(
-  cors({
-    credentials: true,
-    origin: ["https://easyrooms-ssg.vercel.app","http://localhost:5173"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (["https://easyrooms-ssg.vercel.app", "http://localhost:5173"].includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-  }
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+const allowedOrigins = ["https://easyrooms-ssg.vercel.app", "http://localhost:5173"];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
 
 app.use('/uploads', express.static('uploads'));
 
