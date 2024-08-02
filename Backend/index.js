@@ -27,8 +27,7 @@ const port = 8000;
 
 app.use(
   cors({
-    // origin: ["https://easyrooms-ssg.vercel.app", "http://localhost:5173"],
-	  origin: '*', 
+    origin: ["https://easyrooms-ssg.vercel.app", "http://localhost:5173"],
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type'],
