@@ -277,7 +277,7 @@ app.post("/register", async (req, res) => {
         httpOnly: true,
         sameSite:"none",
         secure:true,
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 1000, //1day
       })
       .status(201)
       .json({ ResUserDoc, message: "User registered successfully" });
@@ -298,8 +298,8 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     const { userEmail, password } = req.body;
-    if (!password) {
-      return res.status(400).json({ error: "Password is required" });
+    if (!password || !userEmail) {
+      return res.status(400).json({ error: "Email and password are required" });
     }
 
     const user = await User.findOne({ userEmail });
@@ -325,7 +325,7 @@ app.post("/login", async (req, res) => {
         httpOnly: true,
         sameSite:"none",
         secure:true,
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 1000,  //1day
       })
       .json({ userDoc, message: "User logged in successfully" });
   } catch (error) {

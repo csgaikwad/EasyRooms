@@ -10,7 +10,7 @@
                     type="rotate"
                     attributeName="transform"
                     calcMode="spline"
-                    dur="2"
+                    dur="1.2"
                     values="0;120"
                     keyTimes="0;1"
                     keySplines="0 0 1 1"

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useRecoilStateLoadable } from "recoil";
+import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { UserAtom } from "./atoms/UserAtom";
 import { useNavigate } from "react-router-dom";
 
 export default function UserTile() {
-  const [userDataLoadable, setUserDataLoadable] = useRecoilStateLoadable(UserAtom);
+  const userDataLoadable = useRecoilValueLoadable(UserAtom);
+  const setUserData = useSetRecoilState(UserAtom);
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(false);
 
@@ -19,7 +20,7 @@ export default function UserTile() {
   async function fetchUserData() {
     try {
       const response = await axios.get("/me");
-      setUserDataLoadable(response.data);
+      setUserData(response.data);
       const userData = response.data;
       setIsAuth(userData.isAuthenticated || false);
     } catch (error) {
@@ -34,7 +35,7 @@ export default function UserTile() {
   async function logout() {
     try {
       await axios.get("/logout");
-      setUserDataLoadable({
+      setUserData({
         isAuthenticated: false,
         userEmail: "",
         username: "",

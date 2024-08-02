@@ -4,16 +4,11 @@ import Logo from "./Logo";
 import Searchbar from "./Searchbar";
 import UserProfile from "./Menu";
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
 
 export default function Navbar() {
-  const [user, setUser] = useRecoilState(UserAtom);
-  const [hideLogin,setHideLogin]= useState(false);
-  useEffect(() => {
-    window.scrollTo(0,0);
-    user.isAuthenticated && setHideLogin(user.isAuthenticated)
-  }, [user.isAuthenticated,user]);
+  const user = useRecoilValue(UserAtom);
 
   return (
     <div className="sticky flex flex-row top-0 lg:px-8 bg-white z-50 stroke-lime-50 rounded-md shadow-sm border-b-2 border-gray-300">
@@ -24,7 +19,7 @@ export default function Navbar() {
         <Logo />
       </div>
         <Searchbar />
-        {hideLogin ? (
+        {user.isAuthenticated ? (
           <></>
           ) : (
             <div className="text-lg sm:text-2xl underline text-blue-400 font-serif tracking-tighter w-auto cursor-pointer">

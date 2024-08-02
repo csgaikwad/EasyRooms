@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../atoms/UserAtom";
+import Swal from 'sweetalert2';
+
 
 export default function Register() {
   const navigate = useNavigate();
@@ -12,6 +14,8 @@ export default function Register() {
   const [password, setPassword] = useState("123");
   const [isOwner, setisOwner] = useState(false);
   const [user, setUser] = useRecoilState(UserAtom);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,6 +23,8 @@ export default function Register() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
+
 
     try {
       const userDetails = {
@@ -28,7 +34,14 @@ export default function Register() {
         isOwner,
       };
       const response = await axios.post("/register", userDetails);
-      alert(response.data.message);
+      // alert(response.data.message);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Registration Successful",
+        showConfirmButton: false,
+        timer: 800,
+      });
       if (response.data) {
         const UserAtomDetails = {
           isAuthenticated: true,
@@ -40,7 +53,15 @@ export default function Register() {
         navigate("/");
       }
     } catch (e) {
-      alert("Registeration failed.Please try again! ");
+      console.log(e);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Registration failed",
+        timer: 800,
+      });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -90,7 +111,7 @@ export default function Register() {
               required
             />
           </div>
-          {/* <div className="flex h-4 w-full items-center justify-start gap-2">
+          <div className="flex h-4 w-full items-center justify-start gap-2">
             <label>Owner Login: </label>
             <input
               className="appearance-none mt-1 align-text-bottom size-5 border-2 rounded-full focus:border-blue-500 checked:bg-blue-500 checked:border-none"
@@ -102,11 +123,19 @@ export default function Register() {
                 setisOwner(e.target.checked);
               }}
             />
-          </div> */}
+          </div>
           <button
-            className={`basicButton ${user.isOwner ? "bg-purple-500" : "bg-red-500"}`}
+            className={`basicButton ${user.isOwner ? "bg-purple-500" : "bg-red-500"} flex justify-center items-center`}
+            disabled={loading}
           >
-            Register
+            {loading ? (
+              <div className="flex items-center justify-center">
+                Loading...
+                <img className="size-8 filter invert brightness-0" src="/loader.svg" alt="loader" />
+              </div>
+            ) : (
+              "Register"
+            )}
           </button>
           <Link to="/login">
             <label className=" text-blue-400 cursor-pointer">

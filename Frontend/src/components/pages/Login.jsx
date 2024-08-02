@@ -10,6 +10,8 @@ export default function Login() {
   const [password, setPassword] = useState("123");
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserAtom);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(()=>{
     window.scrollTo(0,0)
@@ -17,6 +19,8 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
+
 
     try {
       const userDetails = {
@@ -40,8 +44,7 @@ export default function Login() {
           position: "center",
           icon: "success",
           title: "Login Successful",
-          showConfirmButton: false,
-          timer: 1200
+          timer: 800
         });
         navigate("/");
       }
@@ -52,6 +55,8 @@ export default function Login() {
         title: 'Oops...',
         text: 'Login failed. Please try again! Or try Registering...',
       });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -91,9 +96,17 @@ export default function Login() {
             />
           </div>
           <button
-            className={`basicButton ${user.isOwner ? "bg-purple-500" : "bg-red-500"}`}
+            className={`basicButton ${user.isOwner ? "bg-purple-500" : "bg-red-500"} flex justify-center items-center`}
+            disabled={loading}
           >
-            Login
+             {loading ? (
+              <div className="flex items-center justify-center">
+                Loading...
+                <img className="size-8 filter invert brightness-0" src="/loader.svg" alt="loader" />
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
           <Link to="/register">
             <label className=" cursor-pointer text-blue-400">
