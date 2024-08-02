@@ -25,6 +25,12 @@ dotenv.config();
 const app = express();
 const port = 8000;
 
+app.use(
+  cors({
+    origin: ["https://easyrooms-ssg.vercel.app/","https://airbndweb.vercel.app","http://localhost:5173"],
+    credentials: true,
+  })
+);
 app.use('/uploads', express.static('uploads'));
 
 // app.use(compression());
@@ -36,20 +42,7 @@ app.use(fileUpload({
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: ["https://easyrooms-ssg.vercel.app/","https://airbndweb.vercel.app","http://localhost:5173"],
-    credentials: true,
-  })
-);
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", ["https://easyrooms-ssg.vercel.app", "https://airbndweb.vercel.app", "http://localhost:5173"]);
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
 
 
 
