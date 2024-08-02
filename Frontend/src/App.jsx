@@ -16,7 +16,7 @@ import Places from "./components/pages/Places";
 import Terms from "./components/pages/Terms";
 import Booking from "./components/pages/Booking";
 
-axios.defaults.baseURL = "https://airbnd-airbnd.koyeb.app/";
+axios.defaults.baseURL = "easyrooms-ssg.koyeb.app/";
 // axios.defaults.baseURL = "https://airbnd-qs5d.onrender.com";
 // axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
