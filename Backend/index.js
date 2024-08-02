@@ -24,46 +24,15 @@ dotenv.config();
 const app = express();
 const port = 8000;
 
+
 app.use(
   cors({
-    origin: ["https://easyrooms-ssg.vercel.app/","http://localhost:5173"],
+    origin: ["https://easyrooms-ssg.vercel.app", "http://localhost:5173"],
     credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
   })
 );
-
-// // Custom CORS headers middleware
-// app.use((req, res, next) => {
-//   const allowedOrigins = ['http://localhost:5173', 'https://easyrooms-ssg.vercel.app'];
-//   const origin = req.headers.origin;
-
-//   if (allowedOrigins.includes(origin)) {
-//     res.setHeader('Access-Control-Allow-Origin', origin);
-//   }
-  
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-//   res.setHeader('Access-Control-Allow-Credentials', true);
-
-//   if (req.method === 'OPTIONS') {
-//     return res.status(200).end();
-//   }
-  
-//   next();
-// });
-
-// Custom CORS headers middleware
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  
-  next();
-});
 
 
 
