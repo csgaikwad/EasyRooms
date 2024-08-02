@@ -27,7 +27,7 @@ const port = 8000;
 
 app.use(
   cors({
-    origin: ["https://easyrooms-ssg.vercel.app/","https://airbndweb.vercel.app","http://localhost:5173"],
+    origin: ["https://easyrooms-ssg.vercel.app","https://airbndweb.vercel.app","http://localhost:5173"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
   })
