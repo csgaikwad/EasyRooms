@@ -31,6 +31,17 @@ app.use(
     credentials: true,
   })
 );
+
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (["https://easyrooms-ssg.vercel.app", "http://localhost:5173"].includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
 app.use('/uploads', express.static('uploads'));
 
 // app.use(compression());
