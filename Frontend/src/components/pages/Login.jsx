@@ -44,7 +44,7 @@ export default function Login() {
           position: "center",
           icon: "success",
           title: "Login Successful",
-          timer: 800
+          timer: 1000
         });
         navigate("/");
       }

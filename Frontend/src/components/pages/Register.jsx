@@ -40,7 +40,7 @@ export default function Register() {
         icon: "success",
         title: "Registration Successful",
         showConfirmButton: false,
-        timer: 800,
+        timer: 1000,
       });
       if (response.data) {
         const UserAtomDetails = {
@@ -58,7 +58,7 @@ export default function Register() {
         position: "center",
         icon: "error",
         title: "Registration failed",
-        timer: 800,
+        timer: 1000,
       });
     } finally {
       setLoading(false);
