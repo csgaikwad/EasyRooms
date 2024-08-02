@@ -34,7 +34,7 @@ const port = 8000;
 //   })
 // );
 
-app.user(cors());
+app.use(cors());
 
 app.use('/uploads', express.static('uploads'));
 
