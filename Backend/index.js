@@ -412,13 +412,14 @@ app.post("/property", async (req, res) => {
 
 // Route to get all properties
 app.get("/properties", async (req, res) => {
-  try {
-    const properties = await PropertyDetails.find();
-    res.json(properties);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "An internal server error occurred" });
-  }
+	res.send("hello");
+  // try {
+  //   const properties = await PropertyDetails.find();
+  //   res.json(properties);
+  // } catch (error) {
+  //   console.error(error);
+  //   res.status(500).json({ error: "An internal server error occurred" });
+  // }
 });
 
 
