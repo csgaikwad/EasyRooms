@@ -29,9 +29,9 @@ app.use(
   cors({
     origin: ["https://easyrooms-ssg.vercel.app/","https://airbndweb.vercel.app","http://localhost:5173"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
