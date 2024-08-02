@@ -43,6 +43,14 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", ["https://easyrooms-ssg.vercel.app", "https://airbndweb.vercel.app", "http://localhost:5173"]);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
 
 
 let instance = new Razorpay({
