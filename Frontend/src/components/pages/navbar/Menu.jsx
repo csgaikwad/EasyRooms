@@ -41,7 +41,7 @@ export default function UserProfile() {
   }, [divRef]);
 
   return (
-    <div className="flex items-center w-auto md:w-24 lg:w-auto h-10 border-2 rounded-full py-6 px-2 pl-2 gap-1 shadow-md">
+    <div className="flex items-center w-auto  h-1 border-2 rounded-full py-6 px-2 pl-3 gap-1 shadow-md">
       <div
         className="transition duration-300 ease-in-out transform hover:scale-125 cursor-pointer"
         onClick={showDivOnEvent}
@@ -52,7 +52,7 @@ export default function UserProfile() {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-5 h-5"
         >
           <path
             strokeLinecap="round"
@@ -67,7 +67,7 @@ export default function UserProfile() {
             className={`block py-2 border-2 rounded-md bg-gray-50 shadow-md p-2 absolute top-10 left-[-20px]`}
           >
             <div
-              className="border-b-2 text-xl font-serif"
+              className="border-b-2 text-md font-serif"
               onClick={() => {
                 setShowDiv(false);
                 navigate("/");
@@ -76,7 +76,7 @@ export default function UserProfile() {
               Home
             </div>
             <div
-              className="border-b-2 text-xl font-serif"
+              className="border-b-2 text-md font-serif"
               onClick={() => {
                 setShowDiv(false);
                 navigate("/login");
@@ -85,7 +85,7 @@ export default function UserProfile() {
               Login
             </div>
             <div
-              className="text-xl font-serif"
+              className="text-md font-serif"
               onClick={() => {
                 setShowDiv(false);
                 navigate("/profile");
@@ -105,7 +105,7 @@ export default function UserProfile() {
           <div className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-110">
             <Avatar
               name={user.username}
-              size="40"
+              size="35"
               round={true}
               color={`${user.isOwner ? "#8B5CF6" : "#EF4444"}`}
               fgColor="#fff"
@@ -113,12 +113,12 @@ export default function UserProfile() {
             />
           </div>
         ) : (
-          <div className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-125">
+          <div className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-125 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="gray"
-              className="w-10 h-10"
+              className="size-8"
             >
               <path
                 fillRule="evenodd"

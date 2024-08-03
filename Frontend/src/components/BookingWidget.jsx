@@ -122,7 +122,7 @@ export default function BookingWidget(props) {
   }, [checkIn, checkOut, numGuests, props.price]);
 
   return (
-    <div className="flex flex-col justify-center items-center py-10">
+    <div className="flex flex-col justify-center items-center py-5">
       <h1 className=" text-xl lg:text-[2rem] font-sans font-semibold mb-4 text-center">
         <span className=" text-yellow-500 font-serif">🎉10% off🎉 </span> <br />
         <br />
@@ -177,6 +177,9 @@ export default function BookingWidget(props) {
           <label className="text-lg font-semibold text-gray-700 my-1">
             Number Of Guests
           </label>
+          <h4 className="mb-2 text-sm font-semibold text-red-400">
+          * Max Guests : {props.numberOfGuests} *
+        </h4>
           <div className="flex justify-center w-full gap-2 mt-2 ">
             <button
               className=" rounded-full p-2 cursor-pointer bg-gray-400 shadow-sm outline-none  size-10  hover:scale-105 duration-300 "
@@ -201,11 +204,8 @@ export default function BookingWidget(props) {
             </button>
           </div>
         </div>
-        <h4 className="mb-2 text-sm font-semibold text-red-400">
-          * Max Guests : {props.numberOfGuests} *
-        </h4>
 
-        <h1 className="flex justify-center text-2xl font-semibold text-gray-700 pl-3 m-1">
+        <h1 className="flex justify-center text-2xl font-semibold text-gray-700 pl-3 m-1 underline">
           Total Amount: ₹ {totalAmount}
         </h1>
       </div>

@@ -45,7 +45,7 @@ html {
 }
 
 label {
-  @apply text-xl text-gray-500 font-serif ml-4;
+  @apply text-lg text-gray-500 font-serif ml-4;
 }
 
 input:not([type="checkbox"]):not(#num-Guest) {

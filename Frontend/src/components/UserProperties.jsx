@@ -36,23 +36,23 @@ export default function UserProperties() {
     }
   }, [user.isOwner, user.id, properties]);
   return (
-    <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-10  my-4 justify-items-center p-4 ">
+    <div className="block md:grid grid-cols-1  xl:grid-cols-2  gap-10  my-4 justify-items-center px-10 ">
       {userProperties.map((property) => (
         <div
           key={property._id}
-          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-2 cursor-pointer size-full pb-4  "
+          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-[102%] hover:z-10 hover:border-white hover:border-2 cursor-pointer size-full pb-4  "
         >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
               <div
-                className="md:min-w-44 sm:min-h-60 max-w-96  m-2 "
+                className="md:min-w-40 sm:min-h-60 max-w-96  m-2 "
                 key={index}
                 onClick={() => {
                   navigate("/places/" + property._id);
                 }}
               >
                 <img
-                  className="rounded-xl size-60 md:size-72 object-cover shadow-sm"
+                  className="rounded-xl size-52 md:size-60 object-cover shadow-sm"
                   src={photoUrl}
                   alt={`Property ${index}`}
                 />
@@ -65,13 +65,13 @@ export default function UserProperties() {
               navigate("/places/" + property._id);
             }}
           >
-            <h2 className="md:text-xl font-semibold whitespace-nowrap truncate max-w-80 ">
+            <h2 className="md:text-lg font-semibold whitespace-nowrap truncate max-w-80 ">
               {property.title}
             </h2>
             <p className="text-gray-600 whitespace-nowrap truncate max-w-80">
               {property.location}
             </p>
-            <p className="text-gray-600 text-lg ">
+            <p className="text-gray-600 text-md ">
               <span className="text-black font-semibold font-serif">
                 ₹ {property.price}
               </span>
@@ -81,14 +81,14 @@ export default function UserProperties() {
           </div>
           <div className=" w-full mt-8 absolute bottom-0 flex items-end justify-center">
             <div
-              className="hidden sm:flex  w-full  items-center justify-center font-serif font-semibold text-xl bg-red-500 opacity-50 hover:opacity-100 rounded-2xl "
+              className="hidden sm:flex  w-full  items-center justify-center font-serif font-semibold text-xl bg-red-500 opacity-50 hover:opacity-100 rounded-lg "
               onClick={() => {
                 navigate("/property/" + property._id);
               }}
             >
               <span className="opacity-100">Edit </span>
               <img
-                className=" border-2 border-white m-2 size-8   transition-transform duration-300 transform hover:scale-125 hover:z-10   cursor-pointer rounded-full p-1"
+                className=" border-2 border-white m-2 size-8   transition-transform duration-300 transform hover:scale-105 hover:z-10   cursor-pointer rounded-full p-1"
                 src="/pencil.svg"
                 alt="edit"
               />

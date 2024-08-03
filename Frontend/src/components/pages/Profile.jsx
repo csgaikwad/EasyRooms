@@ -15,7 +15,7 @@ export default function Profile() {
       <div className="flex flex-col lg:flex-row items-center justify-center gap-4 pt-2 pb-7">
         {user.isOwner && (
           <div
-            className=" flex px-8 pr-4 gap-3 my-2 cursor-pointer bg-purple-500 hover:bg-purple-700 rounded-full h-14 max-w-72  items-center justify-around text-white text-xl"
+            className=" flex px-8 pr-4 gap-3 my-2 cursor-pointer bg-purple-500 hover:bg-purple-700 rounded-full h-12 max-w-72  items-center justify-around text-white text-xl"
             onClick={() => {
               navigate("/property");
             }}
@@ -31,7 +31,7 @@ export default function Profile() {
             user.isOwner
               ? "bg-purple-500 hover:bg-purple-700"
               : "bg-red-500 hover:bg-red-700"
-          } rounded-full h-14 flex items-center justify-around text-white text-xl max-w-72`}
+          } rounded-full h-12 flex items-center justify-around text-white text-xl max-w-72`}
           onClick={() => {
             navigate(`/booking/${user.id}`)
           }}
@@ -39,13 +39,13 @@ export default function Profile() {
           <p>My Bookings</p>
         </div>
       </div>
-      <div className={`flex flex-col items-center  lg:grid  ${user.isOwner ? "grid-cols-[1fr,4fr]" : "grid-cols-1 place-items-center" } gap-4`}>
-        <div className="w-72 sm:w-auto">
+      <div className={`flex flex-col items-center  lg:grid  ${user.isOwner ? "grid-cols-[1fr,3fr]" : "grid-cols-1 place-items-center" } gap-6 px-10`}>
+        <div className="w-72 ">
 
         <UserTile />
         </div>
         {user.isOwner && (
-          <div className="bg-purple-200 h-[60rem] min-w-40 border-2 border-gray-200 shadow-lg rounded-xl overflow-y-scroll customScrollbar">
+          <div className="bg-purple-200 h-[40rem] min-w-40 border-2 border-gray-200 shadow-lg rounded-xl overflow-y-scroll customScrollbar">
             <UserProperties />
           </div>
         )}

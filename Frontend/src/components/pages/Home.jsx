@@ -69,8 +69,8 @@ export default function Home() {
                 baseColor="#c8cddb"
                 highlightColor="white"
                 key={index}
-                height={300}
-                width={415}
+                height={295}
+                width={370}
                 borderRadius={15}
               />
             </div>
@@ -81,8 +81,8 @@ export default function Home() {
                 baseColor="#c8cddb"
                 highlightColor="white"
                 key={index}
-                height={300}
-                width={415}
+                height={295}
+                width={370}
                 borderRadius={15}
               />
             </div>
@@ -94,7 +94,7 @@ export default function Home() {
                 highlightColor="white"
                 key={index}
                 height={200}
-                width={300}
+                width={280}
                 borderRadius={15}
               />
             </div>
@@ -105,14 +105,14 @@ export default function Home() {
           variants={variants}
           initial="before"
           animate="after"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4 m-4 sm:m-8 justify-items-center"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-5 m-4 sm:m-8 justify-items-center"
         >
           {shuffledProperties.map((property, index) => (
             <motion.div
               variants={item}
               key={property._id + index}
-              whileHover={{ scale: 1.05 }}
-              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[30rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-105 cursor-pointer"
+              whileHover={{ scale: 1.01 }}
+              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[23rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-105 cursor-pointer"
             >
               <Carousel
                 showThumbs={false}
@@ -124,7 +124,7 @@ export default function Home() {
                 {property.propertyPhotos.map((photoUrl, index) => (
                   <div className="" key={index}>
                     <img
-                      className="rounded-xl size-60 lg:size-72  shadow-sm "
+                      className="rounded-xl size-60 lg:size-68  shadow-sm "
                       src={photoUrl}
                       alt={`Property ${index}`}
                     />
@@ -132,7 +132,7 @@ export default function Home() {
                 ))}
               </Carousel>
               <div
-                className="px-5 mt-2 hover:bg-gray-200 rounded-md py-4"
+                className="px-5 mt-2 hover:bg-gray-200 rounded-md py-2"
                 onClick={() => {
                   user.isAuthenticated
                     ? navigate(`/places/${property._id}`)
@@ -142,10 +142,10 @@ export default function Home() {
                 <h2 className="text-md sm:text-lg font-semibold whitespace-nowrap truncate max-w-80">
                   {property.title}
                 </h2>
-                <p className="text-gray-600 whitespace-nowrap truncate max-w-72 text-md sm:text-lg">
+                <p className="text-gray-600 whitespace-nowrap truncate max-w-72 text-md ">
                   {property.location}
                 </p>
-                <p className="text-gray-600 text-md sm:text-lg">
+                <p className="text-gray-600 text-md lg:text-lg">
                   <span className="text-black font-semibold font-sans">
                     ₹{property.price}
                   </span>{" "}

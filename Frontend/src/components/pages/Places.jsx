@@ -42,15 +42,15 @@ export default function Places() {
   };
 
   return (
-    <div key={reqId} className="min-h-screen py-10 px-2 lg:px-20 mb-20">
+    <div key={reqId} className="min-h-screen py-5 px-2 lg:px-20 mb-20">
       {selectedProperty ? (
         <>
           <div>
-            <h1 className="text-[1.2rem] sm:text-[1.8rem] pl-2 font-semibold font-sans text-black cursor-text">
+            <h1 className="text-[1rem] sm:text-[1.8rem] pl-2 font-serif  text-gray-700 cursor-text">
               {selectedProperty.title}
             </h1>
           </div>
-          <div className=" lg:grid grid-cols-4 grid-rows-2 gap-4 lg:h-[28rem] w-full py-8">
+          <div className=" lg:grid grid-cols-4 grid-rows-2 gap-4 lg:h-[25rem] w-full py-4">
             <img
               src={selectedProperty.propertyPhotos[0]}
               alt="Property Image"
@@ -70,7 +70,7 @@ export default function Places() {
           </div>
           <div className="flex flex-col lg:grid grid-cols-2 gap-2">
             <div>
-              <div className="sm:text-[1.4rem] font-semibold font-sans text-black">
+              <div className="sm:text-[1.2rem] font-semibold font-sans text-gray-600">
                 <a
                   href={`https://www.google.com/maps/search/${/\bin\b/.test(selectedProperty.location) ? selectedProperty.location.split(/\bin\b/)[1].trim() : selectedProperty.location}`}
                   target="_blank"
@@ -80,7 +80,7 @@ export default function Places() {
                     src="/LocationPin.svg"
                     alt="Location"
                   />
-                  <p className="inline">{selectedProperty.location} <span className="text-gray-500 text-md">(Click here to see the location)</span></p>
+                  <p className="inline">{selectedProperty.location} <span className="text-gray-600 text-sm">(Click here to see the location)</span></p>
                 </a>
               </div>
               <div className="md:text-[1.1rem] text-gray-500 px-2 py-4">
@@ -177,7 +177,7 @@ export default function Places() {
             {selectedProperty.propertyPhotos.map((photo, index) => {
               return (
                 <img
-                  className="rounded-xl lg:h-[40rem] lg:w-[60rem]"
+                  className="rounded-xl lg:h-[28rem] lg:w-[48rem]"
                   key={index}
                   src={photo}
                 />

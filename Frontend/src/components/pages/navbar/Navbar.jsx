@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Logo from "./Logo";
 import Searchbar from "./Searchbar";
 import UserProfile from "./Menu";
@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <div className="sticky flex flex-row top-0 lg:px-8 bg-white z-50 stroke-lime-50 rounded-md shadow-sm border-b-2 border-gray-300">
-      <div className="flex  flex-row w-full h-16 lg:h-auto flex-nowrap  items-center gap-3 justify-around py-5 lg:p-5 px-8">
+      <div className="flex  flex-row w-full  flex-nowrap  items-center gap-3 justify-around  lg:p-5 px-8">
 
       <div>
 
@@ -22,7 +22,7 @@ export default function Navbar() {
         {user.isAuthenticated ? (
           <></>
           ) : (
-            <div className="text-lg sm:text-2xl underline text-blue-400 font-serif tracking-tighter w-auto cursor-pointer">
+            <div className="text-lg  underline text-blue-400 font-serif tracking-tighter w-auto cursor-pointer">
             <Link to={"/login"}>Login</Link>
           </div>
         )}
