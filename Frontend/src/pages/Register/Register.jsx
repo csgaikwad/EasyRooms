@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { UserAtom } from "../atoms/UserAtom";
+import { UserAtom } from "../../atoms/UserAtom";
 import Swal from 'sweetalert2';
 
 

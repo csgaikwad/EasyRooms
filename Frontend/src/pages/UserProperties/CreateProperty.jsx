@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { PropertyAtom } from "./atoms/PropertyAtom";
+import { PropertyAtom } from "../../atoms/PropertyAtom";
 
 export default function CreateProperties() {
   const [selectedFiles, setSelectedFiles] = useState([]);

@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { PropertyAtom } from "../atoms/PropertyAtom";
 import axios from "axios";
-import BookingWidget from "../BookingWidget";
-import { UserAtom } from "../atoms/UserAtom";
+import BookingWidget from "./BookingWidget";
+import { PropertyAtom } from "../../atoms/PropertyAtom";
+import { UserAtom } from "../../atoms/UserAtom";
 
 export default function Places() {
   const [selectedProperty, setSelectedProperty] = useState(null);

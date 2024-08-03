@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
 import Avatar from "react-avatar";
-import { fetchData } from "../../functions/fetchData";
+import fetchData  from "../../utils/fetchData";
 
 export default function UserProfile() {
   const navigate = useNavigate();

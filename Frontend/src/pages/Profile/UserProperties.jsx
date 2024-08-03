@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { PropertyAtom } from "./atoms/PropertyAtom";
 import { Carousel } from "react-responsive-carousel";
-import { UserAtom } from "./atoms/UserAtom";
+import { PropertyAtom } from "../../atoms/PropertyAtom";
+import { UserAtom } from "../../atoms/UserAtom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

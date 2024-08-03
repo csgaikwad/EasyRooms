@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { UserAtom } from "../atoms/UserAtom";
-import UserTile from "../UserTile";
-import UserProperties from "../UserProperties";
+import { UserAtom } from "../../atoms/UserAtom";
+import UserTile from "./UserTile";
+import UserProperties from "./UserProperties";
 
 export default function Profile() {
   const user = useRecoilValue(UserAtom);

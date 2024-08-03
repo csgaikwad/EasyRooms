@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 export default function Terms() {
-    useEffect(()=>{
-        window.scrollTo(0,0)
-    },[]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
-    <div className='h-auto my-4 px-4 font-serif text-lg'>
-      <pre className='whitespace-nowrap'>{`
+    <div className="p-10 my-4 mx-auto font-medium text-lg">
+      <pre className="whitespace-pre-wrap bg-gray-100 p-6 rounded-lg shadow-md">{`
 Terms and Conditions:
 
 Last updated on Mar 29 2024

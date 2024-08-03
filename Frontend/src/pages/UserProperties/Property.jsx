@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValueLoadable } from "recoil";
-import { UserAtom } from "../atoms/UserAtom";
+import { UserAtom } from "../../atoms/UserAtom";
 import { useNavigate } from "react-router-dom";
-import CreateProperties from "../CreateProperty";
+import CreateProperties  from "./CreateProperty";
 
-export function Property() {
+export default function Property() {
   const userDataLoadable = useRecoilValueLoadable(UserAtom);
   const [userAuth, setUserAuth] = useState(false);
   const navigate = useNavigate();
@@ -37,7 +37,8 @@ export function Property() {
         ) : (
           <div className="h-screen flex items-center">
             <h1 className="text-2xl text-red-500">
-              Unauthorized access. Please log in as an owner or try refreshing the page.
+              Unauthorized access. Please log in as an owner or try refreshing
+              the page.
             </h1>
           </div>
         )}

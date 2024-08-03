@@ -1,20 +1,21 @@
 import React, { useEffect } from "react";
-import { Routes, Route, BrowserRouter, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import Navbar from "./components/pages/navbar/Navbar";
-import Footer from "./components/pages/Footer";
-import Home from "./components/pages/Home";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
-import Profile from "./components/pages/Profile";
-import { fetchData } from "./components/functions/fetchData";
 import { useRecoilState } from "recoil";
-import { UserAtom } from "./components/atoms/UserAtom";
+import { UserAtom } from "./atoms/UserAtom";
 import axios from "axios";
-import { Property } from "./components/pages/Property";
-import Places from "./components/pages/Places";
-import Terms from "./components/pages/Terms";
-import Booking from "./components/pages/Booking";
+import Navbar from "./layout/Navbar/Navbar";
+import Footer from "./layout/Footer/Footer";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Profile from "./pages/Profile/Profile";
+import Property from "./pages/UserProperties/Property";
+import Places from "./pages/Places/Places";
+import Booking from "./pages/Booking/Booking";
+import Terms from "./layout/Footer/Terms";
+import fetchData from "./utils/fetchData";
+import useScrollToTop from "./utils/scrollToTop";
 
 axios.defaults.baseURL = "https://easyrooms-ssg.koyeb.app";
 // axios.defaults.baseURL = "https://airbnd-qs5d.onrender.com";
@@ -35,6 +36,9 @@ export default function App() {
     }
     fetchDataOnLoad();
   }, []);
+
+
+  useScrollToTop();
 
   const pageVariants = {
     initial: {

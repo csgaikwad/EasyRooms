@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function fetchData(setUserAtom) {
+export default async function fetchData(setUserAtom) {
   try {
     const response = await axios.get("/me");
     if (response.data.userEmail) {

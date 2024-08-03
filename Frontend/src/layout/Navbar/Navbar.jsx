@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import Logo from "./Logo";
-import Searchbar from "./Searchbar";
+import Searchbar from "./Searchbar.jsx";
 import UserProfile from "./Menu";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";

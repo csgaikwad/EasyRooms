@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
-import { UserAtom } from "./atoms/UserAtom";
+import { UserAtom } from "../../atoms/UserAtom";
 import { useNavigate } from "react-router-dom";
 
 export default function UserTile() {
