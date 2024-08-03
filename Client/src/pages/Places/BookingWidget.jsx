@@ -45,7 +45,7 @@ export default function BookingWidget(props) {
   const handleBook = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("/processPayment", {
+      const response = await axios.post("/payment/process", {
         totalAmount: totalAmount,
       });
 
@@ -59,7 +59,7 @@ export default function BookingWidget(props) {
         image: "/logo2.svg",
         order_id: response.data.order.id,
         handler: function (response) {
-          axios.post("/verify", { response: response }).then((res) => {
+          axios.post("/payment/verify", { response: response }).then((res) => {
             if (res.data) {
               axios
                 .post("/booking", {

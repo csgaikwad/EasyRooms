@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { PropertyAtom } from "../../atoms/PropertyAtom";
+import {UserAtom} from "../../atoms/UserAtom"
 
 export default function CreateProperties() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -21,6 +22,7 @@ export default function CreateProperties() {
 
   const { id } = useParams();
   const propertyAtom = useRecoilValue(PropertyAtom);
+  const user = useRecoilValue(UserAtom);
   const [selectedProperty, setSelectedProperty] = useState();
 
   const navigate = useNavigate();
@@ -112,7 +114,7 @@ export default function CreateProperties() {
         const formData = new FormData();
         formData.append("propertyPhoto", selectedFile);
 
-        const res = await axios.post("/preview", formData, {
+        const res = await axios.post("/properties/preview", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         const imageUrl = res.data.imageUrl;
@@ -140,11 +142,12 @@ export default function CreateProperties() {
       pets,
       entrance,
       propertyPhotos: previews,
+      user,
     };
 
     if (id) {
       try {
-        const res = await axios.put(`/property/${id}`, propertyData);
+        const res = await axios.put(`/properties/${id}`, propertyData);
         alert(res.data.message);
         navigate("/profile");
       } catch (error) {
@@ -155,7 +158,7 @@ export default function CreateProperties() {
 
     } else {
       try {
-        const res = await axios.post("/property", propertyData);
+        const res = await axios.post("/properties", propertyData);
         alert(res.data.message);
         navigate("/profile");
       } catch (error) {

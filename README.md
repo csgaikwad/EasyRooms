@@ -39,11 +39,11 @@ To run this project locally, follow these steps:
 2. Install dependencies:
 
    ```
-   // (cd into /frontend)
+   // (cd into /Client)
    npm install
    ```
    ```
-   // (cd into /backend)
+   // (cd into /Server)
    npm install
    ```
 3. Set up environment variables:
@@ -54,11 +54,11 @@ To run this project locally, follow these steps:
 4. Start the development servers:
 
    ```
-   // Start the client (React) server (cd into /frontend)
-   npm start
+   // Start the client (React) server (cd into /Client)
+   npm run dev
    ```
    ```
-   // Start the server (Node.js/Express) server (cd into /backend)
+   // Start the server (Node.js/Express) server (cd into /server)
    node start
    ```
 
