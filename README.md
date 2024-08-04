@@ -39,11 +39,11 @@ To run this project locally, follow these steps:
 2. Install dependencies:
 
    ```
-   // (cd into /Client)
+   cd EasyRooms/Client
    npm install
    ```
    ```
-   // (cd into /Server)
+   cd ../Server
    npm install
    ```
 3. Set up environment variables:
@@ -59,7 +59,7 @@ To run this project locally, follow these steps:
    ```
    ```
    // Start the server (Node.js/Express) server (cd into /server)
-   node start
+   node index.js
    ```
 
 
