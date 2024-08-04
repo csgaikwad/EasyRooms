@@ -1,14 +1,18 @@
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
-import config  from '../config/config.js';
+import instance  from '../config/razorpay.js';
+import config from '../config/config.js';
 
-const razorpayInstance = new Razorpay({
-  key_id: config.secrets.razorpay.id,
-  key_secret: config.secrets.razorpay.secret
-});
+
+
 
 export async function processPayment(req, res) {
-  const { amount } = req.body;
+  const { totalAmount : amount } = req.body;
+  if (!amount || amount <= 0) {
+    return res.status(400).json({
+      error: "Invalid amount. Amount must be a positive number."
+    });
+  }
   try {
     const options = {
       amount: amount * 100, // amount in paise
@@ -16,7 +20,7 @@ export async function processPayment(req, res) {
       receipt: crypto.randomBytes(10).toString("hex"),
     };
 
-    const order = await razorpayInstance.orders.create(options);
+    const order = await instance.orders.create(options);
     res.status(200).json({ order });
   } catch (error) {
     console.error("Error processing payment:", error);
@@ -25,12 +29,12 @@ export async function processPayment(req, res) {
 }
 
 export async function verifyPayment(req, res) {
-  const { paymentId, orderId, signature } = req.body;
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body.response;
   const generatedSignature = crypto.createHmac('sha256', config.secrets.razorpay.secret)
-    .update(`${orderId}|${paymentId}`)
+    .update(`${razorpay_order_id}|${razorpay_payment_id}`)
     .digest('hex');
 
-  if (generatedSignature === signature) {
+  if (generatedSignature === razorpay_signature) {
     res.status(200).json({ message: "Payment verified successfully" });
   } else {
     res.status(400).json({ error: "Payment verification failed" });

@@ -41,7 +41,7 @@ export default function Booking() {
         pastBookingsRef.current.scrollIntoView({
           behavior: "smooth",
         });
-      }, 500);
+      }, 1);
     }
   }, [showPast]);
 
@@ -92,14 +92,14 @@ export default function Booking() {
                 ))
               ) : (
                 <div
-                  className="h-[18rem] bg-gray-200 flex flex-col justify-center items-center pb-10 cursor-pointer rounded-md"
+                  className="h-[18rem] bg-gray-200 flex flex-col justify-center items-center text-center pb-10 cursor-pointer rounded-md"
                   onClick={() => navigate("/")}
                 >
-                  <p className="text-[2rem] font-serif text-gray-600 font-semibold">
+                  <p className="text-[1.8rem] font-serif text-gray-600 font-semibold">
                     No bookings found
                   </p>
-                  <p className="text-[2rem] font-serif text-gray-600 font-semibold">
-                    Click here to book some properties
+                  <p className="text-[1.8rem] font-serif text-gray-600 font-semibold">
+                    Click here to see some properties
                   </p>
                 </div>
               )}
