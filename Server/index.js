@@ -45,8 +45,6 @@ app.use("/booking", bookingRoutes);
 app.use("/properties", propertyRoutes);
 app.use("/payment", paymentRoutes);
 
-// Error Handling Middleware
-// app.use(errorHandler);  // Ensure you have this middleware defined
 
 // Start the server
 app.listen(config.server.port, () => {
