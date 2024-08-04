@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <div className="sticky flex flex-row top-0 lg:px-8 bg-white z-50 stroke-lime-50 rounded-md shadow-sm border-b-2 border-gray-300">
-      <div className="flex  flex-row w-full  flex-nowrap  items-center gap-3 justify-around  lg:p-5 px-8">
+      <div className="flex  flex-row w-full  flex-nowrap  items-center gap-3 justify-around   px-8">
 
       <div>
 

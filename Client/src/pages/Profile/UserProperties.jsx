@@ -40,19 +40,19 @@ export default function UserProperties() {
       {userProperties.map((property) => (
         <div
           key={property._id}
-          className=" shadow-xl rounded-xl  max-w-96 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-[102%] hover:z-10 hover:border-white hover:border-2 cursor-pointer size-full pb-4  "
+          className=" shadow-xl rounded-xl  max-w-80 bg-transparent my-5 border-2 bg-white transition-transform duration-300 transform hover:scale-[102%] hover:z-10 hover:border-white hover:border-2 cursor-pointer size-full   "
         >
           <Carousel showThumbs={false} showStatus={false} showIndicators={true}>
             {property.propertyPhotos.map((photoUrl, index) => (
               <div
-                className="md:min-w-40 sm:min-h-60 max-w-96  m-2 "
+                className="md:min-w-36 sm:min-h-52 max-w-80  m-2 "
                 key={index}
                 onClick={() => {
                   navigate("/places/" + property._id);
                 }}
               >
                 <img
-                  className="rounded-xl size-52 md:size-60 object-cover shadow-sm"
+                  className="rounded-xl size-52 md:w-52 object-cover shadow-sm"
                   src={photoUrl}
                   alt={`Property ${index}`}
                 />
@@ -60,12 +60,12 @@ export default function UserProperties() {
             ))}
           </Carousel>
           <div
-            className="px-5 mt-2 "
+            className="px-5 my-1 "
             onClick={() => {
               navigate("/places/" + property._id);
             }}
           >
-            <h2 className="md:text-lg font-semibold whitespace-nowrap truncate max-w-80 ">
+            <h2 className="md:text-md font-semibold whitespace-nowrap truncate max-w-80 ">
               {property.title}
             </h2>
             <p className="text-gray-600 whitespace-nowrap truncate max-w-80">
@@ -81,14 +81,14 @@ export default function UserProperties() {
           </div>
           <div className=" w-full mt-8 absolute bottom-0 flex items-end justify-center">
             <div
-              className="hidden sm:flex  w-full  items-center justify-center font-serif font-semibold text-xl bg-red-500 opacity-50 hover:opacity-100 rounded-lg "
+              className="hidden sm:flex  w-full  items-center justify-center font-serif font-semibold text-lg bg-red-500 opacity-50 hover:opacity-100 rounded-lg "
               onClick={() => {
                 navigate("/property/" + property._id);
               }}
             >
               <span className="opacity-100">Edit </span>
               <img
-                className=" border-2 border-white m-2 size-8   transition-transform duration-300 transform hover:scale-105 hover:z-10   cursor-pointer rounded-full p-1"
+                className=" border-2 border-white my-2 size-6   transition-transform duration-300 transform hover:scale-105 hover:z-10   cursor-pointer rounded-full p-1"
                 src="/pencil.svg"
                 alt="edit"
               />

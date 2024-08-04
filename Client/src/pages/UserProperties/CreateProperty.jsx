@@ -3,7 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { PropertyAtom } from "../../atoms/PropertyAtom";
-import {UserAtom} from "../../atoms/UserAtom"
+import { UserAtom } from "../../atoms/UserAtom";
+import {
+  handleFileChange,
+  handleDeleteImage,
+  handleSubmit,
+  handleDeleteProperty,
+} from "./Utils";
 
 export default function CreateProperties() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -26,7 +32,6 @@ export default function CreateProperties() {
   const [selectedProperty, setSelectedProperty] = useState();
 
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const fetchPropertyData = async () => {
@@ -102,72 +107,104 @@ export default function CreateProperties() {
     }
   };
 
-  const handleFileChange = async (event) => {
-    const selectedFile = event.target.files[0];
-    const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
+  // const handleFileChange = async (event) => {
+  //   const selectedFile = event.target.files[0];
+  //   const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
 
-    if (selectedFile && selectedFile.size > maxSizeInBytes) {
-      alert("File size exceeds the maximum allowed size (10MB).");
-      event.target.value = "";
-    } else {
-      try {
-        const formData = new FormData();
-        formData.append("propertyPhoto", selectedFile);
+  //   if (selectedFile && selectedFile.size > maxSizeInBytes) {
+  //     alert("File size exceeds the maximum allowed size (10MB).");
+  //     event.target.value = "";
+  //   } else {
+  //     try {
+  //       const formData = new FormData();
+  //       formData.append("propertyPhoto", selectedFile);
 
-        const res = await axios.post("/properties/preview", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-        const imageUrl = res.data.imageUrl;
-        setPreviews([...previews, imageUrl]);
-        setSelectedFiles([...selectedFiles, selectedFile]);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
+  //       const res = await axios.post("/properties/preview", formData, {
+  //         headers: { "Content-Type": "multipart/form-data" },
+  //       });
+  //       const imageUrl = res.data.imageUrl;
+  //       setPreviews([...previews, imageUrl]);
+  //       setSelectedFiles([...selectedFiles, selectedFile]);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleDeleteImage = async (event, index) => {
+  //   event.preventDefault();
+  //   try {
+  //     const url = previews[index];
+  //     const response = await axios.delete(`/properties/deletePhoto`, {
+  //       data: { url, propertyId: id },
+  //     });
+  //     const updatedPreviews = [...previews];
+  //     updatedPreviews.splice(index, 1);
+  //     setPreviews(updatedPreviews);
+  //     if (response.data && response.data.message) {
+  //       alert(response.data.message);
+  //     }
+  //   } catch (error) {
+  //     alert("image could not be deleted");
+  //     console.error("Error deleting image:", error);
+  //   }
+  // };
 
-    const propertyData = {
-      title,
-      location,
-      details,
-      price,
-      numberOfGuests: parseInt(numberOfGuests),
-      wifi,
-      parking,
-      tv,
-      radio,
-      pets,
-      entrance,
-      propertyPhotos: previews,
-      user,
-    };
+  // const handleDeleteProperty = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const propertyId = id;
+  //     const response = await axios.delete(`/properties/deleteProperty`, {
+  //       data: { propertyId },
+  //     });
+  //     if (response.data && response.data.message) {
+  //       alert(response.data.message);
+  //     }
+  //     navigate("/");
+  //   } catch (error) {
+  //     alert("image could not be deleted");
+  //     console.error("Error deleting image:", error);
+  //   }
+  // };
 
-    if (id) {
-      try {
-        const res = await axios.put(`/properties/${id}`, propertyData);
-        alert(res.data.message);
-        navigate("/profile");
-      } catch (error) {
-        console.error(error);
-      }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
+  //   const propertyData = {
+  //     title,
+  //     location,
+  //     details,
+  //     price,
+  //     numberOfGuests: parseInt(numberOfGuests),
+  //     wifi,
+  //     parking,
+  //     tv,
+  //     radio,
+  //     pets,
+  //     entrance,
+  //     propertyPhotos: previews,
+  //     user,
+  //   };
 
-
-    } else {
-      try {
-        const res = await axios.post("/properties", propertyData);
-        alert(res.data.message);
-        navigate("/profile");
-      } catch (error) {
-        alert("Error occured,try allowing cookies")
-        console.error(error);
-      }
-    }
-  };
-
+  //   if (id) {
+  //     try {
+  //       const res = await axios.put(`/properties/${id}`, propertyData);
+  //       alert(res.data.message);
+  //       navigate("/");
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   } else {
+  //     try {
+  //       const res = await axios.post("/properties", propertyData);
+  //       alert(res.data.message);
+  //       navigate("/profile");
+  //     } catch (error) {
+  //       alert("Error occured,try allowing cookies");
+  //       console.error(error);
+  //     }
+  //   }
+  // };
   return (
     <div className=" lg:h-auto lg:w-full rounded-xl">
       <div className="py-8 flex items-center justify-center">
@@ -186,7 +223,9 @@ export default function CreateProperties() {
               id="file-upload"
               type="file"
               name="propertyPhoto"
-              onChange={handleFileChange}
+              onChange={(e) =>
+                handleFileChange(e, setPreviews, setSelectedFiles)
+              }
               multiple
             />
           </label>
@@ -197,7 +236,7 @@ export default function CreateProperties() {
               {previews.map((preview, index) => (
                 <div className="relative shrink-0 bg-cover" key={index}>
                   <img
-                    className="shrink-0 rounded-xl size-56 sm:w-80 sm:h-72 "
+                    className="shrink-0 rounded-xl size-52 sm:w-72 sm:h-64 "
                     src={preview}
                     alt={`Preview ${index} `}
                   />
@@ -217,6 +256,14 @@ export default function CreateProperties() {
                       alt="star"
                     />
                   </div>
+                  <button
+                    className="absolute top-2 right-4 size-10 flex items-center justify-center bg-red-600 opacity-60  hover:bg-red-600 hover:opacity-90 hover:scale-110 rounded-full pb-1 cursor-pointer duration-200"
+                    onClick={(event) =>
+                      handleDeleteImage(event, index, previews, setPreviews, id)
+                    }
+                  >
+                    <img className="size-7 " src="/trash.svg" alt="delete" />
+                  </button>
                 </div>
               ))}
             </div>
@@ -368,11 +415,41 @@ export default function CreateProperties() {
             </div>
           </div>
           <button
-            className="basicButton bg-purple-500 lg:w-1/2 mb-20 hover:bg-purple-700"
-            onClick={(e) => handleSubmit(e)}
+            className="basicButton bg-purple-500 lg:w-1/2 mb-10 hover:bg-purple-700"
+            onClick={(e) =>
+              handleSubmit(
+                e,
+                id,
+                {
+                  title,
+                  location,
+                  details,
+                  price,
+                  numberOfGuests,
+                  wifi,
+                  parking,
+                  tv,
+                  radio,
+                  pets,
+                  entrance,
+                  propertyPhotos: previews,
+                  user,
+                },
+                navigate
+              )
+            }
           >
             Save
           </button>
+
+          {id && (
+            <button
+              className="bg-red-500 text-lg text-white py-2 px-4 hover:scale-105 cursor-pointer mb-10 rounded-full lg:w-1/3 duration-200"
+              onClick={(e) => handleDeleteProperty(e, id, navigate)}
+            >
+              Delete Property
+            </button>
+          )}
         </form>
       </div>
     </div>

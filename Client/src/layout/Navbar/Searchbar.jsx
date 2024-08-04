@@ -9,7 +9,7 @@ export default function Searchbar() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      if (scrollPosition < 50) {
+      if (scrollPosition === 0) {
         setShowFirstBar(true);
       } else {
         setShowFirstBar(false);
@@ -25,7 +25,7 @@ export default function Searchbar() {
   return (
     <div className="hidden  md:w-125 lg:flex w-[70%] items-center justify-center gap-4  ">
       {showFirstBar ? (
-        <div className=" overflow-hidden searching hidden md:flex w-full items-center justify-around gap-2 rounded-full border p-2 shadow-md ">
+        <div className=" overflow-hidden searching hidden md:flex w-full items-center justify-around gap-2 rounded-full border p-2 shadow-md my-4">
           <div className=" searching text-sm hoverable-item w-[25%] p-1 pl-2 text-center font-serif cursor-pointer">
             Where
           </div>
