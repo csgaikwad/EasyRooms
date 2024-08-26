@@ -60,7 +60,7 @@ export default function Booking() {
                 bookingRes.map((booking, index) => (
                   <div
                     key={index}
-                    className="flex flex-col md:flex-row gap-6 h-48 bg-gray-100 rounded-lg hover:scale-[102%] cursor-pointer duration-200"
+                    className="flex flex-col md:flex-row gap-6 min-h-48 bg-gray-100 rounded-lg hover:scale-[102%] cursor-pointer duration-200"
                     onClick={() => navigate(`/places/${booking.propertyId.id}`)}
                   >
                     <img
@@ -68,7 +68,7 @@ export default function Booking() {
                       src={`${booking.propertyId.propertyPhoto}`}
                       alt="image"
                     />
-                    <div className=" py-4 flex flex-col gap-1 text-left ">
+                    <div className=" p-4 flex flex-col gap-1 text-left ">
                       <p className="text-xl font-serif text-gray-600 font-semibold">
                         {booking.propertyId.title}
                       </p>
