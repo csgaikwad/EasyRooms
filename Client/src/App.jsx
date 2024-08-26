@@ -17,8 +17,8 @@ import Terms from "./layout/Footer/Terms";
 import fetchData from "./utils/fetchData";
 import useScrollToTop from "./utils/scrollToTop";
 
-axios.defaults.baseURL = "https://easyrooms-ssg.koyeb.app";
-// axios.defaults.baseURL = "https://airbnd-qs5d.onrender.com";
+// axios.defaults.baseURL = "https://easyrooms-ssg.koyeb.app";
+axios.defaults.baseURL = "https://easyrooms.onrender.com";
 // axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
