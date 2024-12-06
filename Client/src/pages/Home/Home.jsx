@@ -123,7 +123,7 @@ export default function Home() {
                 infiniteLoop={true}
                 transitionTime={1000}
                 autoPlay={true}
-                interval={6000}
+                interval={7000}
               >
                 {property.propertyPhotos.map((photoUrl, index) => (
                   <div className="" key={index}>
