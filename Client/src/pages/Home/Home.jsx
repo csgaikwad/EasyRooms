@@ -116,10 +116,14 @@ export default function Home() {
             >
               <Carousel
                 showThumbs={false}
-                showStatus={false}
+                showStatus={true}
                 showIndicators={true}
-                // showArrows={false}
-                className="lg:carousel-mobile"
+                showArrows={false}
+                swipeable={false}
+                infiniteLoop={true}
+                transitionTime={1000}
+                autoPlay={true}
+                interval={6000}
               >
                 {property.propertyPhotos.map((photoUrl, index) => (
                   <div className="" key={index}>

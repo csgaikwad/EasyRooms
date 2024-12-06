@@ -90,9 +90,3 @@ h1{
   border-radius: 5rem;
 
 }
-
-@media (max-width: 768px) {
-  .lg\:carousel-mobile .carousel .control-arrow {
-    display: none;
-  }
-}
