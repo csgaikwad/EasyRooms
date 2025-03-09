@@ -130,6 +130,7 @@ export default function Home() {
                 transitionTime={1000}
                 autoPlay={true}
                 interval={7000}
+                stopOnHover={false}
               >
                 {property.propertyPhotos.map((photoUrl, index) => (
                   <div className="" key={index}>
