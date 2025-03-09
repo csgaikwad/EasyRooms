@@ -125,7 +125,6 @@ export default function Home() {
                 showIndicators={true}
                 showArrows={false}
                 swipeable={false}
-                stopOnHover={false}
                 infiniteLoop={true}
                 transitionTime={1000}
                 autoPlay={true}
