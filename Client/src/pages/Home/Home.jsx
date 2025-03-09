@@ -44,7 +44,7 @@ export default function Home() {
     before: {},
     after: {
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -125,6 +125,7 @@ export default function Home() {
                 showIndicators={true}
                 showArrows={false}
                 swipeable={false}
+                stopOnHover={false}
                 infiniteLoop={true}
                 transitionTime={1000}
                 autoPlay={true}
