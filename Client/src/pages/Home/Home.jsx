@@ -113,6 +113,11 @@ export default function Home() {
               key={property._id + index}
               whileHover={{ scale: 1.01 }}
               className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[23rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-105 cursor-pointer"
+              onClick={() => {
+                user.isAuthenticated
+                  ? navigate(`/places/${property._id}`)
+                  : navigate("/login");
+              }}
             >
               <Carousel
                 showThumbs={false}
@@ -137,11 +142,11 @@ export default function Home() {
               </Carousel>
               <div
                 className="px-5 mt-2 hover:bg-gray-200 rounded-md py-2"
-                onClick={() => {
-                  user.isAuthenticated
-                    ? navigate(`/places/${property._id}`)
-                    : navigate("/login");
-                }}
+                // onClick={() => {
+                //   user.isAuthenticated
+                //     ? navigate(`/places/${property._id}`)
+                //     : navigate("/login");
+                // }}
               >
                 <h2 className="text-md sm:text-lg font-semibold whitespace-nowrap truncate max-w-80">
                   {property.title}
