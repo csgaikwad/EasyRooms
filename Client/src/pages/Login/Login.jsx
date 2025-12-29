@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 export default function Login() {
   const [userEmail, setEmail] = useState("owner1@gm.com");
-  const [password, setPassword] = useState("123");
+  const [password, setPassword] = useState(""); //123
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserAtom);
   const [loading, setLoading] = useState(false);
