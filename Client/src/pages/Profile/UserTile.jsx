@@ -33,19 +33,10 @@ export default function UserTile() {
   }, []);
 
   async function logout() {
-    try {
-      await axios.get("/logout");
-      setUserData({
-        isAuthenticated: false,
-        userEmail: "",
-        username: "",
-        isOwner: false,
-      });
-      navigate("/");
-    } catch (err) {
-      console.error("Error logging out:", err);
-    }
-  }
+   localStorage.removeItem("token");
+  setUser({ isAuthenticated: false });
+  navigate("/login");
+};
 
   return (
     <div className="flex items-start">

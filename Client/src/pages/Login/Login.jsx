@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export default function Login() {
   const [userEmail, setEmail] = useState("owner1@gm.com");
@@ -12,48 +12,43 @@ export default function Login() {
   const [user, setUser] = useRecoilState(UserAtom);
   const [loading, setLoading] = useState(false);
 
-
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
 
-
     try {
-      const userDetails = {
-        userEmail,
-        password,
-      };
-      const response = await axios.post("/login", userDetails);
-      // alert(response.data.message);
+      const response = await api.post("/login", { userEmail, password });
 
-      if (response.data) {
-        const UserAtomDetails = {
+      if (response.data.token) {
+        // Save token
+        localStorage.setItem("token", response.data.token);
+
+        // Set user in Recoil
+        setUser({
           isAuthenticated: true,
-          id:response.data.userDoc.id,
-          userEmail: response.data.userDoc.userEmail,
-          username: response.data.userDoc.username,
-          isOwner: response.data.userDoc.isOwner,
-        };
-        setUser(UserAtomDetails);
-        // Show SweetAlert on successful login
+          id: response.data.user.id,
+          userEmail: response.data.user.userEmail,
+          username: response.data.user.username,
+          isOwner: response.data.user.isOwner,
+        });
+
         Swal.fire({
-          position: "center",
           icon: "success",
           title: "Login Successful",
-          timer: 1000
+          timer: 1000,
         });
+
         navigate("/");
       }
     } catch (error) {
-      // Show SweetAlert on login failure
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Login failed. Please try again! Or try Registering...',
+        icon: "error",
+        title: "Login Failed",
+        text: error.response?.data?.error || "Please try again",
       });
     } finally {
       setLoading(false);
@@ -99,10 +94,14 @@ export default function Login() {
             className={`basicButton ${user.isOwner ? "bg-purple-500" : "bg-red-500"} flex justify-center items-center`}
             disabled={loading}
           >
-             {loading ? (
+            {loading ? (
               <div className="flex items-center justify-center">
                 Loading...
-                <img className="size-8 filter invert brightness-0" src="/loader.svg" alt="loader" />
+                <img
+                  className="size-8 filter invert brightness-0"
+                  src="/loader.svg"
+                  alt="loader"
+                />
               </div>
             ) : (
               "Login"
