@@ -11,7 +11,7 @@ export default function Footer() {
         <a
           className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-110"
           target="_blank"
-          href="https://github.com/csgaikwad"
+          // href="https://github.com/csgaikwad"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ export default function Footer() {
         <a
           className="text-blue-400 text-xl cursor-pointer transition duration-300 ease-in-out transform hover:scale-110 "
           target="_blank"
-          href="https://www.linkedin.com/in/csgaikwad"
+          // href="https://www.linkedin.com/in/csgaikwad"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +43,7 @@ export default function Footer() {
         <a
           className="text-black-600 text-xl cursor-pointer transition duration-300 ease-in-out transform hover:scale-110"
           target="_blank"
-          href="https://twitter.com/SSG_tweet"
+          // href="https://twitter.com/SSG_tweet"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -57,6 +57,7 @@ export default function Footer() {
           </svg>
         </a>
       </div>
+{/* 
       <div className="flex flex-col items-center">
         <h1>&copy; {currentYear} EasyRooms, Inc.</h1>
         <h1
@@ -70,8 +71,10 @@ export default function Footer() {
         {/* <h1 className="text-gray-500 text-sm pt-3">
           {" "}
           *This is a project for studying MERN Stack
-        </h1> */}
+        </h1>
       </div>
+ */}
+
     </div>
   );
 }

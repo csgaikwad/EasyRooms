@@ -56,6 +56,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen  h-auto  xl:px-5 mb-20 ">
+      {/* Sentinel */}
+      <div id="nav-sentinel" className="h-[1px]" />
+
       {properties.length === 0 ? (
         <div
           variants={variants}
@@ -112,7 +115,7 @@ export default function Home() {
               variants={item}
               key={property._id + index}
               whileHover={{ scale: 1.01 }}
-              className="shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[23rem] bg-transparent hover:my-3 my-4 border-2 transition-transform duration-100 transform hover:scale-105 cursor-pointer"
+              className="group shadow-xl rounded-xl  md:min-w-[20rem] w-[100%]  md:max-w-[23rem] bg-transparent my-4 border-2 transition-transform duration-200 transform hover:scale-105 hover:shadow-2xl  cursor-pointer"
               onClick={() => {
                 user.isAuthenticated
                   ? navigate(`/places/${property._id}`)
@@ -132,24 +135,24 @@ export default function Home() {
                 stopOnHover={false}
               >
                 {property.propertyPhotos.map((photoUrl, index) => (
-                  <div className="" key={index}>
+                  <div
+                    key={index}
+                    className="overflow-hidden rounded-xl h-60 lg:h-68"
+                  >
                     <img
-                      className="rounded-xl size-60 lg:size-68  shadow-sm "
                       src={photoUrl}
                       alt={`Property ${index}`}
+                      className="
+                       h-full w-full object-cover
+                       transition-transform duration-500 ease-in-out
+                       group-hover:scale-110
+                      "
                     />
                   </div>
                 ))}
               </Carousel>
-              <div
-                className="px-5 mt-2 hover:bg-gray-200 rounded-md py-2"
-                // onClick={() => {
-                //   user.isAuthenticated
-                //     ? navigate(`/places/${property._id}`)
-                //     : navigate("/login");
-                // }}
-              >
-                <h2 className="text-md sm:text-lg font-semibold whitespace-nowrap truncate max-w-80">
+              <div className="px-5 hover:bg-gray-200 rounded-md py-2">
+                <h2 className="text-md sm:text-lg font-semibold whitespace-nowrap truncate max-w-80 group-hover:text-rose-500">
                   {property.title}
                 </h2>
                 <p className="text-gray-600 whitespace-nowrap truncate max-w-72 text-md ">

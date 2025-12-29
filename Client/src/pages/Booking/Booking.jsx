@@ -163,6 +163,13 @@ export default function Booking() {
                 )}
               </AnimatePresence>
             </div>
+            {showPast && pastBookings.length === 0 && (
+              <div className="mt-4 h-40 flex justify-center items-center bg-gray-200 rounded-md">
+                <p className="text-xl font-serif text-gray-600 font-semibold">
+                  No past bookings
+                </p>
+              </div>
+            )}
           </>
         )}
       </div>

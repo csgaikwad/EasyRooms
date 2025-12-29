@@ -120,78 +120,86 @@ export default function BookingWidget(props) {
   }, [checkIn, checkOut, numGuests, props.price]);
 
   return (
-    <div className="flex flex-col justify-center items-center py-5">
-      <h1 className=" text-xl lg:text-[2rem] font-sans font-semibold mb-4 text-center">
-        <span className=" text-yellow-500 font-serif">🎉10% off🎉 </span> <br />
-        <br />
-        <p className="line-through text-gray-800 text-[1.5rem] mb-0">
-          ₹{parseInt(props.price + props.price * 0.1)}{" "}
-          <span className="text-gray-700 ">per night</span>
+    <div className="flex flex-col justify-center items-center py-4">
+      <h1 className=" text-xl lg:text-[2rem] font-sans font-semibold text-center">
+        <p className="text-rose-400 text-[1.5rem] underline mb-4">
+          Book the property Today!
         </p>
-        <br />
-        <p className="">
+        <p className="font-sans font-medium">
           ₹{parseInt(props.price)}{" "}
           <span className="text-gray-700 lg:text-2xl  font-serif">
-            per night
+            for 1 night stay
           </span>
         </p>
       </h1>
-      <div className="mb-4 w-full flex flex-col items-center justify-center ">
-        <div className="flex flex-col my-4 items-center">
+      {/* Grid table */}
+      <div className="grid w-full grid-cols-[1fr_1fr]  border border-black rounded-md my-2 place-items-center">
+
+        <div className="flex flex-col items-center  border-r border-b border-black w-full">
           <label
             htmlFor="check-in"
-            className="text-lg font-semibold text-gray-700 my-1"
+            className="text-lg font-semibold text-gray-700"
           >
             Check In
           </label>
-          <DatePicker
-            selected={checkIn}
-            onChange={handleCheckInChange}
-            className="border border-gray-300 rounded-md p-2 cursor-pointer"
-            placeholderText="Select Check In Date"
-            dateFormat="dd/MM/yyyy"
-            minDate={new Date()}
-            maxDate={new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)}
-          />
+          <div className="">
+            <DatePicker
+              selected={checkIn}
+              onChange={handleCheckInChange}
+              className="w-full max-w-[10rem] border border-gray-300 rounded-md p-2 cursor-pointer text-center"
+              placeholderText="Select Check In Date"
+              dateFormat="dd/MM/yyyy"
+              minDate={new Date()}
+              maxDate={
+                new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)
+              }
+            />
+          </div>
         </div>
-        <div className="flex flex-col my-4 items-center">
+        <div className="flex flex-col items-center justify-center border-b border-black w-full">
           <label
             htmlFor="check-out"
-            className="text-lg font-semibold text-gray-700 my-1 "
+            className="text-lg font-semibold text-gray-700 "
           >
             Check Out
           </label>
-          <DatePicker
-            selected={checkOut}
-            onChange={handleCheckOutChange}
-            className="border border-gray-300 rounded-md p-2 cursor-pointer"
-            placeholderText="Select Check Out Date"
-            dateFormat="dd/MM/yyyy"
-            minDate={checkIn} // Prevent selection of dates before the selected check-in date
-            maxDate={new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)}
-          />
+          <div className="">
+            <div className="">
+              <DatePicker
+                selected={checkOut}
+                onChange={handleCheckOutChange}
+                className="w-full max-w-[10rem] border border-gray-300 rounded-md p-2 cursor-pointer text-center"
+                placeholderText="Select Check Out Date"
+                dateFormat="dd/MM/yyyy"
+                minDate={checkIn} // Prevent selection of dates before the selected check-in date
+                maxDate={
+                  new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)
+                }
+              />
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col my-4 items-center justify-center md:min-w-96">
+        <div className="flex flex-col my-4 items-center justify-center md:min-w-80 col-span-2">
           <label className="text-lg font-semibold text-gray-700 my-1">
             Number Of Guests
           </label>
           <h4 className="mb-2 text-sm font-semibold text-red-400">
-          * Max Guests : {props.numberOfGuests} *
-        </h4>
-          <div className="flex justify-center w-full gap-2 mt-2 ">
+            * Max Guests : {props.numberOfGuests} *
+          </h4>
+          <div className="flex justify-center items-center w-full gap-2 mt-2 ">
             <button
-              className=" rounded-full p-2 cursor-pointer bg-gray-400 shadow-sm outline-none  size-10  hover:scale-105 duration-300 "
+              className=" rounded-full p-2 cursor-pointer bg-gray-400 shadow-sm outline-none  size-8 hover:scale-105 duration-300 "
               onClick={() =>
                 setNumGuests((prevNumGuests) => Math.max(1, prevNumGuests - 1))
               }
             >
               <img className="" src="/minus.svg" alt="-" />
             </button>
-            <div className="border-2 border-gray-300 rounded-full  cursor-default w-11 bg-gray-50 text-center p-2  shadow-sm   ">
+            <div className="border-2 border-gray-300 rounded-full  cursor-default w-11 bg-gray-50 text-center font-semibold p-2  shadow-sm    ">
               {numGuests}
             </div>
             <button
-              className=" rounded-full p-2 cursor-pointer bg-gray-400 shadow-sm outline-none size-10  hover:scale-105 duration-300 "
+              className=" rounded-full p-2 cursor-pointer bg-gray-400 shadow-sm outline-none size-8  hover:scale-105 duration-300 "
               onClick={() =>
                 setNumGuests((prevNumGuests) =>
                   Math.min(props.numberOfGuests, prevNumGuests + 1)
@@ -202,11 +210,10 @@ export default function BookingWidget(props) {
             </button>
           </div>
         </div>
-
-        <h1 className="flex justify-center text-2xl font-semibold text-gray-700 pl-3 m-1 underline">
-          Total Amount: ₹ {totalAmount}
-        </h1>
       </div>
+      <h1 className="flex justify-center text-2xl font-semibold text-gray-700 pl-3 m-1 underline">
+        Total Amount: ₹ {totalAmount}
+      </h1>
       <button
         className="basicButton bg-red-500"
         onClick={handleBook}
