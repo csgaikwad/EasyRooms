@@ -9,13 +9,17 @@ export default async function fetchData(setUserAtom) {
         userEmail: response.data.userEmail,
         username: response.data.username,
         isOwner: response.data.isOwner,
-        id:response.data.id,
+        id: response.data.id,
       };
       setUserAtom(user);
+    } else {
+      // No user data → not logged in
+      setUserAtom({ isAuthenticated: false });
     }
   } catch (error) {
     console.error("Error fetching user data:", error);
-    throw error;
+
+    setUserAtom({ isAuthenticated: false });
   }
 }
 

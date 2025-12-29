@@ -21,7 +21,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await api.post("/login", { userEmail, password });
+      const response = await axios.post("/login", { userEmail, password });
 
       if (response.data.token) {
         // Save token
