@@ -1,5 +1,11 @@
-// src/api/axios.js
 import axios from "axios";
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL || "https://easyrooms-ssg.koyeb.app",
+  // baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:8000",
+
+  withCredentials: false, // No cookies
+});
 
 // Automatically add Bearer token to every request
 api.interceptors.request.use(
@@ -19,7 +25,6 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
-      window.location.href = "/login"; // or use navigate if in component
     }
     return Promise.reject(error);
   }

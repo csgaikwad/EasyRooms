@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../../utils/axios";
 
 export default function BookingWidget(props) {
   const [checkIn, setCheckIn] = useState(null);
@@ -45,7 +46,7 @@ export default function BookingWidget(props) {
   const handleBook = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("/payment/process", { totalAmount });
+      const response = await api.post("/payment/process", { totalAmount });
 
       var options = {
         key: response.data.key,
@@ -57,9 +58,9 @@ export default function BookingWidget(props) {
         image: "/logo2.svg",
         order_id: response.data.order.id,
         handler: function (response) {
-          axios.post("/payment/verify", { response }).then((res) => {
+          api.post("/payment/verify", { response }).then((res) => {
             if (res.data) {
-              axios
+              api
                 .post("/booking", {
                   checkIn: checkIn.toISOString(),
                   checkOut: checkOut.toISOString(),

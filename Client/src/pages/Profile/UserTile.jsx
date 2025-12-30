@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
 import { useNavigate } from "react-router-dom";
+import api from "../../utils/axios";
 
 export default function UserTile() {
   const userDataLoadable = useRecoilValueLoadable(UserAtom);
@@ -19,7 +20,7 @@ export default function UserTile() {
 
   async function fetchUserData() {
     try {
-      const response = await axios.get("/me");
+      const response = await api.get("/me");
       setUserData(response.data);
       const userData = response.data;
       setIsAuth(userData.isAuthenticated || false);
@@ -33,10 +34,19 @@ export default function UserTile() {
   }, []);
 
   async function logout() {
-   localStorage.removeItem("token");
-  setUser({ isAuthenticated: false });
-  navigate("/login");
-};
+    localStorage.removeItem("token");
+
+    // update the full Recoil atom
+    setUserData({
+      isAuthenticated: false,
+      id: null,
+      username: null,
+      userEmail: null,
+      isOwner: false,
+    });
+
+    navigate("/");
+  }
 
   return (
     <div className="flex items-start">
@@ -60,7 +70,7 @@ export default function UserTile() {
             </div>
           </div>
 
-          {(userDataLoadable.contents.isAuthenticated || isAuth) ? (
+          {userDataLoadable.contents.isAuthenticated || isAuth ? (
             <div
               className="bg-purple-400 px-6 py-2 my-2 shadow-lg  rounded-xl text-lg md:text-xl underline text-white font-serif tracking-wide cursor-pointer"
               onClick={logout}

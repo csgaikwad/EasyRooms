@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import api from "../../utils/axios";
 
 export default function Booking() {
   const { id: userId } = useParams();
@@ -14,7 +15,7 @@ export default function Booking() {
 
   async function getBookings() {
     try {
-      const response = await axios.get("/booking/" + userId);
+      const response = await api.get("/booking/" + userId);
       const bookings = response.data.doc;
 
       const today = new Date().toISOString().split("T")[0];

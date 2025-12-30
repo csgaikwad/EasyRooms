@@ -9,6 +9,7 @@ import { UserAtom } from "../../atoms/UserAtom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { motion } from "framer-motion";
+import api from "../../utils/axios";
 
 export default function Home() {
   const user = useRecoilValue(UserAtom);
@@ -24,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchProperties() {
       try {
-        const response = await axios.get("/properties");
+        const response = await api.get("/properties");
         setProperties(response.data);
         setPropertyAtom(response.data);
         shuffleProperties(response.data);

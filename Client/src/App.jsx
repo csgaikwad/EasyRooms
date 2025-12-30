@@ -16,13 +16,8 @@ import Booking from "./pages/Booking/Booking";
 import Terms from "./layout/Footer/Terms";
 import fetchData from "./utils/fetchData";
 import useScrollToTop from "./utils/scrollToTop";
-import "./api/interceptors"; // ← to run the interceptors setup
+import api from "./utils/axios"; // ← to run the interceptors setup
 
-axios.defaults.baseURL = "https://easyrooms-ssg.koyeb.app";
-// axios.defaults.baseURL = "http://localhost:8000";
-
-// axios.defaults.baseURL = "https://easyrooms.onrender.com";
-axios.defaults.withCredentials = true;
 
 export default function App() {
   const [user, setUser] = useRecoilState(UserAtom);
@@ -38,7 +33,6 @@ export default function App() {
     }
     fetchDataOnLoad();
   }, []);
-
 
   useScrollToTop();
 

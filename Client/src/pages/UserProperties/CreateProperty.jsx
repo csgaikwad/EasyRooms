@@ -10,6 +10,7 @@ import {
   handleSubmit,
   handleDeleteProperty,
 } from "./Utils";
+import api from "../../utils/axios";
 
 export default function CreateProperties() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -57,7 +58,7 @@ export default function CreateProperties() {
               setEntrance(selectedProperty.entrance);
             }
           } else {
-            const response = await axios.get("/properties/" + id);
+            const response = await api.get("/properties/" + id);
             const foundProperty = response.data;
             setTitle(foundProperty.title);
             setLocation(foundProperty.location);

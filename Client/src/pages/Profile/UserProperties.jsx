@@ -5,6 +5,7 @@ import { PropertyAtom } from "../../atoms/PropertyAtom";
 import { UserAtom } from "../../atoms/UserAtom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../../utils/axios";
 
 export default function UserProperties() {
   const properties = useRecoilValue(PropertyAtom);
@@ -16,7 +17,7 @@ export default function UserProperties() {
   const fetchUserProperties = async () => {
     try {
       if (properties.length === 0) {
-        const response = await axios.get(`/properties`);
+        const response = await api.get(`/properties`);
         setPropertyAtom(response.data);
         const filteredProperties = response.data.filter(
           (a) => a.user === user.id

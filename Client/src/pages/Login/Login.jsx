@@ -4,9 +4,10 @@ import axios from "axios";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
 import Swal from "sweetalert2";
+import api from "../../utils/axios";
 
 export default function Login() {
-  const [userEmail, setEmail] = useState("owner1@gm.com");
+  const [userEmail, setEmail] = useState("owner1@gmail.com");
   const [password, setPassword] = useState(""); //123
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(UserAtom);
@@ -21,7 +22,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post("/login", { userEmail, password });
+      const response = await api.post("/login", { userEmail, password });
 
       if (response.data.token) {
         // Save token
@@ -38,7 +39,8 @@ export default function Login() {
 
         Swal.fire({
           icon: "success",
-          title: "Login Successful",
+          title: "Welcome back!",
+          text: "Login successful",
           timer: 1000,
         });
 
@@ -48,7 +50,9 @@ export default function Login() {
       Swal.fire({
         icon: "error",
         title: "Login Failed",
-        text: error.response?.data?.error || "Please try again",
+        text:
+          error.response?.data?.error ||
+          "Invalid email or password. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -56,17 +60,21 @@ export default function Login() {
   }
 
   return (
-    <div className="h-screen p-4 z-0">
-      <div className=" lg:mt-8 flex md:min-w-96 items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50">
+      <div className="w-full max-w-md">
         <form
-          className="flex flex-col items-center justify-center gap-5 rounded-3xl border-2 p-6 py-12 shadow-md "
+          className="bg-white rounded-3xl shadow-lg border border-gray-200 p-8 py-12"
           onSubmit={handleSubmit}
         >
+          <h2 className="text-2xl font-semibold font-serif text-center mb-8 text-gray-700 ">
+            Welcome Back
+          </h2>
           <div className="flex flex-col items-start">
             <label>Email</label>
 
             <input
               type="email"
+              id="email"
               name="email"
               placeholder="abc@gmail.com"
               value={userEmail}
@@ -74,6 +82,7 @@ export default function Login() {
                 setEmail(e.target.value);
               }}
               required
+              autoComplete="email"
             />
           </div>
           <div className=" flex flex-col items-start">
@@ -96,7 +105,7 @@ export default function Login() {
           >
             {loading ? (
               <div className="flex items-center justify-center">
-                Loading...
+                Logging in...
                 <img
                   className="size-8 filter invert brightness-0"
                   src="/loader.svg"
@@ -107,11 +116,15 @@ export default function Login() {
               "Login"
             )}
           </button>
-          <Link to="/register">
-            <label className=" cursor-pointer text-blue-400">
-              Not Registered yet...?
-            </label>
-          </Link>
+          <div className="text-center mt-6 text-gray-600">
+            Don't have an account?{" "}
+            <Link
+              to="/register"
+              className="text-blue-600 font-medium hover:text-blue-800 hover:underline transition-colors duration-200"
+            >
+              Register here
+            </Link>
+          </div>
         </form>
       </div>
     </div>

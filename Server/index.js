@@ -1,6 +1,5 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
-
 
 import express from "express";
 import cors from "cors";
@@ -15,7 +14,6 @@ import bookingRoutes from "./routes/bookingRoutes.js";
 import propertyRoutes from "./routes/propertyRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 
-
 // Connect to MongoDB
 connectDB();
 
@@ -28,7 +26,12 @@ app.use(
     origin: ["https://easyrooms-ssg.vercel.app", "http://localhost:5173"],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Accept",
+      "Origin",
+    ],
   })
 );
 
@@ -44,7 +47,6 @@ app.use("/", authRoutes);
 app.use("/booking", bookingRoutes);
 app.use("/properties", propertyRoutes);
 app.use("/payment", paymentRoutes);
-
 
 // Start the server
 app.listen(config.server.port, () => {

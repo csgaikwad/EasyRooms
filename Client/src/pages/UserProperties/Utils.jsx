@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "../../utils/axios";
 
 // Function to handle file change and preview
 export const handleFileChange = async (
@@ -17,7 +18,7 @@ export const handleFileChange = async (
       const formData = new FormData();
       formData.append("propertyPhoto", selectedFile);
 
-      const res = await axios.post("/properties/preview", formData, {
+      const res = await api.post("/properties/preview", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       const imageUrl = res.data.imageUrl;
@@ -39,7 +40,7 @@ export const handleDeleteImage = async (
   event.preventDefault();
   try {
     const url = previews[index];
-    const response = await axios.delete(`/properties/deletePhoto`, {
+    const response = await api.delete(`/properties/deletePhoto`, {
       data: { url, propertyId: id },
     });
     const updatedPreviews = [...previews];
@@ -59,10 +60,10 @@ export const handleSubmit = async (event, id, propertyData, navigate) => {
   event.preventDefault();
   try {
     if (id) {
-      const res = await axios.put(`/properties/${id}`, propertyData);
+      const res = await api.put(`/properties/${id}`, propertyData);
       alert(res.data.message);
     } else {
-      const res = await axios.post("/properties", propertyData);
+      const res = await api.post("/properties", propertyData);
       alert(res.data.message);
       navigate("/");
     }
@@ -76,7 +77,7 @@ export const handleSubmit = async (event, id, propertyData, navigate) => {
 export const handleDeleteProperty = async (event, id, navigate) => {
   event.preventDefault();
   try {
-    const response = await axios.delete(`/properties/deleteProperty`, {
+    const response = await api.delete(`/properties/deleteProperty`, {
       data: { propertyId: id },
     });
     if (response.data && response.data.message) {

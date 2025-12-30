@@ -16,7 +16,6 @@
     /* @apply bg-gray-50; */
   }
 
-
   /* For better browser support of the gradient text */
   .gradient-text {
     background-image: var(--gradient-hero);
@@ -50,29 +49,30 @@
   }
 
   .basicButton {
-    @apply border-2 rounded-full py-3 text-white text-xl min-w-48 md:min-w-96 mt-2 hover:scale-105 transition-all duration-300;
+    @apply border-2 rounded-full py-3 text-white text-xl min-w-48 md:min-w-96 mt-2 hover:scale-105 transition-all duration-300
+    disabled:opacity-70 disabled:cursor-not-allowed;
   }
 
-/*
+  /*
 Source - https://stackoverflow.com/a
 Posted by Asons, modified by community. See post 'Timeline' for change history
 Retrieved 2025-12-20, License - CC BY-SA 4.0
 */
 
-#container {
-  display: inline-block;
-  margin: 20px;
-  border: 1px solid black;
-  overflow: hidden;            /* clip the excess when child gets bigger than parent */
-}
-#container img {
-  display: block;
-  transition: transform .4s;   /* smoother zoom */
-}
-#container:hover img {
-  transform: scale(1.3);
-  transform-origin: 50% 50%;
-}
+  #container {
+    display: inline-block;
+    margin: 20px;
+    border: 1px solid black;
+    overflow: hidden; /* clip the excess when child gets bigger than parent */
+  }
+  #container img {
+    display: block;
+    transition: transform 0.4s; /* smoother zoom */
+  }
+  #container:hover img {
+    transform: scale(1.3);
+    transform-origin: 50% 50%;
+  }
 }
 
 /* Utility classes outside layers for direct usage */
@@ -107,7 +107,9 @@ Retrieved 2025-12-20, License - CC BY-SA 4.0
   }
 
   input:not([type="checkbox"]):not(#num-Guest) {
-    @apply bg-gray-50 border-2 rounded-full shadow-sm outline-none p-2 px-4 m-2 md:min-w-96;
+    @apply bg-gray-50 border-2 rounded-full shadow-sm outline-none p-2 px-4 m-2 md:min-w-96
+            transition-all duration-200
+           focus:border-red-400;
   }
 
   h1 {
@@ -146,7 +148,6 @@ Retrieved 2025-12-20, License - CC BY-SA 4.0
   background: lightblue;
   border-radius: 5rem;
 }
-
 
 .react-datepicker-wrapper,
 .react-datepicker__input-container,
