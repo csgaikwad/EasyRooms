@@ -1,13 +1,13 @@
 import { atom } from "recoil";
 
-
 export const UserAtom = atom({
-    key: "UserAtom",
-    default: {
-      isAuthenticated: false,
-      id: "",
-      userEmail:"",
-      username: "",
-      isOwner: false,
-    },
-  });
+  key: "UserAtom",
+  default: {
+    isAuthenticated: false,
+    id: "",
+    userEmail: "",
+    username: "",
+    profilePhoto: "",
+    isOwner: false,
+  },
+});

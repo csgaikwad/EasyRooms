@@ -1,4 +1,3 @@
-import axios from "axios";
 import api from "../../utils/axios";
 
 // Function to handle file change and preview
@@ -68,7 +67,7 @@ export const handleSubmit = async (event, id, propertyData, navigate) => {
       navigate("/");
     }
   } catch (error) {
-    alert("Error occurred, try allowing cookies");
+    alert("Error occurred");
     console.error(error);
   }
 };

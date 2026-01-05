@@ -1,14 +1,14 @@
-import axios from "axios";
 import api from "./axios";
 
 export default async function fetchData(setUserAtom) {
   try {
-    const response = await api.get("/me");
+    const response = await api.get("/user/me");
     if (response.data.userEmail) {
       const user = {
         isAuthenticated: true,
         userEmail: response.data.userEmail,
         username: response.data.username,
+        profilePhoto: response.data.profilePhoto,
         isOwner: response.data.isOwner,
         id: response.data.id,
       };

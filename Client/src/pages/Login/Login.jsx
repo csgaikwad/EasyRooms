@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../../atoms/UserAtom";
 import Swal from "sweetalert2";
@@ -22,7 +21,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await api.post("/login", { userEmail, password });
+      const response = await api.post("/auth/login", { userEmail, password });
 
       if (response.data.token) {
         // Save token
@@ -34,6 +33,7 @@ export default function Login() {
           id: response.data.user.id,
           userEmail: response.data.user.userEmail,
           username: response.data.user.username,
+          profilePhoto: response.data.user.profilePhoto,
           isOwner: response.data.user.isOwner,
         });
 

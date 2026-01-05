@@ -3,7 +3,6 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Carousel } from "react-responsive-carousel";
 import { PropertyAtom } from "../../atoms/PropertyAtom";
 import { UserAtom } from "../../atoms/UserAtom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import api from "../../utils/axios";
 
@@ -84,7 +83,7 @@ export default function UserProperties() {
             <div
               className="hidden sm:flex  w-full  items-center justify-center font-serif font-semibold text-lg bg-red-500 opacity-50 hover:opacity-100 rounded-lg "
               onClick={() => {
-                navigate("/property/" + property._id);
+                navigate("/create-property/" + property._id);
               }}
             >
               <span className="opacity-100">Edit </span>
@@ -97,6 +96,11 @@ export default function UserProperties() {
           </div>
         </div>
       ))}
+      {userProperties.length === 0 && (
+        <div>
+          <h1>No properties found </h1>
+        </div>
+      )}
     </div>
   );
 }

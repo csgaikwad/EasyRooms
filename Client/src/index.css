@@ -107,7 +107,7 @@ Retrieved 2025-12-20, License - CC BY-SA 4.0
   }
 
   input:not([type="checkbox"]):not(#num-Guest) {
-    @apply bg-gray-50 border-2 rounded-full shadow-sm outline-none p-2 px-4 m-2 md:min-w-96
+    @apply bg-gray-50 border-2 rounded-full shadow-sm outline-none p-2 px-4 m-2 md:min-w-full
             transition-all duration-200
            focus:border-red-400;
   }

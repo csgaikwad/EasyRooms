@@ -1,18 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import axios from "axios";
 import BookingWidget from "./BookingWidget";
 import { PropertyAtom } from "../../atoms/PropertyAtom";
 import { UserAtom } from "../../atoms/UserAtom";
+import api from "../../utils/axios";
 
 export default function Places() {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const { id: reqId } = useParams();
   const properties = useRecoilValue(PropertyAtom);
-  const user=useRecoilValue(UserAtom)
+  const user = useRecoilValue(UserAtom);
   const photosRef = useRef(null);
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,7 +21,7 @@ export default function Places() {
       properties.length === 0 ||
       !properties.find((property) => property._id === reqId)
     ) {
-      axios
+      api
         .get(`/properties/${reqId}`)
         .then((response) => {
           const data = response.data;
@@ -43,7 +42,12 @@ export default function Places() {
 
   return (
     <div key={reqId} className="min-h-screen py-5 px-2 lg:px-20 mb-20">
-      {selectedProperty ? (
+      {!selectedProperty ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <h1 className="text-pink-600 text-2xl">Loading...</h1>
+          <img className="size-20" src="/loader.svg" alt="Loading..." />
+        </div>
+      ) : (
         <>
           <div>
             <h1 className="text-[1rem] sm:text-[1.8rem] pl-2 font-serif  text-gray-700 cursor-text">
@@ -52,21 +56,25 @@ export default function Places() {
           </div>
           <div className=" lg:grid grid-cols-4 grid-rows-2 gap-4 lg:h-[25rem] w-full py-4">
             <img
-              src={selectedProperty.propertyPhotos[0]}
+              src={selectedProperty.propertyPhotos?.[0]}
               alt="Property Image"
               className="col-span-2 row-span-2 lg:w-full lg:h-full object-cover rounded-xl transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer"
               onClick={scrollToPhotos}
             />
 
-            {selectedProperty.propertyPhotos.slice(1, 5).map((photo, index) => (
-              <img
-                key={index}
-                src={photo}
-                alt={`Property Image ${index}`}
-                onClick={scrollToPhotos}
-                className="hidden lg:inline object-cover rounded-xl h-full w-full transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer "
-              />
-            ))}
+            {selectedProperty.propertyPhotos &&
+              selectedProperty.propertyPhotos.length > 1 &&
+              selectedProperty.propertyPhotos
+                .slice(1, 5)
+                .map((photo, index) => (
+                  <img
+                    key={index}
+                    src={photo}
+                    alt={`Property Image ${index}`}
+                    onClick={scrollToPhotos}
+                    className="hidden lg:inline object-cover rounded-xl h-full w-full transition-transform duration-300 transform hover:scale-105 hover:z-10 hover:border-white hover:border-4 cursor-pointer "
+                  />
+                ))}
           </div>
           <div className="flex flex-col lg:grid grid-cols-2 gap-2">
             <div>
@@ -80,7 +88,12 @@ export default function Places() {
                     src="/LocationPin.svg"
                     alt="Location"
                   />
-                  <p className="inline">{selectedProperty.location} <span className="text-gray-600 text-sm">(Click here to see the location)</span></p>
+                  <p className="inline">
+                    {selectedProperty.location}{" "}
+                    <span className="text-gray-600 text-sm">
+                      (Click here to see the location)
+                    </span>
+                  </p>
                 </a>
               </div>
               <div className="md:text-[1.1rem] text-gray-500 px-2 py-4">
@@ -185,11 +198,6 @@ export default function Places() {
             })}
           </div>
         </>
-      ) : (
-        <div className="flex items-center justify-center min-h-screen">
-          <h1 className="text-pink-600 text-2xl">Loading...</h1>
-          <img className="size-20" src="/loader.svg" alt="Loading..." />
-        </div>
       )}
     </div>
   );

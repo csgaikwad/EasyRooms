@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL || "https://easyrooms-ssg.koyeb.app",
-  // baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:8000",
+  // baseURL: import.meta.env.VITE_BACKEND_URL || "https://easyrooms-ssg.koyeb.app/api/v1",
+  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:8000/api/v1",
 
   withCredentials: false, // No cookies
 });

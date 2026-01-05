@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -47,130 +46,188 @@ export default function Booking() {
   }, [showPast]);
 
   return (
-    <div className={`min-h-screen p-10 mb-10 lg:px-52 `}>
-      <div>
+    <div className="min-h-screen py-8 px-4 lg:px-20 pb-20 bg-gray-50">
+      <div className="max-w-5xl mx-auto">
         {loading ? (
-          <div className="  h-screen flex justify-center items-center">
-            <h1 className="text-pink-600 text-2xl pb-10">Loading...</h1>
-            <img className="size-20" src="/loader.svg" alt="Loading..." />
+          <div className="h-screen flex flex-col justify-center items-center gap-6">
+            <h1 className="text-3xl font-serif text-pink-600">
+              Loading your bookings...
+            </h1>
+            <img
+              className="w-24 h-24 animate-spin"
+              src="/loader.svg"
+              alt="Loading..."
+            />
           </div>
         ) : (
           <>
-            <div className="flex flex-col gap-6">
-              {bookingRes.length ? (
-                bookingRes.map((booking, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col md:flex-row gap-6 min-h-48 bg-gray-100 rounded-lg hover:scale-[102%] cursor-pointer duration-200"
-                    onClick={() => navigate(`/places/${booking.propertyId.id}`)}
-                  >
-                    <img
-                      className="size-full md:size-48 rounded-lg "
-                      src={`${booking.propertyId.propertyPhoto}`}
-                      alt="image"
-                    />
-                    <div className=" p-4 flex flex-col gap-1 text-left ">
-                      <p className="text-xl font-serif text-gray-600 font-semibold">
-                        {booking.propertyId.title}
-                      </p>
-                      <p className="text-md font-serif text-gray-600 font-semibold">
-                        {booking.propertyId.location}
-                      </p>
-                      <p className="text-md font-serif text-gray-600">
-                        From : {booking.checkIn.slice(0, 10)}
-                      </p>
-                      <p className="text-md font-serif text-gray-600">
-                        To : {booking.checkOut.slice(0, 10)}
-                      </p>
-                      <p className="text-md font-serif text-gray-600">
-                        Number of Guests : {booking.numGuests}
-                      </p>
-                      <p className="text-md font-serif text-gray-600 font-semibold">
-                        Total ₹{booking.totalAmount} Paid
-                      </p>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div
-                  className="h-[18rem] bg-gray-200 flex flex-col justify-center items-center text-center pb-10 cursor-pointer rounded-md"
-                  onClick={() => navigate("/")}
-                >
-                  <p className="text-[1.8rem] font-serif text-gray-600 font-semibold">
-                    No bookings found
-                  </p>
-                  <p className="text-[1.8rem] font-serif text-gray-600 font-semibold">
-                    Click here to see some properties
-                  </p>
-                </div>
-              )}
-            </div>
+            {/* Upcoming Bookings */}
+            <section className="mb-12">
+              <h2 className="text-2xl font-serif font-semibold text-gray-800 mb-8 text-center">
+                Upcoming Bookings
+              </h2>
 
-            <div className="mt-6 flex flex-col gap-8">
-              <div className="flex justify-center " ref={pastBookingsRef}>
-                <button
-                  className="flex justify-center items-center h-12  w-80 bg-red-500  rounded-md text-[1rem] font-serif text-white font-semibold hover:scale-105 duration-300"
-                  onClick={() => {
-                    setShowPast(!showPast);
-                  }}
-                >
-                  {showPast
-                    ? "✮ Hide Past Bookings ✮"
-                    : "✮ Show Past Bookings ✮"}
-                </button>
-              </div>
-              <AnimatePresence>
-                {showPast && pastBookings.length > 0 && (
-                  <motion.div
-                    className="mt-4 flex flex-col gap-6 overflow-hidden"
-                    initial={{ scale: 0, height: 0 }}
-                    animate={{ scale: 1, height: "auto" }}
-                    exit={{ scale: 0, height: 0 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {pastBookings.map((booking, index) => (
-                      <div
-                        key={index}
-                        className="flex flex-col md:flex-row gap-6 h-48 bg-gray-100 rounded-lg cursor-pointer hover:scale-[97%] duration-200"
-                      >
-                        <img
-                          className="size-full md:size-48 rounded-lg"
-                          src={`${booking.propertyId.propertyPhoto}`}
-                          alt="image"
-                        />
-                        <div className=" py-3 flex flex-col gap-1 text-left">
-                          <p className="text-xl font-serif text-gray-600 font-semibold">
-                            {booking.propertyId.title}
+              <div className="flex flex-col gap-8">
+                {bookingRes.length > 0 ? (
+                  bookingRes.map((booking, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex flex-col md:flex-row gap-6 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+                      onClick={() =>
+                        navigate(`/places/${booking.propertyId.id}`)
+                      }
+                    >
+                      <img
+                        src={
+                          booking.propertyId.propertyPhoto || "/placeholder.jpg"
+                        }
+                        alt={booking.propertyId.title}
+                        className="w-full h-48 md:w-56 md:h-56 object-cover rounded-lg"
+                      />
+                      <div className="px-6 py-2 flex flex-col justify-center flex-1">
+                        <h3 className="text-2xl font-serif font-bold text-gray-800 mb-2">
+                          {booking.propertyId.title}
+                        </h3>
+                        <p className="text-lg text-gray-600 mb-1">
+                          📍 {booking.propertyId.location}
+                        </p>
+                        <div className="space-y-2 text-gray-700">
+                          <p className="text-base">
+                            <span className="font-medium">Check-in:</span>{" "}
+                            {new Date(booking.checkIn).toLocaleDateString(
+                              "en-US",
+                              {
+                                weekday: "long",
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              }
+                            )}
                           </p>
-                          <p className="text-md font-serif text-gray-600 font-semibold">
-                            {booking.propertyId.location}
+                          <p className="text-base">
+                            <span className="font-medium">Check-out:</span>{" "}
+                            {new Date(booking.checkOut).toLocaleDateString(
+                              "en-US",
+                              {
+                                weekday: "long",
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              }
+                            )}
                           </p>
-                          <p className="text-md font-serif text-gray-600">
-                            From : {booking.checkIn.slice(0, 10)}
+                          <p className="text-base">
+                            <span className="font-medium">Guests:</span>{" "}
+                            {booking.numGuests}
                           </p>
-                          <p className="text-md font-serif text-gray-600">
-                            To : {booking.checkOut.slice(0, 10)}
-                          </p>
-                          <p className="text-md font-serif text-gray-600">
-                            Number of Guests : {booking.numGuests}
-                          </p>
-                          <p className="text-md font-serif text-gray-600 font-semibold">
-                            Total ₹{booking.totalAmount} Paid
+                          <p className="text-xl font-bold text-green-600 mt-4">
+                            Total Paid: ₹
+                            {booking.totalAmount.toLocaleString("en-IN")}
                           </p>
                         </div>
                       </div>
-                    ))}
-                  </motion.div>
+                    </motion.div>
+                  ))
+                ) : (
+                  <div
+                    className="h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex flex-col justify-center items-center text-center p-8 cursor-pointer hover:shadow-xl transition-shadow"
+                    onClick={() => navigate("/")}
+                  >
+                    <p className="text-3xl font-serif text-gray-700 font-semibold mb-4">
+                      No upcoming bookings
+                    </p>
+                    <p className="text-xl font-serif text-gray-600">
+                      Discover amazing properties and plan your next stay!
+                    </p>
+                  </div>
                 )}
-              </AnimatePresence>
-            </div>
-            {showPast && pastBookings.length === 0 && (
-              <div className="mt-4 h-40 flex justify-center items-center bg-gray-200 rounded-md">
-                <p className="text-xl font-serif text-gray-600 font-semibold">
-                  No past bookings
-                </p>
               </div>
-            )}
+            </section>
+
+            {/* Past Bookings Toggle */}
+            <div className="flex justify-center my-12">
+              <button
+                onClick={() => setShowPast(!showPast)}
+                className="px-10 py-4 bg-gradient-to-r from-red-500 to-pink-500 text-white font-serif text-xl rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
+              >
+                {showPast ? "✦ Hide Past Bookings ✦" : "✦ View Past Bookings ✦"}
+              </button>
+            </div>
+
+            {/* Past Bookings */}
+            <AnimatePresence>
+              {showPast && (
+                <motion.section
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="overflow-hidden"
+                  ref={pastBookingsRef}
+                >
+                  <h2 className="text-2xl font-serif font-semibold text-gray-800 mb-8 text-center">
+                    Past Bookings
+                  </h2>
+
+                  {pastBookings.length > 0 ? (
+                    <div className="flex flex-col gap-8">
+                      {pastBookings.map((booking, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -50 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="flex flex-col md:flex-row gap-6 bg-gray-50 rounded-2xl shadow-md mb-2 hover:shadow-lg transition-shadow"
+                        >
+                          <img
+                            src={
+                              booking.propertyId.propertyPhoto ||
+                              "/placeholder.jpg"
+                            }
+                            alt={booking.propertyId.title}
+                            className="w-full h-48 md:w-60 object-cover rounded-xl"
+                          />
+                          <div className="flex-1 ">
+                            <h3 className="text-xl font-serif font-bold text-gray-800 mb-2">
+                              {booking.propertyId.title}
+                            </h3>
+                            <p className="text-gray-600 mb-3">
+                              📍 {booking.propertyId.location}
+                            </p>
+                            <div className="text-gray-600 space-y-1">
+                              <p>
+                                Check-in:{" "}
+                                {new Date(booking.checkIn).toLocaleDateString()}
+                              </p>
+                              <p>
+                                Check-out:{" "}
+                                {new Date(
+                                  booking.checkOut
+                                ).toLocaleDateString()}
+                              </p>
+                              <p>Guests: {booking.numGuests}</p>
+                              <p className="font-semibold text-lg text-gray-800 mt-3">
+                                Total Paid: ₹
+                                {booking.totalAmount.toLocaleString("en-IN")}
+                              </p>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-16 bg-gray-100 rounded-2xl">
+                      <p className="text-2xl font-serif text-gray-600">
+                        No past bookings yet
+                      </p>
+                    </div>
+                  )}
+                </motion.section>
+              )}
+            </AnimatePresence>
           </>
         )}
       </div>

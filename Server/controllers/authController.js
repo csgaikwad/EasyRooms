@@ -84,30 +84,3 @@ export async function logoutUser(req, res) {
   res.json({ message: "Logged out successfully" });
 }
 
-// GET CURRENT USER (protected route)
-export async function getUserInfo(req, res) {
-  try {
-    // Token comes from Authorization header now
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(401).json({ message: "No token provided" });
-    }
-
-    const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, config.secrets.jwtSecret);
-
-    const user = await User.findById(decoded.userId);
-    if (!user) return res.status(404).json({ message: "User not found" });
-
-    res.json({
-      isAuthenticated: true,
-      id: user._id,
-      username: user.username,
-      userEmail: user.userEmail,
-      isOwner: user.isOwner,
-    });
-  } catch (error) {
-    console.error("Auth error:", error);
-    res.status(401).json({ message: "Invalid or expired token" });
-  }
-}

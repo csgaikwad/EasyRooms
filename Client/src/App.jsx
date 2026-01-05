@@ -17,7 +17,7 @@ import Terms from "./layout/Footer/Terms";
 import fetchData from "./utils/fetchData";
 import useScrollToTop from "./utils/scrollToTop";
 import api from "./utils/axios"; // ← to run the interceptors setup
-
+import NotFound from "./pages/NotFound/notFound";
 
 export default function App() {
   const [user, setUser] = useRecoilState(UserAtom);
@@ -116,7 +116,7 @@ export default function App() {
             }
           />
           <Route
-            path="/property"
+            path="/create-property"
             element={
               <motion.div
                 key="property"
@@ -130,7 +130,7 @@ export default function App() {
             }
           />
           <Route
-            path="/property/:id"
+            path="/create-property/:id"
             element={
               <motion.div
                 key="property"
@@ -185,6 +185,7 @@ export default function App() {
               </motion.div>
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
       <Footer />

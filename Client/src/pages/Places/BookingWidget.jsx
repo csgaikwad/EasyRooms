@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import api from "../../utils/axios";
 
@@ -55,7 +54,7 @@ export default function BookingWidget(props) {
         name: "Air Corp",
         description:
           "Stay like a local, anywhere you go - Air Corp, where every stay is a new adventure.",
-        image: "/logo2.svg",
+        image: "/logo.svg",
         order_id: response.data.order.id,
         handler: function (response) {
           api.post("/payment/verify", { response }).then((res) => {
@@ -135,7 +134,6 @@ export default function BookingWidget(props) {
       </h1>
       {/* Grid table */}
       <div className="grid w-full grid-cols-[1fr_1fr]  border border-black rounded-md my-2 place-items-center">
-
         <div className="flex flex-col items-center  border-r border-b border-black w-full">
           <label
             htmlFor="check-in"
@@ -172,7 +170,11 @@ export default function BookingWidget(props) {
                 className="w-full max-w-[10rem] border border-gray-300 rounded-md p-2 cursor-pointer text-center"
                 placeholderText="Select Check Out Date"
                 dateFormat="dd/MM/yyyy"
-                minDate={checkIn} // Prevent selection of dates before the selected check-in date
+                minDate={
+                  checkIn
+                    ? new Date(checkIn.getTime() + 24 * 60 * 60 * 1000)
+                    : null
+                } // Prevent selection of dates before the selected check-in date
                 maxDate={
                   new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)
                 }

@@ -5,12 +5,22 @@ import PropertyDetails from "../../models/Property.js";
 export async function deletePhoto(req, res) {
   const { url, propertyId } = req.body;
   try {
-    const parts = url.split("/").slice(7);
-    const publicId = parts.join("/").split(".")[0];
+    const parts = url.split("/property-photos/property-photos/")[1];
+    const publicId = parts.split(".")[0];
 
-    const result = await cloudinary.uploader.destroy(publicId);
-    if (result.result !== "ok") {
-      throw new Error("Image not found");
+    const deleteResult = await cloudinary.uploader.destroy(
+      "property-photos/property-photos/" + publicId
+    );
+
+    if (deleteResult.result === "ok") {
+      console.log(
+        "Old profile photo successfully deleted from Cloudinary:",
+        publicId
+      );
+    } else if (deleteResult.result === "not found") {
+      console.log("Old profile photo not found (already deleted):", publicId);
+    } else {
+      console.log("Unexpected delete result:", deleteResult);
     }
 
     if (propertyId) {

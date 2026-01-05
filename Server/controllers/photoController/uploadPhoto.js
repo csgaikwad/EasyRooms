@@ -17,7 +17,7 @@ export async function uploadPhoto(req, res) {
       if (err) {
         console.error("Error deleting temporary file:", err);
       } else {
-        console.log("Temporary file deleted successfully");
+        console.log("Temporary property-photo file deleted successfully");
       }
     });
 

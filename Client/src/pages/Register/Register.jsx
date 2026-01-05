@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -31,7 +30,7 @@ export default function Register() {
         password,
         isOwner,
       };
-      const response = await api.post("/register", userDetails);
+      const response = await api.post("/auth/register", userDetails);
       // alert(response.data.message);
       Swal.fire({
         position: "center",
@@ -45,6 +44,7 @@ export default function Register() {
           isAuthenticated: true,
           userEmail: response.data.ResUserDoc.userEmail,
           username: response.data.ResUserDoc.username,
+          profilePhoto: response.data.ResUserDoc.profilePhoto,
           isOwner: response.data.ResUserDoc.isOwner,
         };
         setUser(UserAtomDetails);
