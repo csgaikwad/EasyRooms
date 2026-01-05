@@ -23,7 +23,7 @@ export default function Logo() {
       </div>
       {/* <div className={`${user.isOwner? "text-purple-700" : "text-red-500"}`}> */}
       <div className="">
-        <h1 className=" text-2xl font-bold font-serif  underline transition duration-300 ease-in-out transform cursor-pointer gradient-text">
+        <h1 className=" text-2xl font-bold font-serif  underline transition duration-300 ease-in-out transform cursor-pointer gradient-text select-none">
           EasyRooms
         </h1>
       </div>
